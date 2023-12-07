@@ -1,4 +1,4 @@
-# Library フォルダは要らない
+# アップロードしないフォルダ
 Library/
 Temp/
 Logs/
