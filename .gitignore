@@ -1,3 +1,4 @@
 # Library フォルダは要らない
 Library/
 Temp/
+Logs/
