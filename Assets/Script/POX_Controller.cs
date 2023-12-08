@@ -4,11 +4,15 @@ using UnityEngine;
 
 public class POX_Controller : MonoBehaviour
 {
-    private float speed = 1.0f; //自機のスピード
+    private float speed = 3.0f; //自機のスピード
+
+    private Rigidbody2D rd;
+    private float jumpForce = 250f; //自機のジャンプ力
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        rd = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -26,5 +30,10 @@ public class POX_Controller : MonoBehaviour
         }
 
         transform.position = position;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            this.rd.AddForce(transform.up * jumpForce);
+        }
     }
 }
