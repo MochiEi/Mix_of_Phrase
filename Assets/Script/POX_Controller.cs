@@ -8,6 +8,7 @@ public class POX_Controller : MonoBehaviour
 
     private Rigidbody2D rd;
     private float jumpForce = 250f; //Ž©‹@‚ÌƒWƒƒƒ“ƒv—Í
+    private int jumpCount = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -31,9 +32,14 @@ public class POX_Controller : MonoBehaviour
 
         transform.position = position;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space)&&this.jumpCount<1)
         {
             this.rd.AddForce(transform.up * jumpForce);
+            jumpCount++;
         }
+    }
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+            jumpCount = 0;
     }
 }
