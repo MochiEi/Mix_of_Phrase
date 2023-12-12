@@ -5,10 +5,10 @@ using UnityEngine.UIElements;
 
 public class POX_Controller : MonoBehaviour
 {
-    public float speed;// = 3.0f; //自機のスピード
+    public float speed;//自機のスピード(Hierarchy→pox→Scriptから調節可能)
+    private float jumpForce = 250f; //自機のジャンプ力
 
     private Rigidbody2D rb;
-    private float jumpForce = 250f; //自機のジャンプ力
     private int jumpCount = 0;
 
     // Start is called before the first frame update
@@ -20,12 +20,13 @@ public class POX_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && this.jumpCount < 1)
+        if (Input.GetKeyDown(KeyCode.Space) && !(rb.velocity.y < -0.5f) && this.jumpCount < 1)
         {
             this.rb.AddForce(transform.up * jumpForce);
             jumpCount++;
         }
     }
+
 
     void FixedUpdate()
     {
@@ -43,6 +44,7 @@ public class POX_Controller : MonoBehaviour
         }
     }
 
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Floor"))
@@ -50,6 +52,7 @@ public class POX_Controller : MonoBehaviour
             jumpCount = 0;
         }
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
