@@ -22,7 +22,7 @@ public class POX_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !(rb.velocity.y < -0.5f) && this.jumpCount < 1)
+        if (Input.GetKeyDown(KeyCode.Space) && !(rb.velocity.y < -0.5f) && !(rb.velocity.y > 1f) && this.jumpCount < 1)
         {
             this.rb.AddForce(transform.up * jumpForce);
             jumpCount++;
