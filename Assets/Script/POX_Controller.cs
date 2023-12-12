@@ -11,6 +11,8 @@ public class POX_Controller : MonoBehaviour
     private Rigidbody2D rb;
     private int jumpCount = 0;
 
+    public GameObject prefab;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,9 +27,14 @@ public class POX_Controller : MonoBehaviour
             this.rb.AddForce(transform.up * jumpForce);
             jumpCount++;
         }
-    }
 
+        if (Input.GetKeyDown(KeyCode.Return)) // スペースキーを押したとき
+        {
+            Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
+            Instantiate(prefab, spawnPosition, Quaternion.identity); // プレハブを生成
+        }
 
+    }   
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))

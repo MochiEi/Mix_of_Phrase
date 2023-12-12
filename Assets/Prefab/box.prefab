@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 657629095444288567}
   - component: {fileID: 657629095444288566}
   - component: {fileID: 657629095444288562}
+  - component: {fileID: -1173614330241698670}
   m_Layer: 0
   m_Name: box
   m_TagString: Box
@@ -96,7 +97,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 657629095444288521}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 595293be89f1c3146aa14125f4c83398, type: 2}
+  m_Material: {fileID: 6200000, guid: 8e16f37f53b4645419e97dc42acb7d80, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -111,7 +112,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4, y: 0.4}
+  m_Size: {x: 0.39, y: 0.39}
   m_EdgeRadius: 0
 --- !u!50 &657629095444288566
 Rigidbody2D:
@@ -128,7 +129,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -160,3 +161,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.39, y: 0.1}
   m_EdgeRadius: 0
+--- !u!114 &-1173614330241698670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657629095444288521}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53749e07a158f4841b2de49ba112cf54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
