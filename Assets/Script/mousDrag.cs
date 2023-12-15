@@ -4,30 +4,41 @@ using UnityEngine;
 
 public class mousDrag : MonoBehaviour
 {
-    private Vector3 offset;
+    public GameObject hitObject;
+    Vector3 position;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetMouseButton(0))
+        {
+            // マウスの位置をワールド座標に変換
+            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-    }
-    //オブジェクトをクリックしてドラッグ状態にある間呼び出される関数（Unityのマウスイベント）
-    void OnMouseDrag()
-    {
-        //マウスカーソル及びオブジェクトのスクリーン座標を取得
-        Vector3 objectScreenPoint =
-            new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10);
+            var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
 
-        //スクリーン座標をワールド座標に変換
-        Vector3 objectWorldPoint = Camera.main.ScreenToWorldPoint(objectScreenPoint);
+            if (hit.collider.tag == "phrase" && hitObject == null)
+            {
+                hitObject = hit.collider.gameObject;
+            }
 
-        //オブジェクトの座標を変更する
-        transform.position = objectWorldPoint;
+            // hitObjectのxとyをマウスの位置に合わせる
+            position.x = mousePosition.x;
+            position.y = mousePosition.y;
+
+            // hitObjectの位置を更新
+            hitObject.transform.position = position;
+        }
+
+        if(Input.GetMouseButtonUp(0))
+        {
+            hitObject = null;        
+        }
     }
 }
