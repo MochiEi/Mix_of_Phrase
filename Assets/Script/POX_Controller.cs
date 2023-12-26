@@ -5,13 +5,16 @@ using UnityEngine.UIElements;
 
 public class POX_Controller : MonoBehaviour
 {
-    public float speed;//自機のスピード(Hierarchy→pox→Scriptから調節可能)
+    private float speed=3;  //自機のスピード
     private float jumpForce = 250f; //自機のジャンプ力
 
     private Rigidbody2D rb;
     private int jumpCount = 0;
 
+    private bool Trigger = false;   //自機の真上にオブジェクトがあるかどうか
+
     public GameObject prefab;
+
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,7 @@ public class POX_Controller : MonoBehaviour
             jumpCount++;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return)) // スペースキーを押したとき
+        if (Input.GetKeyDown(KeyCode.Return) && Trigger == false) // スペースキーを押したとき
         {
             Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
             Instantiate(prefab, spawnPosition, Quaternion.identity); // プレハブを生成
@@ -63,7 +66,7 @@ public class POX_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Box"))
+        if (collision.gameObject.CompareTag("Box_Top"))
         {
             jumpCount = 0;
         }

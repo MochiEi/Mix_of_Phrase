@@ -7,6 +7,13 @@ TagManager:
   - Floor
   - Wall
   - Box
+  - POX_Feet
+  - Box_Top
+  - POX_Top
+  - Side
+  - POX_Side
+  - Box_Right
+  - Box_Left
   layers:
   - Default
   - TransparentFX
