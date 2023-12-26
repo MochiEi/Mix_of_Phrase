@@ -74,11 +74,11 @@ public class Box_Controller : MonoBehaviour
 
             if (moveother == true)                                                          //自分を押してたら
             {
-                Rmove = true;                                                               //左のオブジェクトが自分を押しとるやん
+                Rmove = true;                                                               //右のオブジェクトが自分を押しとるやん
             }
             if (speedother.x == 0)                                                          //自分を押してない(動いてない)だったら
             {
-                Rmove = false;                                                              //左のオブジェクトが自分を押しとらんやんけ
+                Rmove = false;                                                              //右のオブジェクトが自分を押しとらんやんけ
             }
         }
 
@@ -92,11 +92,11 @@ public class Box_Controller : MonoBehaviour
 
             if (moveother == true)                                                          //自分を押してたら
             {
-                Lmove = true;                                                               //右のオブジェクトが自分を押しとるやん
+                Lmove = true;                                                               //左のオブジェクトが自分を押しとるやん
             }
             if (speedother.x == 0)                                                          //自分を押してない(動いてない)だったら
             {
-                Lmove = false;                                                              //右のオブジェクトが自分を押しとらんやんけ
+                Lmove = false;                                                              //左のオブジェクトが自分を押しとらんやんけ
             }
         }
     }
