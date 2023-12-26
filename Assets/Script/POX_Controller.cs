@@ -9,11 +9,9 @@ public class POX_Controller : MonoBehaviour
     private float jumpForce = 250f; //自機のジャンプ力
 
     private Rigidbody2D rb;
-    private int jumpCount = 0;
+    private int jumpCount = 0;  //ジャンプをカウントする変数
 
-    private bool Trigger = false;   //自機の真上にオブジェクトがあるかどうか
-
-    public GameObject prefab;
+    public GameObject prefab;   //ここに生成したいアイテムとか入れよう(public変数1つにつき1つまで)
 
 
     // Start is called before the first frame update
@@ -31,7 +29,7 @@ public class POX_Controller : MonoBehaviour
             jumpCount++;
         }
 
-        if (Input.GetKeyDown(KeyCode.Return) && Trigger == false) // スペースキーを押したとき
+        if (Input.GetKeyDown(KeyCode.Return)) // スペースキーを押したとき
         {
             Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
             Instantiate(prefab, spawnPosition, Quaternion.identity); // プレハブを生成
