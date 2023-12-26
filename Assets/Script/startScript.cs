@@ -5,36 +5,36 @@ using UnityEngine.UI;
 
 public class startScript : MonoBehaviour
 {
-    public float speed = 1.0f;
-    public bool start = false;
+    //public float speed = 1.0f;
+    //public bool start = false;
 
-    private Text text;
-    private float time;
+    //private Text text;
+    //private float time;
 
-    void Start()
-    {
-        text = this.gameObject.GetComponent<Text>();
-    }
+    //void Start()
+    //{
+    //    text = this.gameObject.GetComponent<Text>();
+    //}
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            start = true;
-        }
+    //void Update()
+    //{
+    //    if (Input.GetKeyDown(KeyCode.Mouse0))
+    //    {
+    //        start = true;
+    //    }
 
-        if (start)
-        {
-            text.color = GetAlphaColor(text.color);
-        }
-    }
+    //    if (start)
+    //    {
+    //        text.color = GetAlphaColor(text.color);
+    //    }
+    //}
 
-    //Alpha値を更新してColorを返す
-    Color GetAlphaColor(Color color)
-    {
-        time += Time.deltaTime *    speed;
-        color.a = 1.0f - time;
+    ////Alpha値を更新してColorを返す
+    //Color GetAlphaColor(Color color)
+    //{
+    //    time += Time.deltaTime *    speed;
+    //    color.a = 1.0f - time;
 
-        return color;
-    }
+    //    return color;
+    //}
 }
