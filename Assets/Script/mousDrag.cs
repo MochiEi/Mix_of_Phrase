@@ -6,11 +6,8 @@ using UnityEngine;
 
 public class mousDrag : MonoBehaviour
 {
-    public LayerMask PutIn;
     GameObject hitObject;
-    bool click = false;
     Vector2 position;
-    Vector2 fastPosition;
 
     // Start is called before the first frame update
     void Start()
@@ -21,63 +18,76 @@ public class mousDrag : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        /////  Rayの設定  /////
+        Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 direction = Vector2.down;
+        float maxDistance = 0.1f;
+        int layerMask = 1 << LayerMask.NameToLayer("BuckCollider") | 1 << LayerMask.NameToLayer("phrase") | 1 << LayerMask.NameToLayer("Put In");
+
+        RaycastHit2D phrase = default;
+
         if (Input.GetMouseButtonDown(0))
         {
-            // マウスの位置をワールド座標に変換
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, direction, maxDistance, layerMask);
 
-            var hit = Physics2D.Raycast(mousePosition, Vector2.zero);
-
-            if (hit)
+            foreach (RaycastHit2D hit in hits)
             {
-                print(hit.collider.tag);
+                int layer = hit.collider.gameObject.layer;
+
+                if (layer == LayerMask.NameToLayer("phrase"))
+                {
+                    phrase = hit;
+                    break;
+                }
             }
 
-            if (hit.collider.tag == "phrase" && hitObject == null)
+            if (phrase != default)
             {
-                hitObject = hit.collider.gameObject;
-
-                if (!click)
-                {
-                    fastPosition = hitObject.transform.position;
-                    click = true;
-                }
+                //Debug.Log("Hit phrase: " + phrase.collider.gameObject.name);
+                hitObject = phrase.collider.gameObject;
             }
         }
 
         if (Input.GetMouseButton(0))
         {
-            // マウスの位置をワールド座標に変換
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-            // hitObjectのxとyをマウスの位置に合わせる
             position.x = mousePosition.x;
             position.y = mousePosition.y;
 
             if (hitObject != null)
             {
-                // hitObjectの位置を更新
                 hitObject.transform.position = position;
             }
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            if(hitObject != null)
+            if (hitObject != null)
             {
-                hitObject.transform.position = fastPosition;
+                bool PutInArea = false;
+
+                phraseControl phraseControl = hitObject.GetComponent<phraseControl>();
+                RaycastHit2D[] hits = Physics2D.RaycastAll(mousePosition, direction, maxDistance, layerMask);
+
+                ///// PutInの中なら /////
+                foreach (RaycastHit2D hit in hits)
+                {
+                    int layer = hit.collider.gameObject.layer;
+
+                    if (layer == LayerMask.NameToLayer("Put In"))
+                    {
+                        hitObject.transform.position = hit.collider.gameObject.transform.position;
+                        PutInArea = true;
+                    }
+                }
+
+                ///// PutInの外なら /////
+                if (!PutInArea)
+                {
+                    hitObject.transform.position = phraseControl.initPosition;
+                }
+
+                hitObject = null;
             }
-
-            hitObject = null;
         }
-    }
-
-    private bool putin()
-    {
-        var hit = Physics2D.Raycast(hitObject.transform.position, Vector2.zero);
-
-        if (hit.transform.tag == "PutIn") return true;
-
-        return false;
     }
 }

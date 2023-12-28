@@ -58,7 +58,9 @@
   <ItemGroup>
     <Compile Include="Assets\Script\mousDrag.cs" />
     <Compile Include="Assets\Script\moveText.cs" />
-    <Compile Include="Assets\Script\startScript.cs" />
+    <Compile Include="Assets\Script\phraseControl.cs" />
+    <Compile Include="Assets\Script\startSystem.cs" />
+    <Compile Include="Assets\Script\startFade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
