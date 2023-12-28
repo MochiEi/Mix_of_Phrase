@@ -6,17 +6,17 @@ public class startFade : MonoBehaviour
 {
     ///// 動作するオブジェクト群 /////
     public GameObject[] inactive;
-    public GameObject[] active;
     public GameObject[] FadeOutText;
     public GameObject[] FadeOut;
-    public GameObject[] FadeInText;
-    public GameObject[] FadeIn;
 
     public float fadeSpeed = 0.5f;
     
     ///// 動作用リスト /////
     private List<Text> OutTexts;
     private List<SpriteRenderer> OutSpriteRenderer;
+
+    ///// シーン切り替え用変数 /////
+    public bool next = false;
 
     void Start()
     {
@@ -91,5 +91,7 @@ public class startFade : MonoBehaviour
         {
             obj.SetActive(false);
         }
+
+        next = true;
     }
 }

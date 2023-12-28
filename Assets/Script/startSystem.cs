@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class startSystem : MonoBehaviour
 {
     public GameObject startPutIn;
     public bool start = false;
+
+    double time;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +37,18 @@ public class startSystem : MonoBehaviour
                     //print("start");
                     start = true;
                 }
+            }
+        }
+        
+        startFade startFade = this.GetComponent<startFade>();
+
+        if (startFade.next)
+        {
+            time += 1 * Time.deltaTime;
+
+            if(time > 1)
+            {
+                SceneManager.LoadScene("Select");
             }
         }
     }
