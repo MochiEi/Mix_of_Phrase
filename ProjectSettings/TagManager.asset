@@ -3,7 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Floor
+  - Wall
+  - Box
+  - POX_Feet
+  - Box_Top
+  - POX_Top
+  - Side
+  - POX_Side
+  - Box_Right
+  - Box_Left
   layers:
   - Default
   - TransparentFX
