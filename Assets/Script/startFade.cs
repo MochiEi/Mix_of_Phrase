@@ -58,12 +58,6 @@ public class startFade : MonoBehaviour
             color.a = Mathf.Max(0, color.a);
 
             text.color = color;
-
-            ///// 透明度0で非アクティブ /////
-            if (color.a == 0)
-            {
-                text.transform.parent.gameObject.SetActive(false);
-            }
         }
         foreach (SpriteRenderer alpha in OutSpriteRenderer)
         {
@@ -74,12 +68,8 @@ public class startFade : MonoBehaviour
 
             alpha.color = color;
 
-            ///// 透明度0で非アクティブ /////
             if (color.a == 0)
             {
-                alpha.transform.parent.gameObject.SetActive(false);
-
-                ///// 便乗して操作用空オブジェクトを非アクティブ /////
                 Inactive();
             }
         }
@@ -87,11 +77,6 @@ public class startFade : MonoBehaviour
 
     void Inactive()
     {
-        foreach (GameObject obj in inactive)
-        {
-            obj.SetActive(false);
-        }
-
         next = true;
     }
 }
