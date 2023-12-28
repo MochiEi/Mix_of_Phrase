@@ -56,11 +56,13 @@
     <Analyzer Include="C:\shortcut\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\POX_Controller.cs" />
+    <Compile Include="Assets\Script\startSystem.cs" />
     <Compile Include="Assets\Script\mousDrag.cs" />
+    <Compile Include="Assets\Script\Box_Controller.cs" />
+    <Compile Include="Assets\Script\startFade.cs" />
     <Compile Include="Assets\Script\moveText.cs" />
     <Compile Include="Assets\Script\phraseControl.cs" />
-    <Compile Include="Assets\Script\startSystem.cs" />
-    <Compile Include="Assets\Script\startFade.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
