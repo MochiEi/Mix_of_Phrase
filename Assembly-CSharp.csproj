@@ -57,7 +57,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\POX_Controller.cs" />
-    <Compile Include="Assets\Script\startSystem.cs" />
+    <Compile Include="Assets\Script\TitleSystem.cs" />
     <Compile Include="Assets\Script\mousDrag.cs" />
     <Compile Include="Assets\Script\Box_Controller.cs" />
     <Compile Include="Assets\Script\startFade.cs" />

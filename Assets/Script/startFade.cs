@@ -25,9 +25,9 @@ public class startFade : MonoBehaviour
 
     void Update()
     {
-        startSystem startSystem = this.GetComponent<startSystem>();
+        TitleSystem TitleSystem = this.GetComponent<TitleSystem>();
 
-        if (startSystem.start)
+        if (TitleSystem.start)
         {
             Fadeout();
         }

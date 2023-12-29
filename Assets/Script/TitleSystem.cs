@@ -4,7 +4,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class startSystem : MonoBehaviour
+public class TitleSystem : MonoBehaviour
 {
     public GameObject startPutIn;
     public bool start = false;
@@ -37,19 +37,33 @@ public class startSystem : MonoBehaviour
                     //print("start");
                     start = true;
                 }
+
+                if (name == "end")
+                {
+                    Quit();
+                }
             }
         }
-        
+
         startFade startFade = this.GetComponent<startFade>();
 
         if (startFade.next)
         {
             time += 1 * Time.deltaTime;
 
-            if(time > 1)
+            if (time > 1)
             {
                 SceneManager.LoadScene("Select");
             }
         }
+    }
+
+    public void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+      Application.Quit();
+#endif
     }
 }
