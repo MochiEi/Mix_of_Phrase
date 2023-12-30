@@ -1,34 +1,34 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Button : MonoBehaviour
 {
-    Color Color = new Color(1.0f, 0f, 0.0f, 1.0f);
+    Color Color = new Color(0f, 1f, 0f, 1.0f);
+    //色を変えるボタン
     public Image button;
+
+    [SerializeField, Header("ボタンの識別番号")]
+    private bool buttonNo=false;
+
+    [SerializeField, Header("表示するメニュー")]
+    private GameObject MenuViews;
+
+    private UIScript ui;
 
     // Start is called before the first frame update
     void Start()
     {
-        button=GetComponent<Image>();
+        button= button.GetComponent<Image>();
+        ui= MenuViews.GetComponent<UIScript>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            Debug.Log("aaaaa");
-            this.GetComponent<Image>().color = Color;
-        }
-        else
-        {
-            this.GetComponent<Image>().color = new Color(1f, 1f, 1f, 0);
-        }
+        if(ui.MenuViews== buttonNo) button.GetComponent<Image>().color = Color;
+        else button.GetComponent<Image>().color = new Color(1f, 1f, 1f, 1f);
     }
-
-    
 
 }
