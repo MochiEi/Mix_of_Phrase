@@ -1,4 +1,4 @@
 # アップロードしないフォルダ
 Library/
-Temp/
+Debug/
 Logs/
