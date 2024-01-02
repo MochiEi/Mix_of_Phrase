@@ -19,5 +19,10 @@ public class moveText : MonoBehaviour
         position.y = parentObject.transform.position.y * 108 + 540;
 
         this.transform.position = position;
+
+        if(parentObject.activeSelf == false)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
 }

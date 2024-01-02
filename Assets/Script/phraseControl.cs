@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class phraseControl : MonoBehaviour
 {
     public Vector2 initPosition;
+    public GameObject LinkText;
 
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,6 @@ public class phraseControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        LinkText.SetActive(true);
     }
 }

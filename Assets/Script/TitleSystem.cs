@@ -7,53 +7,63 @@ using UnityEngine.SceneManagement;
 public class TitleSystem : MonoBehaviour
 {
     public GameObject startPutIn;
+    public GameObject fade;
     public bool start = false;
 
-    double time;
+    private float fadeDelta;
+    private float time;
 
     // Start is called before the first frame update
     void Start()
     {
-
+        fade.SetActive(true);
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector3 pos = startPutIn.transform.position;
-        Vector2 direction = Vector2.down;
-        float maxDistance = 0.1f;
-        int layerMask = 1 << LayerMask.NameToLayer("phrase");
-        RaycastHit2D[] hits = Physics2D.RaycastAll(pos, direction, maxDistance, layerMask);
-
-        if (Input.GetMouseButtonUp(0))
+        if (fade.transform.localScale.y > 0)
         {
-            foreach (RaycastHit2D hit in hits)
-            {
-                string name = hit.collider.gameObject.name;
-
-                if (name == "start")
-                {
-                    //print("start");
-                    start = true;
-                }
-
-                if (name == "end")
-                {
-                    Quit();
-                }
-            }
+            fadeDelta = fadeDelta + Time.deltaTime * 10;
+            fade.transform.localScale = new Vector3(20, 10 - fadeDelta, 1);
         }
 
-        startFade startFade = this.GetComponent<startFade>();
-
-        if (startFade.next)
+        if (fade.transform.localScale.y <= 0)
         {
-            time += 1 * Time.deltaTime;
+            fade.transform.localScale = new Vector3(20, 0, 1);
+            Vector3 pos = startPutIn.transform.position;
+            Vector2 direction = Vector2.down;
+            float maxDistance = 0.1f;
+            int layerMask = 1 << LayerMask.NameToLayer("phrase");
+            RaycastHit2D[] hits = Physics2D.RaycastAll(pos, direction, maxDistance, layerMask);
 
-            if (time > 1)
+            if (Input.GetMouseButtonUp(0))
             {
-                SceneManager.LoadScene("Select");
+                foreach (RaycastHit2D hit in hits)
+                {
+                    string name = hit.collider.gameObject.name;
+
+                    if (name == "start")
+                    {
+                        start = true;
+                    }
+                    else if (name == "end")
+                    {
+                        Quit();
+                    }
+                }
+            }
+
+            startFade startFade = this.GetComponent<startFade>();
+
+            if (startFade.next)
+            {
+                time += 1 * Time.deltaTime;
+
+                if (time > 1)
+                {
+                    SceneManager.LoadScene("Select");
+                }
             }
         }
     }

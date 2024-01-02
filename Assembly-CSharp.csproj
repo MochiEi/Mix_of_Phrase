@@ -59,10 +59,14 @@
     <Compile Include="Assets\Script\POX_Controller.cs" />
     <Compile Include="Assets\Script\TitleSystem.cs" />
     <Compile Include="Assets\Script\mousDrag.cs" />
+    <Compile Include="Assets\Script\selectFade.cs" />
     <Compile Include="Assets\Script\Box_Controller.cs" />
+    <Compile Include="Assets\Script\POX_selectAnimation.cs" />
     <Compile Include="Assets\Script\startFade.cs" />
     <Compile Include="Assets\Script\moveText.cs" />
+    <Compile Include="Assets\Script\SelectSysten.cs" />
     <Compile Include="Assets\Script\phraseControl.cs" />
+    <Compile Include="Assets\Script\SysteManagerStage1.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

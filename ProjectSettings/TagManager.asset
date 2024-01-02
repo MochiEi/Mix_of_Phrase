@@ -14,6 +14,10 @@ TagManager:
   - POX_Side
   - Box_Right
   - Box_Left
+  - Noun
+  - Verb
+  - StageNum
+  - Button
   layers:
   - Default
   - TransparentFX
@@ -24,7 +28,7 @@ TagManager:
   - BuckCollider
   - phrase
   - Put In
-  - 
+  - GUI
   - 
   - 
   - 
