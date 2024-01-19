@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 657629095444288566}
   - component: {fileID: -1173614330241698670}
   - component: {fileID: 5080863128251923436}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: box
   m_TagString: Box
   m_Icon: {fileID: 0}
@@ -184,6 +184,7 @@ MonoBehaviour:
   move: 0
   Rmove: 0
   Lmove: 0
+  POXmove: 0
 --- !u!60 &5080863128251923436
 PolygonCollider2D:
   m_ObjectHideFlags: 0

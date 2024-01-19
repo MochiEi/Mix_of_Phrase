@@ -9,7 +9,8 @@ public class POX_Controller : MonoBehaviour
     private float jumpForce = 250f; //自機のジャンプ力
 
     private Rigidbody2D rb;
-    private int jumpCount = 0;  //ジャンプをカウントする変数
+
+    [SerializeField]private LayerMask groundLayer;
 
     public GameObject prefab;   //ここに生成したいアイテムとか入れよう(public変数1つにつき1つまで)
 
@@ -23,10 +24,10 @@ public class POX_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !(rb.velocity.y < -0.5f) && !(rb.velocity.y > 1f) && this.jumpCount < 1)
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
         {
             this.rb.AddForce(transform.up * jumpForce);
-            jumpCount++;
         }
 
         if (Input.GetKeyDown(KeyCode.Return)) // スペースキーを押したとき
@@ -35,7 +36,15 @@ public class POX_Controller : MonoBehaviour
             Instantiate(prefab, spawnPosition, Quaternion.identity); // プレハブを生成
         }
 
-    }   
+    }
+
+    private bool isGrounded()
+    {
+        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.6f, groundLayer);
+        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.6f, groundLayer);
+        return jumpL.collider != null || jumpR.collider != null;
+    }
+
     void FixedUpdate()
     {
         if (Input.GetKey(KeyCode.A))
@@ -52,21 +61,11 @@ public class POX_Controller : MonoBehaviour
         }
     }
 
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    void OnDrawGizmos()
     {
-        if (collision.gameObject.CompareTag("Floor"))
-        {
-            jumpCount = 0;
-        }
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.39f, transform.position.y), new Vector2(0, -0.6f));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.39f, transform.position.y), new Vector2(0, -0.6f));
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Box_Top"))
-        {
-            jumpCount = 0;
-        }
-    }
 }

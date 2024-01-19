@@ -100,4 +100,12 @@ public class Box_Controller : MonoBehaviour
             }
         }
     }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.1f), new Vector2(0.44f, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.1f), new Vector2(-0.44f, 0));
+    }
+
 }
