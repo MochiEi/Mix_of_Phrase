@@ -59,6 +59,7 @@
     <Compile Include="Assets\UI\Script\Button.cs" />
     <Compile Include="Assets\UI\Script\MnewText.cs" />
     <Compile Include="Assets\UI\Script\UIScript.cs" />
+    <Compile Include="Assets\Effects\EffectsTest.cs" />
     <Compile Include="Assets\Ass\Plugins\Demigiant\DOTween\Modules\DOTweenModulePhysics2D.cs" />
     <Compile Include="Assets\Ass\Plugins\Demigiant\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
     <Compile Include="Assets\Ass\Plugins\Demigiant\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
