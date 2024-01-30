@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19c0cc463c00361469eef60ed4d287c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BOXadvent: {fileID: 7144449805540038962, guid: f970fe441d0ec1e49badf6695813f89c, type: 3}
+  BOXadvent: {fileID: 2835192105089090561, guid: f970fe441d0ec1e49badf6695813f89c, type: 3}
   BOXbreak: {fileID: 7184403236596316699, guid: a32a302be8269a14a91fe69e0ed65506, type: 3}
   FrameEffect: {fileID: 8372648024197848837, guid: 51eaba7fe4774004493d08ce7427d930, type: 3}
 --- !u!4 &394996912
