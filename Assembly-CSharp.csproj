@@ -53,20 +53,11 @@
     <UnityVersion>2021.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\shortcut\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Script\POX_Controller.cs" />
-    <Compile Include="Assets\Script\TitleSystem.cs" />
-    <Compile Include="Assets\Script\mousDrag.cs" />
-    <Compile Include="Assets\Script\selectFade.cs" />
-    <Compile Include="Assets\Script\Box_Controller.cs" />
-    <Compile Include="Assets\Script\POX_selectAnimation.cs" />
-    <Compile Include="Assets\Script\startFade.cs" />
-    <Compile Include="Assets\Script\moveText.cs" />
-    <Compile Include="Assets\Script\SelectSysten.cs" />
-    <Compile Include="Assets\Script\phraseControl.cs" />
-    <Compile Include="Assets\Script\SysteManagerStage1.cs" />
+    <Compile Include="Assets\Script\TestScript.cs" />
+    <Compile Include="Assets\Script\Title\SelectPhrase.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
