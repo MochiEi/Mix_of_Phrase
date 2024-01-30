@@ -11,9 +11,7 @@ public class POX_Controller : MonoBehaviour
     private Rigidbody2D rb;
 
     [SerializeField]private LayerMask groundLayer;
-
-    public GameObject prefab;   //ここに生成したいアイテムとか入れよう(public変数1つにつき1つまで)
-
+    [SerializeField] private LayerMask boxLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -25,23 +23,22 @@ public class POX_Controller : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded())
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded()|| Input.GetKeyDown(KeyCode.Space) && isBoxed())
         {
             this.rb.AddForce(transform.up * jumpForce);
         }
-
-        if (Input.GetKeyDown(KeyCode.Return)) // スペースキーを押したとき
-        {
-            Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
-            Instantiate(prefab, spawnPosition, Quaternion.identity); // プレハブを生成
-        }
-
     }
 
-    private bool isGrounded()
+    private bool isGrounded()   //着地判定
     {
         RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.6f, groundLayer);
         RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.6f, groundLayer);
+        return jumpL.collider != null || jumpR.collider != null;
+    }
+    private bool isBoxed()   //着地判定
+    {
+        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.6f, boxLayer);
+        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.6f, boxLayer);
         return jumpL.collider != null || jumpR.collider != null;
     }
 

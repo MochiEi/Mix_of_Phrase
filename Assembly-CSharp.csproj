@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\Script\POX_Controller.cs" />
     <Compile Include="Assets\Script\Box_Controller.cs" />
+    <Compile Include="Assets\Script\Box_Generator.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

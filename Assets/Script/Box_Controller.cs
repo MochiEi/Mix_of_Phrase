@@ -1,15 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Box_Controller : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    public bool move = false;   //自分が動いているかどうか(他のオブジェクトが参照するためpublic必須)
-    public bool Rmove = false;  //自分の右のオブジェクトが動いているかどうか
-    public bool Lmove = false;  //自分の左のオブジェクトが動いているかどうか
-    public bool POXmove=false;  //POXが自分に触れているかどうか
+    [SerializeField]private bool move = false;   //自分が動いているかどうか
+    [SerializeField] private bool pushmove = false;   //自分が動いているかどうか
+    [SerializeField] private bool poxmove = false;
+
+    [SerializeField] private bool wallstop = false;
+    [SerializeField] private bool boxside = false;
+
+    private float Raylength = 0.05f;
+
+    [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask boxLayer;
 
     // Start is called before the first frame update
     void Start()
@@ -20,92 +30,165 @@ public class Box_Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Rmove == true || Lmove == true || POXmove == true)      //誰かが自分を押してたら
+        if (boxSide(boxside = true) && poxmove == false)
         {
-            move = true;                                            //自分は動いている
+            move = true;
+        }
+        if (boxSide(boxside = true) == false || poxmove == true)
+        {
+            move = false;
         }
 
-        if (Rmove == false && Lmove == false && POXmove == false)   //誰も押してなかったら
+        if (poxSide())
         {
-            move = false;                                           //自分は動いていない
+                poxmove = true;
+        }
+        if (poxSide() == false)
+        {
+            poxmove = false;
         }
 
-        if (move ==true)                                            //自分が動いてたら
+
+
+
+        if (move == true && wallstop == false || poxmove == true && wallstop == false)
         {
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation; //回転のみ固定
+            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
         }
-
-        if(move ==false)                                            //自分が動いてなかったら
+        else
         {
-            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;    //X軸の移動と回転を固定
-        }
-    }
-
-
-    void OnCollisionExit2D(Collision2D collision)       //オブジェクトが離れたら
-    {
-        rb.velocity = new Vector2(0, rb.velocity.y);    //横移動(x)の値を0にする(これいる？)
-    }
-
-
-    private void OnTriggerExit2D(Collider2D collision)      //何らかのTriggerが離れたら
-    {
-        if (collision.gameObject.CompareTag("POX_Side"))    //POX_SideというTag持ちだったら
-        {
-            POXmove = false;                                //POXが自分を押していないよね
+            rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         }
     }
 
-
-    private void OnTriggerStay2D(Collider2D collision)                                      //ぶつかっているTriggerのオブジェクト
+    private bool poxSide()    //Boxの横にpoxがあるとtrue
     {
-        if (collision.gameObject.CompareTag("POX_Side"))                                    //POX_Sideだったら
+        RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, Raylength, playerLayer);
+        RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, Raylength, playerLayer);
+        RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, Raylength, playerLayer);
+        RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, Raylength, playerLayer);
+
+
+        return BoxLdown.collider != null || BoxRdown.collider != null || BoxLup.collider != null || BoxRup.collider != null;
+    }
+
+    private bool boxSide(bool x)    //Boxの横にboxがあるとtrue
+    {
+        RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, Raylength, boxLayer);
+        RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, Raylength, boxLayer);
+        RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, Raylength, boxLayer);
+        RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, Raylength, boxLayer);
+
+        if (x == true)
         {
-            POXmove = true;                                                                 //POXが自分を押している
+            if (BoxLup.collider != null)
+            {
+                Box_Controller otherbox = BoxLup.collider.GetComponent<Box_Controller>();
+                if (otherbox.move == true || otherbox.poxmove == true)
+                {
+                    return true;
+                }
+            }
+            if (BoxLdown.collider != null)
+            {
+                Box_Controller otherbox = BoxLdown.collider.GetComponent<Box_Controller>();
+                if (otherbox.move == true || otherbox.poxmove == true)
+                {
+                    return true;
+                }
+            }
+            if (BoxRup.collider != null)
+            {
+                Box_Controller otherbox = BoxRup.collider.GetComponent<Box_Controller>();
+                if (otherbox.move == true || otherbox.poxmove == true)
+                {
+                    return true;
+                }
+            }
+            if (BoxRdown.collider != null)
+            {
+                Box_Controller otherbox = BoxRdown.collider.GetComponent<Box_Controller>();
+                if (otherbox.move == true || otherbox.poxmove == true)
+                {
+                    return true;
+                }
+            }
         }
 
-        if (collision.gameObject.CompareTag("Box_Right"))                                   //Box_RightのTagを持ったTriggerだったら
+        if (x == false)
         {
-            var parentScript = collision.transform.parent.GetComponent<Box_Controller>();   //そのオブジェクトの親オブジェクトのスクリプトを取得
-            bool moveother = parentScript.move;                                             //move変数を取得しmoveotherとして宣言
-            Transform parentTransform = collision.transform.parent;                         //親オブジェクトのtransformを取得
-            Rigidbody2D rbother = parentTransform.GetComponent<Rigidbody2D>();              //親オブジェクトのrigidbodyを取得しrbotherとして宣言
-            Vector2 speedother = rbother.velocity;                                          //rbotherの速度情報を取得しspeedotherとして宣言
-
-            if (moveother == true)                                                          //自分を押してたら
+            if (BoxLup.collider != null)
             {
-                Rmove = true;                                                               //右のオブジェクトが自分を押しとるやん
+                Box_Controller otherbox = BoxLup.collider.GetComponent<Box_Controller>();
+                if (otherbox.wallstop == true)
+                {
+                    return true;
+                }
             }
-            if (speedother.x == 0)                                                          //自分を押してない(動いてない)だったら
+            if (BoxLdown.collider != null)
             {
-                Rmove = false;                                                              //右のオブジェクトが自分を押しとらんやんけ
+                Box_Controller otherbox = BoxLdown.collider.GetComponent<Box_Controller>();
+                if (otherbox.wallstop == true)
+                {
+                    return true;
+                }
+            }
+            if (BoxRup.collider != null)
+            {
+                Box_Controller otherbox = BoxRup.collider.GetComponent<Box_Controller>();
+                if (otherbox.wallstop == true)
+                {
+                    return true;
+                }
+            }
+            if (BoxRdown.collider != null)
+            {
+                Box_Controller otherbox = BoxRdown.collider.GetComponent<Box_Controller>();
+                if (otherbox.wallstop == true)
+                {
+                    return true;
+                }
             }
         }
 
-        if (collision.gameObject.CompareTag("Box_Left"))                                    //Box_LeftのTagを持ったTriggerだったら
+        return false;
+    }
+    private bool boxDown()    //Boxの下になんかあるとtrue
+    {
+        RaycastHit2D Box = Physics2D.Raycast(new Vector2(transform.position.x, transform.position.y - 0.401f), Vector2.down, -Raylength);
+        if(Box.collider != null)
         {
-            var parentScript = collision.transform.parent.GetComponent<Box_Controller>();   //そのオブジェクトの親オブジェクトのスクリプトを取得
-            bool moveother = parentScript.move;                                             //move変数を取得しmoveotherとして宣言
-            Transform parentTransform = collision.transform.parent;                         //親オブジェクトのtransformを取得
-            Rigidbody2D rbother = parentTransform.GetComponent<Rigidbody2D>();              //親オブジェクトのrigidbodyを取得しrbotherとして宣言
-            Vector2 speedother = rbother.velocity;                                          //rbotherの速度情報を取得しspeedotherとして宣言
+            return true;
+        }
+        return false;
+        
+    }
 
-            if (moveother == true)                                                          //自分を押してたら
-            {
-                Lmove = true;                                                               //左のオブジェクトが自分を押しとるやん
-            }
-            if (speedother.x == 0)                                                          //自分を押してない(動いてない)だったら
-            {
-                Lmove = false;                                                              //左のオブジェクトが自分を押しとらんやんけ
-            }
+    private void OnCollisionStay2D(Collision2D collision)   //boxが壁に触れて押せない状態
+    {
+        if (collision.gameObject.CompareTag("Wall") && boxDown())
+        {
+            wallstop = true;
+        }
+        if (collision.gameObject.CompareTag("Box") && boxSide(boxside = false) && boxDown()==false)
+        {
+            wallstop = true;
         }
     }
 
     void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.1f), new Vector2(0.44f, 0));
-        Gizmos.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.1f), new Vector2(-0.44f, 0));
-    }
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), new Vector2(-Raylength, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), new Vector2(Raylength, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), new Vector2(-Raylength, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), new Vector2(Raylength, 0));
 
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.401f, transform.position.y ), new Vector2(-Raylength, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.401f, transform.position.y), new Vector2(Raylength, 0));
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawRay(new Vector2(transform.position.x, transform.position.y - 0.401f), new Vector2(0,-Raylength));
+    }
 }
