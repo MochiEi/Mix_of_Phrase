@@ -23,7 +23,7 @@ public class EffectsTest : MonoBehaviour
             // 生成位置
             Vector3 pos = this.transform.localPosition;
             // プレハブを指定位置に生成
-            Instantiate(BOXadvent, pos, Quaternion.Euler(90f, 0f, 0f));
+            Instantiate(BOXadvent, pos, Quaternion.Euler(-90f, 0f, 0f));
         }
         if (Input.GetKeyDown(KeyCode.S))
         {
