@@ -9,7 +9,6 @@ public class Box_Controller : MonoBehaviour
 {
     private Rigidbody2D rb;
 
-    [SerializeField]private bool move = false;   //é©ï™Ç™ìÆÇ¢ÇƒÇ¢ÇÈÇ©Ç«Ç§Ç©
     [SerializeField] private bool poxmove = false;
     [SerializeField] private bool Lmove = false;
     [SerializeField] private bool Rmove = false;
@@ -35,7 +34,7 @@ public class Box_Controller : MonoBehaviour
         {
             Rmove = true;
         }
-        if(!boxSideR())
+        if (!boxSideR())
         {
             Rmove = false;
         }
@@ -50,29 +49,25 @@ public class Box_Controller : MonoBehaviour
 
         if (poxSide())
         {
-                poxmove = true;
+            poxmove = true;
         }
         if (poxSide() == false)
         {
             poxmove = false;
         }
 
-        if(wallStop()&&boxDown())
+        if (Rmove == true || Lmove == true || poxmove == true)
         {
-            wallstop= true;
-        }
-
-
-        if (Rmove==true||Lmove==true||poxmove==true)
-        {
-            if(wallstop==false)
+            if (wallstop == false)
             {
-            rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                //rb.mass = 0.1f;
             }
         }
-        if(Rmove == false && Lmove == false && poxmove == false || wallstop==true)
+        if (Rmove == false && Lmove == false && poxmove == false || wallstop == true)
         {
             rb.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+           // rb.mass = 1;
         }
     }
 
@@ -92,17 +87,17 @@ public class Box_Controller : MonoBehaviour
         RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, Raylength, boxLayer);
         RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, Raylength, boxLayer);
 
-            if (BoxLup.collider != null)
+        if (BoxLup.collider != null)
+        {
+            Box_Controller otherbox = BoxLup.collider.GetComponent<Box_Controller>();
+            if (otherbox.Lmove == true || otherbox.poxmove == true)
             {
-                Box_Controller otherbox = BoxLup.collider.GetComponent<Box_Controller>();
-                if (otherbox.Lmove == true || otherbox.poxmove == true)
-                {
-                    return true;
-                }
+                return true;
             }
-            if (BoxLdown.collider != null)
-            {
-                Box_Controller otherbox = BoxLdown.collider.GetComponent<Box_Controller>();
+        }
+        if (BoxLdown.collider != null)
+        {
+            Box_Controller otherbox = BoxLdown.collider.GetComponent<Box_Controller>();
             if (otherbox.Lmove == true || otherbox.poxmove == true)
             {
                 return true;
@@ -141,24 +136,24 @@ public class Box_Controller : MonoBehaviour
     {
         RaycastHit2D BoxL = Physics2D.Raycast(new Vector2(transform.position.x - 0.35f, transform.position.y - 0.401f), Vector2.down, -Raylength);
         RaycastHit2D BoxR = Physics2D.Raycast(new Vector2(transform.position.x + 0.35f, transform.position.y - 0.401f), Vector2.down, -Raylength);
-        if (BoxL.collider != null|| BoxR.collider != null)
+        if (BoxL.collider != null || BoxR.collider != null)
         {
             return true;
         }
         return false;
-        
+
     }
 
     private bool wallStop() //ï«Ç…êGÇÍÇƒâüÇπÇ»Ç≠Ç»ÇÈÇ©Ç«Ç§Ç©        
     {
-        RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, Raylength);
-        RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, Raylength);
-        RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, Raylength);
-        RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, Raylength);
+        RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, 0.02f);
+        RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, 0.02f);
+        RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, 0.02f);
+        RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, 0.02f);
 
-        if (BoxLup.collider != null&&BoxLdown.collider!=null) 
+        if (BoxLup.collider != null && BoxLdown.collider != null)
         {
-            if (BoxLup.collider.CompareTag("Wall")&& BoxLdown.collider.CompareTag("Wall"))
+            if (BoxLup.collider.CompareTag("Wall") && BoxLdown.collider.CompareTag("Wall"))
             {
                 return true;
             }
@@ -166,7 +161,7 @@ public class Box_Controller : MonoBehaviour
             {
                 Box_Controller otherboxup = BoxLup.collider.GetComponent<Box_Controller>();
                 Box_Controller otherboxdown = BoxLdown.collider.GetComponent<Box_Controller>();
-                if (otherboxup.wallstop == true || otherboxdown.wallstop == true)
+                if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
                 {
                     return true;
                 }
@@ -183,7 +178,7 @@ public class Box_Controller : MonoBehaviour
             {
                 Box_Controller otherboxup = BoxRup.collider.GetComponent<Box_Controller>();
                 Box_Controller otherboxdown = BoxRdown.collider.GetComponent<Box_Controller>();
-                if (otherboxup.wallstop == true || otherboxdown.wallstop == true)
+                if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
                 {
                     return true;
                 }
@@ -195,7 +190,11 @@ public class Box_Controller : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Wall") && wallStop())//boxÇâüÇπÇ»Ç¢èÛë‘
+        if (collision.gameObject.CompareTag("Wall") && wallStop() && boxDown())//boxÇâüÇπÇ»Ç¢èÛë‘
+        {
+            wallstop = true;
+        }
+        if (collision.gameObject.CompareTag("Box") && wallStop() && boxDown())
         {
             wallstop = true;
         }
@@ -210,11 +209,11 @@ public class Box_Controller : MonoBehaviour
         Gizmos.DrawRay(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), new Vector2(Raylength, 0));
 
         Gizmos.color = Color.yellow;
-        Gizmos.DrawRay(new Vector2(transform.position.x - 0.401f, transform.position.y ), new Vector2(-Raylength, 0));
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.401f, transform.position.y), new Vector2(-Raylength, 0));
         Gizmos.DrawRay(new Vector2(transform.position.x + 0.401f, transform.position.y), new Vector2(Raylength, 0));
 
         Gizmos.color = Color.green;
-        Gizmos.DrawRay(new Vector2(transform.position.x - 0.35f, transform.position.y - 0.401f), new Vector2(0,-Raylength));
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.35f, transform.position.y - 0.401f), new Vector2(0, -Raylength));
         Gizmos.DrawRay(new Vector2(transform.position.x + 0.35f, transform.position.y - 0.401f), new Vector2(0, -Raylength));
     }
 }
