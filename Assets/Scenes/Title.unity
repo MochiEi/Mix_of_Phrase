@@ -194,7 +194,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Phrase List\n\u30FBGAME SELECT\n\u30FBGAME KEY\n\u30FBEXIT GAME"
+  m_Text: "Phrase List\n\u30FBGAME START\n\u30FBGAME KEY\n\u30FBEXIT GAME"
 --- !u!222 &57431922
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -314,7 +314,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1962700763}
         m_TargetAssemblyTypeName: SelectPhrase, Assembly-CSharp
         m_MethodName: Push3
         m_Mode: 1
@@ -378,7 +378,7 @@ GameObject:
   - component: {fileID: 184669196}
   - component: {fileID: 184669194}
   m_Layer: 5
-  m_Name: Button (Select)
+  m_Name: Button (Start)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1962700763}
         m_TargetAssemblyTypeName: SelectPhrase, Assembly-CSharp
         m_MethodName: Push2
         m_Mode: 1
@@ -538,7 +538,7 @@ GameObject:
   - component: {fileID: 283481751}
   - component: {fileID: 283481750}
   m_Layer: 5
-  m_Name: TrashButton
+  m_Name: Decision
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -608,9 +608,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1962700763}
         m_TargetAssemblyTypeName: SelectPhrase, Assembly-CSharp
-        m_MethodName: TrashPhrase
+        m_MethodName: decision
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -811,7 +811,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1962700763}
         m_TargetAssemblyTypeName: SelectPhrase, Assembly-CSharp
         m_MethodName: Push1
         m_Mode: 1
@@ -1275,7 +1275,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: select
+  m_Text: start
 --- !u!222 &808254868
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1764,7 +1764,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 1962700763}
         m_TargetAssemblyTypeName: SelectPhrase, Assembly-CSharp
         m_MethodName: Push4
         m_Mode: 1
@@ -1833,7 +1833,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectText: {fileID: 768080349}
   canvas: {fileID: 1230943735}
-  startFade: 1
+  startFade: 0
   FadeTime: 0.5
 --- !u!1001 &7534651663566896802
 PrefabInstance:

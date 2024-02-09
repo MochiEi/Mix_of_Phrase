@@ -49,10 +49,10 @@ public class SelectPhrase : MonoBehaviour
                 break;
         }
     }
-    public void TrashPhrase()
+    public void decision()
     {
 
-        if (text.text == "game select")
+        if (text.text == "game start")
         {
             FadeCount++;
         }
@@ -93,6 +93,8 @@ public class SelectPhrase : MonoBehaviour
     }
     public void Push1()
     {
+        if (canvas.alpha < 1) return;
+
         if (textCount == 2)
         {
             text2 = "game";
@@ -107,20 +109,24 @@ public class SelectPhrase : MonoBehaviour
     }
     public void Push2()
     {
+        if (canvas.alpha < 1) return;
+
         if (textCount == 2)
         {
-            text2 = "select";
+            text2 = "start";
             textCount++;
         }
         if (textCount == 1)
         {
-            text1 = "select";
+            text1 = "start";
             text2 = null;
             textCount++;
         }
     }
     public void Push3()
     {
+        if (canvas.alpha < 1) return;
+
         if (textCount == 2)
         {
             text2 = "key";
@@ -135,6 +141,8 @@ public class SelectPhrase : MonoBehaviour
     }
     public void Push4()
     {
+        if (canvas.alpha < 1) return;
+
         if (textCount == 2)
         {
             text2 = "exit";
