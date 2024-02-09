@@ -14,21 +14,17 @@ TagManager:
   - POX_Side
   - Box_Right
   - Box_Left
-  - Noun
-  - Verb
-  - StageNum
-  - Button
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Ground
   - Water
   - UI
-  - BuckCollider
-  - phrase
-  - Put In
-  - GUI
+  - Box
+  - Player
+  - 
+  - 
   - 
   - 
   - 
