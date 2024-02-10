@@ -144,61 +144,61 @@ public class Box_Controller : MonoBehaviour
 
     }
 
-    private bool wallStop() //ï«Ç…êGÇÍÇƒâüÇπÇ»Ç≠Ç»ÇÈÇ©Ç«Ç§Ç©        
-    {
-        RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, 0.02f);
-        RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, 0.02f);
-        RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, 0.02f);
-        RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, 0.02f);
+    //private bool wallStop() //ï«Ç…êGÇÍÇƒâüÇπÇ»Ç≠Ç»ÇÈÇ©Ç«Ç§Ç©        
+    //{
+    //    RaycastHit2D BoxLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y + 0.35f), Vector2.left, 0.02f);
+    //    RaycastHit2D BoxRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y + 0.35f), Vector2.right, 0.02f);
+    //    RaycastHit2D BoxLdown = Physics2D.Raycast(new Vector2(transform.position.x - 0.401f, transform.position.y - 0.35f), Vector2.left, 0.02f);
+    //    RaycastHit2D BoxRdown = Physics2D.Raycast(new Vector2(transform.position.x + 0.401f, transform.position.y - 0.35f), Vector2.right, 0.02f);
 
-        if (BoxLup.collider != null && BoxLdown.collider != null)
-        {
-            if (BoxLup.collider.CompareTag("Wall") && BoxLdown.collider.CompareTag("Wall"))
-            {
-                return true;
-            }
-            if (BoxLup.collider.CompareTag("Box") && BoxLdown.collider.CompareTag("Box"))
-            {
-                Box_Controller otherboxup = BoxLup.collider.GetComponent<Box_Controller>();
-                Box_Controller otherboxdown = BoxLdown.collider.GetComponent<Box_Controller>();
-                if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
-                {
-                    return true;
-                }
-            }
-        }
+    //    if (BoxLup.collider != null && BoxLdown.collider != null)
+    //    {
+    //        if (BoxLup.collider.CompareTag("Wall") && BoxLdown.collider.CompareTag("Wall"))
+    //        {
+    //            return true;
+    //        }
+    //        if (BoxLup.collider.CompareTag("Box") && BoxLdown.collider.CompareTag("Box"))
+    //        {
+    //            Box_Controller otherboxup = BoxLup.collider.GetComponent<Box_Controller>();
+    //            Box_Controller otherboxdown = BoxLdown.collider.GetComponent<Box_Controller>();
+    //            if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
 
-        if (BoxRup.collider != null && BoxRdown.collider != null)
-        {
-            if (BoxRup.collider.CompareTag("Wall") && BoxRdown.collider.CompareTag("Wall"))
-            {
-                return true;
-            }
-            if (BoxRup.collider.CompareTag("Box") && BoxRdown.collider.CompareTag("Box"))
-            {
-                Box_Controller otherboxup = BoxRup.collider.GetComponent<Box_Controller>();
-                Box_Controller otherboxdown = BoxRdown.collider.GetComponent<Box_Controller>();
-                if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
-                {
-                    return true;
-                }
-            }
-        }
+    //    if (BoxRup.collider != null && BoxRdown.collider != null)
+    //    {
+    //        if (BoxRup.collider.CompareTag("Wall") && BoxRdown.collider.CompareTag("Wall"))
+    //        {
+    //            return true;
+    //        }
+    //        if (BoxRup.collider.CompareTag("Box") && BoxRdown.collider.CompareTag("Box"))
+    //        {
+    //            Box_Controller otherboxup = BoxRup.collider.GetComponent<Box_Controller>();
+    //            Box_Controller otherboxdown = BoxRdown.collider.GetComponent<Box_Controller>();
+    //            if (otherboxup.wallstop == true && otherboxdown.wallstop == true)
+    //            {
+    //                return true;
+    //            }
+    //        }
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
-    private void OnCollisionStay2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Wall") && wallStop() && boxDown())//boxÇâüÇπÇ»Ç¢èÛë‘
-        {
-            wallstop = true;
-        }
-        if (collision.gameObject.CompareTag("Box") && wallStop() && boxDown())
-        {
-            wallstop = true;
-        }
-    }
+    //private void OnCollisionStay2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Wall") && wallStop() && boxDown())//boxÇâüÇπÇ»Ç¢èÛë‘
+    //    {
+    //        wallstop = true;
+    //    }
+    //    if (collision.gameObject.CompareTag("Box") && wallStop() && boxDown())
+    //    {
+    //        wallstop = true;
+    //    }
+    //}
 
     void OnDrawGizmos()
     {

@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pox_walk
+  m_Name: POX_walk
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -36,7 +36,7 @@ AnimationClip:
     - time: 0.5833333
       value: {fileID: 21300000, guid: 258f1b2b71b51b74cb1f2bbe18ee46d6, type: 3}
     - time: 0.6666667
-      value: {fileID: 21300000, guid: 258f1b2b71b51b74cb1f2bbe18ee46d6, type: 3}
+      value: {fileID: 21300000, guid: 4e2716766d660ab409cc81aa8bcd589f, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -64,7 +64,7 @@ AnimationClip:
     - {fileID: 21300000, guid: 746f4c731aa974d4bad8357af0a28ce1, type: 3}
     - {fileID: 21300000, guid: fc29eb27f4f50d446be7f837ee8386a6, type: 3}
     - {fileID: 21300000, guid: 258f1b2b71b51b74cb1f2bbe18ee46d6, type: 3}
-    - {fileID: 21300000, guid: 258f1b2b71b51b74cb1f2bbe18ee46d6, type: 3}
+    - {fileID: 21300000, guid: 4e2716766d660ab409cc81aa8bcd589f, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

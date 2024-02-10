@@ -7,7 +7,6 @@ using System;
 
 public class SelectPhrase : MonoBehaviour
 {
-
     [SerializeField] private GameObject selectText; 
     [SerializeField] private CanvasGroup canvas;
 
@@ -15,10 +14,12 @@ public class SelectPhrase : MonoBehaviour
     string text1;
     string text2;
 
-    public bool startFade;
-    public float FadeTime;
+    [SerializeField] private bool startFade;
+    [SerializeField] private float FadeTime;
     private int FadeCount;
     private int textCount;
+
+    private int coutframe;
 
     // Start is called before the first frame update
     void Start()
@@ -37,17 +38,21 @@ public class SelectPhrase : MonoBehaviour
     {   
         text.text = text1 + " " + text2;
 
-        switch(FadeCount)
+        if (coutframe > 5)
         {
-            case 0:
-                fadeIn();
-                break;
-            case 1:
-                break;
-            case 2:
-                fadeOut(); 
-                break;
+            switch (FadeCount)
+            {
+                case 0:
+                    fadeIn();
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    fadeOut();
+                    break;
+            }
         }
+        coutframe++;
     }
     public void decision()
     {
@@ -56,7 +61,7 @@ public class SelectPhrase : MonoBehaviour
         {
             FadeCount++;
         }
-        else if (text.text == "game key")
+        else if (text.text == "game staff")
         {
             print(text.text);
         }
@@ -129,12 +134,12 @@ public class SelectPhrase : MonoBehaviour
 
         if (textCount == 2)
         {
-            text2 = "key";
+            text2 = "staff";
             textCount++;
         }
         if (textCount == 1)
         {
-            text1 = "key";
+            text1 = "staff";
             text2 = null;
             textCount++;
         }

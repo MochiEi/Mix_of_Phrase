@@ -24,16 +24,16 @@ public class Box_Generator : MonoBehaviour
 
     private bool Directlyabove()    //POXåNÇÃê^è„ÇåvéZ
     {
-        RaycastHit2D POXLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.6f), Vector2.up, 0.8f);
-        RaycastHit2D POXRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.6f), Vector2.up, 0.8f);
+        RaycastHit2D POXLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f);
+        RaycastHit2D POXRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f);
         return POXLup.collider == null && POXRup.collider == null;
     }
 
     void OnDrawGizmos()
     {
         Gizmos.color = Color.blue;
-        Gizmos.DrawRay(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.6f), new Vector2(0, 0.8f));
-        Gizmos.DrawRay(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.6f), new Vector2(0, 0.8f));
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.55f), new Vector2(0, 0.8f));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.55f), new Vector2(0, 0.8f));
     }
 
 }
