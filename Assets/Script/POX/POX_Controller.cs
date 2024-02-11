@@ -80,10 +80,10 @@ public class POX_Controller : MonoBehaviour
         }
 
         //ジャンプアニメーション
-        int layerMask = 1 << 7;
+        int layerMask = 1 << 7 | 1 << 8;
         layerMask = ~layerMask;
-        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.63f, layerMask);
-        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.63f, layerMask);
+        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.37f, transform.position.y), Vector2.down, 0.63f, layerMask);
+        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.37f, transform.position.y), Vector2.down, 0.63f, layerMask);
         if (jumpCount == 0 && Input.GetKey(KeyCode.Space))
         {
             jumpCount = 1;
@@ -131,11 +131,11 @@ public class POX_Controller : MonoBehaviour
     private bool isJump()
     {
         bool canJump = false;
-        int layerMask = 1 << 7;
+        int layerMask = 1 << 7 | 1 << 8;
         layerMask = ~layerMask;
 
-        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.63f, layerMask);
-        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.63f, layerMask);
+        RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.37f, transform.position.y), Vector2.down, 0.63f, layerMask);
+        RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.37f, transform.position.y), Vector2.down, 0.63f, layerMask);
 
         foreach (string t in tagName)
         {
@@ -186,8 +186,8 @@ public class POX_Controller : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(new Vector2(transform.position.x - 0.39f, transform.position.y), new Vector2(0, -0.63f));
-        Gizmos.DrawRay(new Vector2(transform.position.x + 0.39f, transform.position.y), new Vector2(0, -0.63f));
+        Gizmos.DrawRay(new Vector2(transform.position.x - 0.37f, transform.position.y), new Vector2(0, -0.63f));
+        Gizmos.DrawRay(new Vector2(transform.position.x + 0.37f, transform.position.y), new Vector2(0, -0.63f));
     }
 
 }

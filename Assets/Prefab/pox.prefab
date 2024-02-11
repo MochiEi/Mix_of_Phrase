@@ -103,6 +103,7 @@ MonoBehaviour:
   tagName:
   - Block
   - Box
+  - Button
 --- !u!114 &6854092657189223985
 MonoBehaviour:
   m_ObjectHideFlags: 0

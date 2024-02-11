@@ -24,8 +24,12 @@ public class Box_Generator : MonoBehaviour
 
     private bool Directlyabove()    //POXåNÇÃê^è„ÇåvéZ
     {
-        RaycastHit2D POXLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f);
-        RaycastHit2D POXRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f);
+        int layerMask = 1 << 7 | 1 << 8;
+        layerMask = ~layerMask;
+
+        RaycastHit2D POXLup = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f, layerMask);
+        RaycastHit2D POXRup = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y + 0.55f), Vector2.up, 0.8f, layerMask);
+
         return POXLup.collider == null && POXRup.collider == null;
     }
 

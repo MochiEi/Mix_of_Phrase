@@ -57,11 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Select\Select_Controller.cs" />
-    <Compile Include="Assets\Script\POX_Controller.cs" />
+    <Compile Include="Assets\Script\POX\POX_Controller.cs" />
     <Compile Include="Assets\Script\TestScript.cs" />
     <Compile Include="Assets\Script\Select\SelectNum_Controller.cs" />
-    <Compile Include="Assets\Script\Box_Controller.cs" />
-    <Compile Include="Assets\Script\Box_Generator.cs" />
+    <Compile Include="Assets\Script\BOX\Box_Controller.cs" />
+    <Compile Include="Assets\Script\POX\Box_Generator.cs" />
+    <Compile Include="Assets\Script\Button\ButtonManager.cs" />
+    <Compile Include="Assets\Script\Stage-1\Gimmick.cs" />
     <Compile Include="Assets\Script\Title\SelectPhrase.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -785,8 +787,14 @@
     <Reference Include="Unity.2D.IK.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Cinemachine">
+      <HintPath>Library\ScriptAssemblies\Cinemachine.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    </Reference>
+    <Reference Include="com.unity.cinemachine.editor">
+      <HintPath>Library\ScriptAssemblies\com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
