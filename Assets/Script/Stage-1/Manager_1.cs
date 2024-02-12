@@ -1,17 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
+using UnityEditor.Profiling;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using static UnityEditor.PlayerSettings;
 
-public class Gimmick : MonoBehaviour
+public class Manager_1 : MonoBehaviour
 {
-    //ギミック１
+    //ギミック1
     [SerializeField] private GameObject Button1;
     [SerializeField] private GameObject Block1;
     private ButtonManager ButtonManager1;
     private bool stop1;
 
-    //ギミック２
+    //ギミック2
     [SerializeField] private GameObject Button2;
     [SerializeField] private GameObject[] Block2;
     private ButtonManager ButtonManager2;
@@ -23,6 +28,17 @@ public class Gimmick : MonoBehaviour
     private ButtonManager ButtonManager3;
     private bool stop3;
 
+    //ギミック4
+    [SerializeField] private GameObject[] Block4;
+    [SerializeField] private GameObject[] goal;
+    [SerializeField] private LayerMask box;
+    private ButtonManager ButtonManager4;
+    private bool[] stop4;
+    private int count = 0;
+
+    [SerializeField] GameObject fade;
+    private Fade Fade;
+
     [SerializeField] private float rayPosX = 0;
     [SerializeField] private float rayPosY = 0;
     private int frameCount = 0;
@@ -30,7 +46,7 @@ public class Gimmick : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //ギミック１
+        //ギミック1
         ButtonManager1 = Button1.GetComponent<ButtonManager>();
 
         //ギミック2
@@ -39,6 +55,11 @@ public class Gimmick : MonoBehaviour
 
         //ギミック3
         ButtonManager3 = Button3.GetComponent<ButtonManager>();
+
+        //ギミック4
+        stop4 = new bool[Block4.Length];
+
+        Fade = fade.GetComponent<Fade>();
     }
 
     // Update is called once per frame
@@ -46,9 +67,11 @@ public class Gimmick : MonoBehaviour
     {
         if (frameCount > 5)
         {
+            Fade.FadeIn = true;
             gimmick1();
             gimmick2();
             gimmick3();
+            gimmick4();
         }
         frameCount++;
     }
@@ -179,9 +202,115 @@ public class Gimmick : MonoBehaviour
         block.transform.position = pos;
     }
 
+    private void gimmick4()
+    {
+        GameObject[] BOX = new GameObject[4];
+        SpriteRenderer[] sprit = new SpriteRenderer[4];
+        int setBox = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            Vector3 pos = Block4[i].transform.position;
+            Transform[] lamp = Block4[i].GetComponentsInChildren<Transform>();
+            SpriteRenderer material = lamp[1].GetComponent<SpriteRenderer>();
+
+            RaycastHit2D ray1 = Physics2D.Raycast(new Vector2(pos.x, pos.y + 3.62f), Vector2.up, 0.1f, box);
+
+            if (ray1.collider != null)
+            {
+                BOX[i] = ray1.collider.gameObject;
+                sprit[i] = BOX[i].GetComponent<SpriteRenderer>();
+                material.color = Color.green;
+                setBox++;
+            }
+            else
+            {
+                material.color = Color.red;
+            }
+
+        }
+
+        if (setBox >= 4)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                Vector3 pos = Block4[i].transform.position;
+                Vector3 Pos = BOX[i].transform.position;
+
+                pos.y -= Time.deltaTime * 1;
+                pos.y = Math.Max(-2.85f, pos.y);
+                Pos.y -= Time.deltaTime * 1;
+                Pos.y = Math.Max(1.17f, Pos.y);
+
+                Block4[i].transform.position = pos;
+                BOX[i].transform.position = Pos;
+            }
+        }
+
+        for (int i = 4; i < 6; i++)
+        {
+            Vector3 scale = Block4[i].transform.localScale;
+
+            if (Block4[0].transform.position.y <= -2.5)
+            {
+                scale.x += Time.deltaTime * 2;
+                scale.x = Math.Min(7f, scale.x);
+            }
+            else
+            {
+                scale.x -= Time.deltaTime * 2;
+                scale.x = Math.Max(0.5f, scale.x);
+            }
+
+            Block4[i].transform.localScale = scale;
+        }
+
+        if(count == 0 && Block4[4].transform.localScale.x >= 2)
+        {
+            count = 1;
+        }
+
+        if (count == 1 && Block4[6].transform.localScale.x >= 10)
+        {
+            count = 2;
+        }
+
+        if (count == 2 && Block4[6].transform.localScale.x <= 0.5)
+        {
+            Fade.FadeOut = true;
+            if (Fade.fade) SceneManager.LoadScene("toSelect");
+        }      
+
+        if (count == 1)
+        {
+            Vector3 scale = Block4[6].transform.localScale;
+
+            scale.x += Time.deltaTime * 3;
+            scale.x = Math.Min(10f, scale.x);
+
+            Block4[6].transform.localScale = scale;
+        }
+
+        if (count == 2)
+        {
+            for (int i = 0; i < goal.Length; i++)
+            {
+                Vector3 scale = Block4[6].transform.localScale;
+
+                scale.x -= Time.deltaTime * 1;
+                scale.x = Math.Max(0.5f, scale.x);
+
+                sprit[i].enabled = false;
+                goal[i].transform.position = BOX[i].transform.position;
+
+                Block4[6].transform.localScale = scale;
+            }
+        }
+    }
+
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(new Vector2(Block2[0].transform.position.x + rayPosX, Block2[0].transform.position.y + rayPosY),new Vector2 (0,0.01f));
+        Gizmos.DrawRay(new Vector2(Block4[0].transform.position.x + rayPosX, Block4[0].transform.position.y + rayPosY),new Vector2 (0,0.1f));
     }
 }

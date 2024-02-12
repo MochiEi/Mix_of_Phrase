@@ -14,8 +14,6 @@ public class Select_Controller : MonoBehaviour
     [SerializeField] private float keyFadeTime;
     [SerializeField] private CanvasGroup SelectCanvas;
     [SerializeField] private float SelectFadeTime;
-    [SerializeField] private GameObject BlackScreen;
-    [SerializeField] private float FadeTime;
 
     private int num = 0;
     private bool play = false;
@@ -24,18 +22,19 @@ public class Select_Controller : MonoBehaviour
     private int animeCount = 0;
     private int frameCount = 0;
 
-    private Image fade;
     private Animator anime;
     private Rigidbody2D rb;
+
+    [SerializeField] private GameObject fadeScreen;
+    private Fade fade;
     
     void Start()
     {
-        fade = BlackScreen.GetComponent<Image>();
         anime = POX.GetComponent<Animator>();
         rb = POX.GetComponent<Rigidbody2D>();
         keyCanvas.alpha = 0;
         SelectCanvas.alpha = 0;
-        fade.raycastTarget = false;
+        fade = fadeScreen.GetComponent<Fade>();
     }
 
     // Update is called once per frame
@@ -150,10 +149,9 @@ public class Select_Controller : MonoBehaviour
         }
         if(animeCount == 2)
         {
-            fade.fillAmount += Time.deltaTime * FadeTime;
-            fade.fillAmount = Math.Min(1, fade.fillAmount);
+            fade.FadeOut = true;
 
-            if (fade.fillAmount < 1) return; 
+            if (!fade.fade) return;
                 
             if(num == 1)
             {
@@ -206,9 +204,9 @@ public class Select_Controller : MonoBehaviour
     }
     public void button2()
     {
-        if (animeCount != 1) return;
-        num = 2;
-        play = true;
+        //if (animeCount != 1) return;
+        //num = 2;
+        //play = true;
     }
     public void button3()
     {

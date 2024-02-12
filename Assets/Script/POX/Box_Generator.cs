@@ -1,15 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
 
 public class Box_Generator : MonoBehaviour
 {
     public GameObject Boxprefab;   //ここに生成したいアイテムとか入れよう(public変数1つにつき1つまで)
+    public GameObject createEffect;
 
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -19,6 +20,7 @@ public class Box_Generator : MonoBehaviour
         {
             Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
             Instantiate(Boxprefab, spawnPosition, Quaternion.identity); // プレハブを生成
+            Instantiate(createEffect,new Vector3(spawnPosition.x , spawnPosition.y , -1), Quaternion.identity); // プレハブを生成
         }
     }
 

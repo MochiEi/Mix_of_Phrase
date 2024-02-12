@@ -53,7 +53,7 @@
     <UnityVersion>2021.3.22f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\shortcut\VisualStudio\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Script\Select\Select_Controller.cs" />
@@ -63,8 +63,12 @@
     <Compile Include="Assets\Script\BOX\Box_Controller.cs" />
     <Compile Include="Assets\Script\POX\Box_Generator.cs" />
     <Compile Include="Assets\Script\Button\ButtonManager.cs" />
-    <Compile Include="Assets\Script\Stage-1\Gimmick.cs" />
+    <Compile Include="Assets\Script\Stage-1\Manager_1.cs" />
     <Compile Include="Assets\Script\Title\SelectPhrase.cs" />
+    <Compile Include="Assets\Script\Fade.cs" />
+    <Compile Include="Assets\Script\toSelect.cs" />
+    <Compile Include="Assets\Script\PhraseWindow.cs" />
+    <Compile Include="Assets\Script\POX\Box_Break.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
