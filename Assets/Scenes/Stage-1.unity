@@ -5104,7 +5104,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   breakEffect: {fileID: 7184403236596316699, guid: a32a302be8269a14a91fe69e0ed65506, type: 3}
-  rayPosX: 0.42
+  rayPosX: 0.41
   rayPosY: 0
 --- !u!1 &1633879181
 GameObject:
@@ -5154,6 +5154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TextFrame: {fileID: 400242271}
+  cam: {fileID: 109361789}
 --- !u!212 &1633879184
 SpriteRenderer:
   m_ObjectHideFlags: 0

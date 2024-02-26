@@ -16,19 +16,20 @@ public class Box_Break : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pos = transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        pos = this.transform.position;
+
         RaycastHit2D[] ray = new RaycastHit2D[12];
 
         ray[0] = Physics2D.Raycast(new Vector2(pos.x, pos.y + 0.53f), Vector2.up, 0.1f, box);
         ray[1] = Physics2D.Raycast(new Vector2(pos.x + 0.39f, pos.y + 0.53f), Vector2.up, 0.1f, box);
         ray[2] = Physics2D.Raycast(new Vector2(pos.x - 0.39f, pos.y + 0.53f), Vector2.up, 0.1f, box);
 
-        ray[3] = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.63f), Vector2.down, 0.1f, box);
+        ray[3] = Physics2D.Raycast(new Vector2(pos.x, pos.y - 0.53f), Vector2.down, 0.1f, box);
         ray[4] = Physics2D.Raycast(new Vector2(pos.x + 0.39f, pos.y - 0.53f), Vector2.down, 0.1f, box);
         ray[5] = Physics2D.Raycast(new Vector2(pos.x - 0.39f, pos.y - 0.53f), Vector2.down, 0.1f, box);
 

@@ -1762,6 +1762,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4691391533019080161, guid: 185bb1c848b16714aaeae7faf5170b5d, type: 3}
+      propertyPath: startFade
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7534651663646940582, guid: 185bb1c848b16714aaeae7faf5170b5d, type: 3}
       propertyPath: m_Name
       value: system

@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PhraseWindow : MonoBehaviour
 {
     [SerializeField] GameObject TextFrame;
+    [SerializeField] GameObject cam;
 
     private Text text;
     private string text1;
@@ -36,12 +37,12 @@ public class PhraseWindow : MonoBehaviour
         if (isWindow)
         {
             pos.x -= Time.deltaTime * 50;
-            pos.x = Math.Max(-13f, pos.x);
+            pos.x = Math.Max(-13f + cam.transform.position.x, pos.x);
         }
         if (!isWindow)
         {
             pos.x += Time.deltaTime * 50;
-            pos.x = Math.Min(-4.23f, pos.x);
+            pos.x = Math.Min(-4.23f + cam.transform.position.x, pos.x);
         }
 
         transform.position = pos;
