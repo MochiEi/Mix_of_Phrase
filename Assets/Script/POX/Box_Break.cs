@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+using UnityEngine.UI;
 
 public class Box_Break : MonoBehaviour
 {
+    [SerializeField] private PhraseWindow phraseWindow;
+    private Text text;
+
     [SerializeField] LayerMask box;
     [SerializeField] GameObject breakEffect;
 
@@ -21,6 +24,8 @@ public class Box_Break : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        text = phraseWindow.text;
+
         pos = this.transform.position;
 
         RaycastHit2D[] ray = new RaycastHit2D[12];
@@ -43,9 +48,8 @@ public class Box_Break : MonoBehaviour
 
         for (int i = 0; i < ray.Length; i++)
         {
-            if (ray[i].collider != null && Input.GetKey(KeyCode.P))
+            if (text.text == "break  box" && ray[i].collider != null && Input.GetKeyDown(KeyCode.E)) 
             {
-                print("a");
                 Destroy(ray[i].collider.gameObject);
                 Instantiate(breakEffect, new Vector3(ray[i].collider.gameObject.transform.position.x, ray[i].collider.gameObject.transform.position.y, -1), Quaternion.identity); // ƒvƒŒƒnƒu‚ð¶¬
             }

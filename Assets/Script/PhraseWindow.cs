@@ -9,7 +9,7 @@ public class PhraseWindow : MonoBehaviour
     [SerializeField] GameObject TextFrame;
     [SerializeField] GameObject cam;
 
-    private Text text;
+    public Text text;
     private string text1;
     private string text2;
 

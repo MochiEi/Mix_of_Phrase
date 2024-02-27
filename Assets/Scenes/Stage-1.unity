@@ -4191,6 +4191,10 @@ PrefabInstance:
       propertyPath: createEffect
       value: 
       objectReference: {fileID: 2835192105089090561, guid: f970fe441d0ec1e49badf6695813f89c, type: 3}
+    - target: {fileID: 6854092657189223985, guid: 6b70aa4101a92124c98495b0c854c607, type: 3}
+      propertyPath: phraseWindow
+      value: 
+      objectReference: {fileID: 1633879183}
     - target: {fileID: 6854092657189223988, guid: 6b70aa4101a92124c98495b0c854c607, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -5100,6 +5104,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c058117304498a4db42f8f8419bf039, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  phraseWindow: {fileID: 1633879183}
   box:
     serializedVersion: 2
     m_Bits: 64
@@ -5155,6 +5160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TextFrame: {fileID: 400242271}
   cam: {fileID: 109361789}
+  text: {fileID: 0}
 --- !u!212 &1633879184
 SpriteRenderer:
   m_ObjectHideFlags: 0

@@ -215,7 +215,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Phrase List\n\u30FBGAME START\n\u30FBGAME STAFF\n\u30FBEXIT GAME"
+  m_Text: "Phrase List\n\u30FBGAME START\n\u30FBEXIT GAME"
 --- !u!222 &57431922
 CanvasRenderer:
   m_ObjectHideFlags: 0

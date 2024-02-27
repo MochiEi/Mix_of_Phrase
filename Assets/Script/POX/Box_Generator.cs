@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
+using UnityEngine.UI;
 
 public class Box_Generator : MonoBehaviour
 {
+    [SerializeField] private PhraseWindow phraseWindow;
+    private Text text;
+
     public GameObject Boxprefab;   //ここに生成したいアイテムとか入れよう(public変数1つにつき1つまで)
     public GameObject createEffect;
 
@@ -16,11 +19,13 @@ public class Box_Generator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Return) && Directlyabove()) //  Enterキーを押したとき
+        text = phraseWindow.text;
+
+        if (text.text == "create  box" && Input.GetKeyDown(KeyCode.E) && Directlyabove()) //  Eキーを押したとき
         {
             Vector3 spawnPosition = transform.position + Vector3.up; // 真上の位置を計算
             Instantiate(Boxprefab, spawnPosition, Quaternion.identity); // プレハブを生成
-            Instantiate(createEffect,new Vector3(spawnPosition.x , spawnPosition.y , -1), Quaternion.identity); // プレハブを生成
+            Instantiate(createEffect, new Vector3(spawnPosition.x, spawnPosition.y, -1), Quaternion.identity); // プレハブを生成
         }
     }
 

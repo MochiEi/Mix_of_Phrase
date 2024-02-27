@@ -61,10 +61,10 @@ public class SelectPhrase : MonoBehaviour
         {
             FadeCount++;
         }
-        else if (text.text == "game staff")
-        {
-            print(text.text);
-        }
+        //else if (text.text == "game staff")
+        //{
+        //    print(text.text);
+        //}
         else if (text.text == "exit game")
         {
             ExitGame();
