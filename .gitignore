@@ -3,10 +3,12 @@
 Library/
 Logs/
 obj/
-Layouts/
 
 # Programs
 Assembly-CSharp.csproj
+CurrentMaximizeLayout.dwlt
+default-2021.dwlt
+default-2022.dwlt
 
 # System
 Mix_of_Phrase.sln
