@@ -3,7 +3,7 @@
 Library/
 Logs/
 obj/
-Layouts/
+UserSettings/
 
 # Programs
 Assembly-CSharp.csproj
