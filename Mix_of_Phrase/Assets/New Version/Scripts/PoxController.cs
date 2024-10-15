@@ -18,7 +18,7 @@ public class PoxController : MonoBehaviour
     private bool inputCheck_A = false;
     private bool inputCheck_D = false;
     private bool inputCheck_S = false;
-    private bool inputCheck_Bool = false;
+    private bool inputCheck_Space = false;
     private bool inputCheck_JumpFlag = false;
 
     private Animator anim;
@@ -41,96 +41,113 @@ public class PoxController : MonoBehaviour
 
         if (jumpFlag.check_Enter2D && jumpFlag.check_Stay2D && jumpFlag.check_Exit2D)
         {
+            anim.SetBool("JumpAnim", false);
             inputCheck_JumpFlag = true;
-           // Debug.Log("JumpFlag" + inputCheck_JumpFlag);
+            // Debug.Log("JumpFlag" + inputCheck_JumpFlag);
         }
     }
 
     public void MoveController()
     {
-        if (!jumpFlag && !inputCheck_A && !inputCheck_D)
-        {
-            rb.velocity = Vector2.zero;
-        }
         pos = this.transform.position;
-
-        ///DもしくはSが押されていなければ///
-        if (Input.GetKey(KeyCode.A) && !inputCheck_D && !inputCheck_S )
+        if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
-            //this.transform.localScale = new Vector3(-1, 1);
-            inputCheck_A = true;
-            //rb.AddForce(Vector2.left * moveSpeed);
-           // anim.SetBool("MoveAnim", true);
-           // pos = this.transform.position;
-        }
-        else if (Input.GetKey(KeyCode.D) && !inputCheck_A && !inputCheck_S)
-        {
-           // this.transform.localScale = Vector3.one;
-            inputCheck_D = true;
-           // rb.AddForce(Vector2.right * moveSpeed);
-           // anim.SetBool("MoveAnim", true);
-            //pos = this.transform.position;
-        }
-        else
-        {
-            anim.SetBool("MoveAnim", false);
+            
         }
         ///AもしくはDが押されていなければ///
         if (Input.GetKey(KeyCode.S) && !inputCheck_A && !inputCheck_D)
         {
             inputCheck_S = true;
         }
+        ///DもしくはSが押されていなければ///
+        else if (Input.GetKey(KeyCode.A) && !inputCheck_D && !inputCheck_S)
+        {
+            inputCheck_A = true;
+        }
+        ///AもしくはSが押されていなければ///
+        else if (Input.GetKey(KeyCode.D) && !inputCheck_A && !inputCheck_S)
+        {
+            inputCheck_D = true;
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
         ///足がついていれば飛ぶことが出来る///
-        if (Input.GetKey(KeyCode.Space) && inputCheck_JumpFlag)
+        if (Input.GetKey(KeyCode.Space) && inputCheck_JumpFlag && !inputCheck_Space)
         {
-            rb.AddForce(Vector2.up * jumpPower);
-            pos = this.transform.position;
-            Debug.Log("JumpFlag" + inputCheck_JumpFlag);
-            inputCheck_JumpFlag = false;
-        }
-      
-
-        this.transform.position = pos;
-
-        // 移動速度制限を適用する
-        float currentHorizontalSpeed = Mathf.Abs(rb.velocity.x);  // 水平方向の速度を取得
-        if (currentHorizontalSpeed > maxSpeed)
-        {
-            // 最大速度を超えている場合、速度を制限する
-            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
+            inputCheck_Space = true;
         }
 
-        // 垂直方向の速度制限を追加
-        if (Mathf.Abs(rb.velocity.y) > maxVerticalSpeed)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxVerticalSpeed);
-        }
     }
     void FixedUpdate()
     {
+        MoveActions();
+
+        SettingMovement();
+    }
+
+    private void MoveActions()
+    {
+
+        if (!inputCheck_A && !inputCheck_D && !inputCheck_S && !inputCheck_Space)
+        {
+            anim.SetBool("MoveAnim", false);
+            anim.SetBool("DownAnim", false);
+        }
+        if (inputCheck_S)
+        {
+            anim.SetBool("MoveAnim", false);
+            anim.SetBool("DownAnim", true);
+            rb.velocity = new Vector2(0, rb.velocity.y);
+        }
         if (inputCheck_A)
         {
             this.transform.localScale = new Vector3(-1, 1);
-            rb.AddForce(Vector2.left * moveSpeed);
+            rb.AddForce(Vector2.left * moveSpeed, ForceMode2D.Force);
             anim.SetBool("MoveAnim", true);
+            anim.SetBool("DownAnim", false);
             pos = this.transform.position;
         }
         if (inputCheck_D)
         {
             this.transform.localScale = new Vector3(1, 1);
-            rb.AddForce(Vector2.right * moveSpeed);
+            rb.AddForce(Vector2.right * moveSpeed, ForceMode2D.Force);
             anim.SetBool("MoveAnim", true);
+            anim.SetBool("DownAnim", false);
             pos = this.transform.position;
         }
-        if (inputCheck_S)
+        if (inputCheck_Space)
         {
-           
+            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            pos = this.transform.position;
+            anim.SetBool("JumpAnim", true);
+            inputCheck_JumpFlag = false;
         }
 
         inputCheck_A = false;
         inputCheck_D = false;
         inputCheck_S = false;
+        inputCheck_Space = false;
 
+    }
+    private void SettingMovement()
+    {
+        /// 移動速度制限を適用する///
+        float currentHorizontalSpeed = Mathf.Abs(rb.velocity.x);  // 水平方向の速度を取得
+        if (currentHorizontalSpeed > maxSpeed)
+        {
+            /// 最大速度を超えている場合、速度を制限する///
+            rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
+        }
+
+        /// 垂直方向の速度制限を追加///
+        if (Mathf.Abs(rb.velocity.y) > maxVerticalSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxVerticalSpeed);
+        }
+        ///基本の処理を終えた後に移動量の適用処理///
+        this.transform.position = pos;
     }
 }
 
