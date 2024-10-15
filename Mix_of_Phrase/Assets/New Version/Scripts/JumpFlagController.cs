@@ -24,26 +24,26 @@ public class JumpFlagController : MonoBehaviour
             check_Enter2D = false;
             check_Stay2D = false;
             check_Exit2D = true;
-            Debug.Log("JumpFlag"+PoxController.jumpFlag);
+           // Debug.Log("JumpFlag"+PoxController.jumpFlag);
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("JumpOK");    
+       // Debug.Log("JumpOK");    
         check_Enter2D = true;
         check_Exit2D = true;
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log("HitLoged");
+        //Debug.Log("HitLoged");
         check_Stay2D = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Debug.Log("JumpNow");
+       // Debug.Log("JumpNow");
         check_Exit2D = false;
     }
 }

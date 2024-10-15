@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 80610515}
   - component: {fileID: 80610514}
   m_Layer: 0
-  m_Name: Square
+  m_Name: Groud
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -288,7 +288,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   jumpPower: 150
-  maxSpeed: 1
+  maxSpeed: 2
+  maxVerticalSpeed: 2
   JumpFlag_Base: {fileID: 1766938570}
   jumpFlag: {fileID: 1766938572}
 --- !u!50 &1036786627
@@ -559,7 +560,7 @@ GameObject:
   - component: {fileID: 2086718747}
   - component: {fileID: 2086718746}
   m_Layer: 0
-  m_Name: Square (1)
+  m_Name: Wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,7 +575,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 2086718745}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: dfd2c86aebfb27445a934027e3447f96, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0

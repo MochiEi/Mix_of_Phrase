@@ -9,6 +9,7 @@ public class PoxController : MonoBehaviour
     [SerializeField] float moveSpeed = 0;
     [SerializeField] float jumpPower = 0;
     [SerializeField] float maxSpeed = 0;
+    [SerializeField] float maxVerticalSpeed = 0; // 最大垂直速度を設定（必要に応じて調整）
     [SerializeField] GameObject JumpFlag_Base;
     public JumpFlagController jumpFlag;
 
@@ -61,7 +62,6 @@ public class PoxController : MonoBehaviour
             rb.AddForce(Vector2.left * moveSpeed);
             anim.SetBool("MoveAnim", true);
             pos = this.transform.position;
-            Debug.Log(inputCheck_A);
         }
         else if (Input.GetKey(KeyCode.D) && !inputCheck_A && !inputCheck_S)
         {
@@ -70,7 +70,6 @@ public class PoxController : MonoBehaviour
             rb.AddForce(Vector2.right * moveSpeed);
             anim.SetBool("MoveAnim", true);
             pos = this.transform.position;
-            Debug.Log(inputCheck_D);
         }
         else
         {
@@ -80,12 +79,10 @@ public class PoxController : MonoBehaviour
         if (Input.GetKey(KeyCode.S) && !inputCheck_A && !inputCheck_D)
         {
             inputCheck_S = true;
-            pos = this.transform.position;
         }
         ///足がついていれば飛ぶことが出来る///
         if (Input.GetKey(KeyCode.Space) && inputCheck_JumpFlag)
         {
-            rb.velocity = Vector2.zero;
             rb.AddForce(Vector2.up * jumpPower);
             pos = this.transform.position;
             Debug.Log("JumpFlag" + inputCheck_JumpFlag);
@@ -96,7 +93,6 @@ public class PoxController : MonoBehaviour
         inputCheck_S = false;
 
         this.transform.position = pos;
-        Debug.Log(pos);
     }
     void FixedUpdate()
     {
@@ -106,6 +102,12 @@ public class PoxController : MonoBehaviour
         {
             // 最大速度を超えている場合、速度を制限する
             rb.velocity = new Vector2(Mathf.Sign(rb.velocity.x) * maxSpeed, rb.velocity.y);
+        }
+
+        // 垂直方向の速度制限を追加
+        if (Mathf.Abs(rb.velocity.y) > maxVerticalSpeed)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxVerticalSpeed);
         }
     }
 }
