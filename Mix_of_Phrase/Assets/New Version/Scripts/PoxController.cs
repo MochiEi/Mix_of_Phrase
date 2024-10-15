@@ -42,7 +42,7 @@ public class PoxController : MonoBehaviour
         if (jumpFlag.check_Enter2D && jumpFlag.check_Stay2D && jumpFlag.check_Exit2D)
         {
             inputCheck_JumpFlag = true;
-            Debug.Log("JumpFlag" + inputCheck_JumpFlag);
+           // Debug.Log("JumpFlag" + inputCheck_JumpFlag);
         }
     }
 
@@ -55,21 +55,21 @@ public class PoxController : MonoBehaviour
         pos = this.transform.position;
 
         ///DもしくはSが押されていなければ///
-        if (Input.GetKey(KeyCode.A) && !inputCheck_D && !inputCheck_S)
+        if (Input.GetKey(KeyCode.A) && !inputCheck_D && !inputCheck_S )
         {
-            this.transform.localScale = new Vector3(-1, 1);
+            //this.transform.localScale = new Vector3(-1, 1);
             inputCheck_A = true;
-            rb.AddForce(Vector2.left * moveSpeed);
-            anim.SetBool("MoveAnim", true);
-            pos = this.transform.position;
+            //rb.AddForce(Vector2.left * moveSpeed);
+           // anim.SetBool("MoveAnim", true);
+           // pos = this.transform.position;
         }
         else if (Input.GetKey(KeyCode.D) && !inputCheck_A && !inputCheck_S)
         {
-            this.transform.localScale = Vector3.one;
+           // this.transform.localScale = Vector3.one;
             inputCheck_D = true;
-            rb.AddForce(Vector2.right * moveSpeed);
-            anim.SetBool("MoveAnim", true);
-            pos = this.transform.position;
+           // rb.AddForce(Vector2.right * moveSpeed);
+           // anim.SetBool("MoveAnim", true);
+            //pos = this.transform.position;
         }
         else
         {
@@ -88,14 +88,10 @@ public class PoxController : MonoBehaviour
             Debug.Log("JumpFlag" + inputCheck_JumpFlag);
             inputCheck_JumpFlag = false;
         }
-        inputCheck_A = false;
-        inputCheck_D = false;
-        inputCheck_S = false;
+      
 
         this.transform.position = pos;
-    }
-    void FixedUpdate()
-    {
+
         // 移動速度制限を適用する
         float currentHorizontalSpeed = Mathf.Abs(rb.velocity.x);  // 水平方向の速度を取得
         if (currentHorizontalSpeed > maxSpeed)
@@ -109,6 +105,32 @@ public class PoxController : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, Mathf.Sign(rb.velocity.y) * maxVerticalSpeed);
         }
+    }
+    void FixedUpdate()
+    {
+        if (inputCheck_A)
+        {
+            this.transform.localScale = new Vector3(-1, 1);
+            rb.AddForce(Vector2.left * moveSpeed);
+            anim.SetBool("MoveAnim", true);
+            pos = this.transform.position;
+        }
+        if (inputCheck_D)
+        {
+            this.transform.localScale = new Vector3(1, 1);
+            rb.AddForce(Vector2.right * moveSpeed);
+            anim.SetBool("MoveAnim", true);
+            pos = this.transform.position;
+        }
+        if (inputCheck_S)
+        {
+           
+        }
+
+        inputCheck_A = false;
+        inputCheck_D = false;
+        inputCheck_S = false;
+
     }
 }
 
