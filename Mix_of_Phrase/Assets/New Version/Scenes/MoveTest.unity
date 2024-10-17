@@ -289,9 +289,12 @@ MonoBehaviour:
   moveSpeed: 10
   jumpPower: 150
   maxSpeed: 2
-  maxVerticalSpeed: 4.5
+  maxVerticalSpeed: 4.7
+  jumpCount: 0
   JumpFlag_Base: {fileID: 1766938570}
-  jumpFlag: {fileID: 1766938572}
+  jumpFlagController: {fileID: 0}
+  Check_JumpFlag: 0
+  frameOne: 0
 --- !u!50 &1036786627
 Rigidbody2D:
   serializedVersion: 4
@@ -501,6 +504,7 @@ MonoBehaviour:
   check_Enter2D: 0
   check_Stay2D: 0
   check_Exit2D: 0
+  frameCount: 0
   PoxController_Base: {fileID: 1036786625}
   PoxController: {fileID: 1036786626}
 --- !u!61 &1766938573

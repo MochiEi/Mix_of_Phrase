@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
-using UnityEditor.SceneManagement;
+using System;
 using UnityEngine;
+using System.Threading;
 
 public class PoxController : MonoBehaviour
 {
@@ -10,8 +8,9 @@ public class PoxController : MonoBehaviour
     [SerializeField] float jumpPower = 0;
     [SerializeField] float maxSpeed = 0;
     [SerializeField] float maxVerticalSpeed = 0; // 最大垂直速度を設定（必要に応じて調整）
+    [SerializeField] int jumpCount = 0;
     [SerializeField] GameObject JumpFlag_Base;
-    public JumpFlagController jumpFlag;
+    public JumpFlagController jumpFlagController;
 
     Vector3 pos;
 
@@ -19,7 +18,10 @@ public class PoxController : MonoBehaviour
     private bool inputCheck_D = false;
     private bool inputCheck_S = false;
     private bool inputCheck_Space = false;
-    private bool inputCheck_JumpFlag = false;
+    [SerializeField] private bool Check_JumpFlag = false;
+
+    [SerializeField] private bool frameOne;
+    private bool frameCache;
 
     private Animator anim;
     private Rigidbody2D rb;
@@ -30,7 +32,8 @@ public class PoxController : MonoBehaviour
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         JumpFlag_Base = GameObject.Find("JumpFlagBase");
-        jumpFlag = JumpFlag_Base.GetComponent<JumpFlagController>();
+        jumpFlagController = JumpFlag_Base.GetComponent<JumpFlagController>();
+        frameOne = true;
     }
 
     // Update is called once per frame
@@ -39,11 +42,13 @@ public class PoxController : MonoBehaviour
 
         MoveController();
 
-        if (jumpFlag.check_Enter2D && jumpFlag.check_Stay2D && jumpFlag.check_Exit2D)
+        if (jumpFlagController.check_Enter2D && jumpFlagController.check_Stay2D && jumpFlagController.check_Exit2D)
         {
-            anim.SetBool("JumpAnim", false);
-            inputCheck_JumpFlag = true;
-            // Debug.Log("JumpFlag" + inputCheck_JumpFlag);
+            Check_JumpFlag = true;
+            Debug.Log("JumpFlag" + Check_JumpFlag);
+        }else if (!jumpFlagController.check_Exit2D)
+        {
+            Check_JumpFlag= false;
         }
     }
 
@@ -52,7 +57,7 @@ public class PoxController : MonoBehaviour
         pos = this.transform.position;
         if (Input.GetKey(KeyCode.A) && Input.GetKey(KeyCode.D))
         {
-            
+
         }
         ///AもしくはDが押されていなければ///
         if (Input.GetKey(KeyCode.S) && !inputCheck_A && !inputCheck_D)
@@ -74,11 +79,12 @@ public class PoxController : MonoBehaviour
             rb.velocity = new Vector2(0, rb.velocity.y);
         }
         ///足がついていれば飛ぶことが出来る///
-        if (Input.GetKey(KeyCode.Space) && inputCheck_JumpFlag && !inputCheck_Space)
+        if (Input.GetKeyDown(KeyCode.Space) && Check_JumpFlag && !inputCheck_Space)
         {
             inputCheck_Space = true;
+             anim.SetBool("JumpAnim", true);
+            Invoke(nameof(DelayJump), 0.3f);
         }
-
     }
     void FixedUpdate()
     {
@@ -90,7 +96,7 @@ public class PoxController : MonoBehaviour
     private void MoveActions()
     {
 
-        if (!inputCheck_A && !inputCheck_D && !inputCheck_S && !inputCheck_Space)
+        if (!inputCheck_A && !inputCheck_D && !inputCheck_S && Check_JumpFlag)
         {
             anim.SetBool("MoveAnim", false);
             anim.SetBool("DownAnim", false);
@@ -117,19 +123,36 @@ public class PoxController : MonoBehaviour
             anim.SetBool("DownAnim", false);
             pos = this.transform.position;
         }
-        if (inputCheck_Space)
-        {
-            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-            pos = this.transform.position;
-            anim.SetBool("JumpAnim", true);
-            inputCheck_JumpFlag = false;
-        }
 
         inputCheck_A = false;
         inputCheck_D = false;
         inputCheck_S = false;
         inputCheck_Space = false;
+        if (jumpCount == 1 && Check_JumpFlag)
+        {
+            anim.SetBool("JumpAnim", false);
+            if (frameCache == frameOne)
+                return;
+            CoolTime();
+            frameCache = !frameOne;
+        }     
+    }
 
+    private void DelayJump()
+    {
+        if (!inputCheck_Space && Check_JumpFlag && jumpCount == 0)
+        {
+            rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            pos = this.transform.position;
+            Check_JumpFlag = false;
+            Debug.Log(Check_JumpFlag);
+            jumpCount = 1;
+        }
+    }
+    private void CoolTime()
+    {
+        jumpCount = 0;
+        Debug.Log(jumpCount);
     }
     private void SettingMovement()
     {
@@ -150,5 +173,6 @@ public class PoxController : MonoBehaviour
         this.transform.position = pos;
     }
 }
+
 
 
