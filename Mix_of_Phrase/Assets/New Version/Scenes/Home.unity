@@ -1202,6 +1202,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 954254753}
   m_CullTransparentMesh: 1
+--- !u!114 &1001786493 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4434469515905797276, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+  m_PrefabInstance: {fileID: 1886854541}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f956369d3a682244adac81b24198be7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1299957322
 GameObject:
   m_ObjectHideFlags: 0
@@ -1639,9 +1650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fadeSpeed: 0.5
   isActive: 0
-  fadeIn: 1
-  fadeOut: 0
-  testMode: 1
+  testMode: 0
 --- !u!1 &1581253750
 GameObject:
   m_ObjectHideFlags: 0
@@ -2026,7 +2035,7 @@ GameObject:
   - component: {fileID: 1704135510}
   - component: {fileID: 1704135512}
   m_Layer: 0
-  m_Name: TitleManager
+  m_Name: SystemManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2076,8 +2085,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ae5a37e55819b842a4455c8dae73796, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shared: {fileID: 1001786493}
   bluckFade: {fileID: 1489551327}
   whiteFade: {fileID: 1370491957}
+  isActive: 1
+  fadeSpeed: 0.3
 --- !u!1 &1785079176
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,6 +2348,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1786056328}
   m_CullTransparentMesh: 1
+--- !u!1001 &1886854541
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4434469515905797276, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: initGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4434469515905797276, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: isSelectScene
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5452552784362578725, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8544368273498896651, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
+      propertyPath: m_Name
+      value: VariableStorage
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fdfd2672f5ea7d945b4cec1521e66dc1, type: 3}
 --- !u!1 &1888248648
 GameObject:
   m_ObjectHideFlags: 0
@@ -2596,3 +2673,4 @@ SceneRoots:
   - {fileID: 1704135511}
   - {fileID: 1679017467}
   - {fileID: 807087338}
+  - {fileID: 1886854541}

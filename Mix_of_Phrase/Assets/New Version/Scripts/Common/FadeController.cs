@@ -15,11 +15,9 @@ public class FadeController : MonoBehaviour
     public bool isActive;
 
     /// フェードが引いてる状態
-    [HideInInspector]
-    public bool fadeIn;
+    private bool fadeIn;
     /// フェードが閉じてる状態
-    [HideInInspector]
-    public bool fadeOut;
+    private bool fadeOut;
 
     [Header("")]
     [SerializeField] bool testMode;
@@ -51,12 +49,14 @@ public class FadeController : MonoBehaviour
         }
 
         if (isActive)
+        {
             amount += fadeSpeed * Time.deltaTime;
 
-        amount = Mathf.Clamp(amount, 0, 1);
+            amount = Mathf.Clamp(amount, 0, 1);
 
-        if (amount == 1 || amount == 0)
-            isActive = false;
+            if (amount == 1 || amount == 0)
+                isActive = false;
+        }
 
         /// フェード中はクリック操作してもイメージが邪魔して無効
         if (fadeIn)

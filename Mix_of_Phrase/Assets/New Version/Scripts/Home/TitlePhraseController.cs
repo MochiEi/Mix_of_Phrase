@@ -21,8 +21,6 @@ public class TitlePhraseController : MonoBehaviour
         secondText = "phrase";
     }
 
-    int a = 0;
-
     void Update()
     {
         outputText = firstText + " " + secondText;
