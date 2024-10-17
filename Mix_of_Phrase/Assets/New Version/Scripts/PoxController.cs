@@ -39,7 +39,6 @@ public class PoxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         MoveController();
 
         if (jumpFlagController.check_Enter2D && jumpFlagController.check_Stay2D && jumpFlagController.check_Exit2D)
@@ -48,7 +47,10 @@ public class PoxController : MonoBehaviour
             Debug.Log("JumpFlag" + Check_JumpFlag);
         }else if (!jumpFlagController.check_Exit2D)
         {
-            Check_JumpFlag= false;
+            if (jumpFlagController.check_Stay2D)
+            {
+                Check_JumpFlag = false;
+            }
         }
     }
 

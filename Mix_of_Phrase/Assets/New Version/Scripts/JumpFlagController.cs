@@ -57,6 +57,5 @@ public class JumpFlagController : MonoBehaviour
        // Debug.Log("JumpNow");
         check_Exit2D = false;
         check_Stay2D = false;
-
     }
 }

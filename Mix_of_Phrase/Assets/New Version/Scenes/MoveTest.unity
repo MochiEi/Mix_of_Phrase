@@ -263,10 +263,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1036786630}
   - component: {fileID: 1036786629}
-  - component: {fileID: 1036786628}
   - component: {fileID: 1036786627}
   - component: {fileID: 1036786626}
   - component: {fileID: 1036786631}
+  - component: {fileID: 1036786632}
   m_Layer: 0
   m_Name: Pox
   m_TagString: Untagged
@@ -322,51 +322,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &1036786628
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1036786625}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.055}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.8, y: 1.28}
-    newSize: {x: 0.8, y: 1.28}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8, y: 1.16}
-  m_EdgeRadius: 0
 --- !u!212 &1036786629
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -456,6 +411,57 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!60 &1036786632
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1036786625}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.4, y: 0.01}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8, y: 1.28}
+    newSize: {x: 0.8, y: 1.28}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0, y: -0.58}
+      - {x: 0.25, y: -0.6}
+      - {x: 0.55, y: -0.6}
+      - {x: 0.8, y: -0.58}
+      - {x: 0.8, y: 0.52}
+      - {x: 0, y: 0.52}
+  m_UseDelaunayMesh: 0
 --- !u!1 &1766938570
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,8 +471,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766938571}
-  - component: {fileID: 1766938573}
   - component: {fileID: 1766938572}
+  - component: {fileID: 1766938573}
   m_Layer: 0
   m_Name: JumpFlagBase
   m_TagString: Untagged
@@ -507,8 +513,8 @@ MonoBehaviour:
   frameCount: 0
   PoxController_Base: {fileID: 1036786625}
   PoxController: {fileID: 1036786626}
---- !u!61 &1766938573
-BoxCollider2D:
+--- !u!60 &1766938573
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -539,19 +545,25 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.8, y: 1.28}
+    newSize: {x: 0.8, y: 1.28}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: -0.52, y: 0.25}
+      - {x: -0.52, y: -0.38}
+      - {x: -0.45, y: -0.65}
+      - {x: 0.45, y: -0.65}
+      - {x: 0.52, y: -0.38}
+      - {x: 0.52, y: 0.25}
+  m_UseDelaunayMesh: 0
 --- !u!1 &2086718745
 GameObject:
   m_ObjectHideFlags: 0
@@ -676,7 +688,7 @@ Transform:
   m_GameObject: {fileID: 2086718745}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.39, z: 0}
+  m_LocalPosition: {x: 0, y: -2.95, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
