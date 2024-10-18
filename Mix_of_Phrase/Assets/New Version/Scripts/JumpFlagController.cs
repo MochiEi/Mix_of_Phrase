@@ -13,7 +13,7 @@ public class JumpFlagController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        PoxController_Base = GameObject.Find("Pox");
+        PoxController_Base = GameObject.Find("Pox0");
         PoxController = PoxController_Base.GetComponent<PoxController>();
     }
 
