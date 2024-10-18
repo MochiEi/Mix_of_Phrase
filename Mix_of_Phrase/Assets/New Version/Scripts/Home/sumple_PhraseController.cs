@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TitlePhraseController : MonoBehaviour
+public class sumple_PhraseController : MonoBehaviour
 {
     [SerializeField] Text phraseBoardText;
     [SerializeField] Text text01;
@@ -14,7 +14,7 @@ public class TitlePhraseController : MonoBehaviour
     private int textCount;
     private string firstText, secondText;
     private string outputText;
-        
+
     void Start()
     {
         firstText = "click";
@@ -31,12 +31,12 @@ public class TitlePhraseController : MonoBehaviour
 
     private void operationTable()
     {
-        if(outputText == "game start")
+        if (outputText == "game start")
         {
 
         }
 
-        if(outputText == "exit game")
+        if (outputText == "exit game")
         {
             ExitGame();
         }
@@ -44,13 +44,13 @@ public class TitlePhraseController : MonoBehaviour
 
     public void buttom01_Down()
     {
-        if(textCount == 0)
+        if (textCount == 0)
         {
             firstText = text01.text;
             textCount++;
             return;
         }
-        if(textCount == 1)
+        if (textCount == 1)
         {
             secondText = text01.text;
             textCount++;
@@ -107,7 +107,7 @@ public class TitlePhraseController : MonoBehaviour
     }
 
     /// フレーズのリセット
-    public void eraseButtom()
+    public void erasePhrase()
     {
         firstText = "click";
         secondText = "phrase";

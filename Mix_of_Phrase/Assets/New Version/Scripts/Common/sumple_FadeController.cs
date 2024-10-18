@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 
-public class FadeController : MonoBehaviour
+public class sumple_FadeController : MonoBehaviour
 {
     private int skipFrame;
 
