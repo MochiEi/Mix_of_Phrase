@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class MoveController : MonoBehaviour
 {
     ///”»’è“®ì
@@ -21,6 +19,7 @@ public class MoveController : MonoBehaviour
     Animator anim;
     Rigidbody2D rb;
     public GameObject Pox;
+
     // Start is called before the first frame update
     void Start()
     {   Pox = GameObject.Find("Pox");
@@ -36,6 +35,7 @@ public class MoveController : MonoBehaviour
         input_S = false;
         input_A = false;
         input_D = false;
+
         if (t_Enter && t_Stay && !t_Exit)
         {
             jump_flag = true;
@@ -49,6 +49,7 @@ public class MoveController : MonoBehaviour
         {
             input_S = true;
         }
+
         if (Input.GetKey(KeyCode.A) && !input_S)
         {
             input_A = true;
@@ -57,19 +58,15 @@ public class MoveController : MonoBehaviour
         {
             input_D = true;
         }
-        else
-        {
-            //rb.velocity = new Vector2(0, rb.velocity.y);
-        }
+
         if (Input.GetKeyDown(KeyCode.Space) && jump_Hit && jump_flag)
         {
             input_Space = true;
         }
 
         MoveActions();
-
-
     }
+
     private void FixedUpdate()
     {
         if (!input_A && !input_D && !input_S)
@@ -78,26 +75,37 @@ public class MoveController : MonoBehaviour
             anim.SetBool("MoveAnim", false);
             rb.velocity = new Vector2(0,rb.velocity.y);
         }
+
         if (input_S)
         {
             rb.velocity = new Vector2(0f , rb.velocity.y);
         }
+
         if (input_A)
         {
+            if (rb.velocity.normalized.x > 0f)
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+
             Pox.transform.localScale = new Vector3(-1, 1);
             rb.AddForce(Vector2.left * moveSpeed, ForceMode2D.Force);
             pos = Pox.transform.position;
-        }else if (input_D)
+        }
+        else if (input_D)
         {
+            if (rb.velocity.normalized.x < 0f)
+                rb.velocity = new Vector2(0f, rb.velocity.y);
+
             Pox.transform.localScale = new Vector3(1, 1);
             rb.AddForce(Vector2.right * moveSpeed, ForceMode2D.Force);
             pos = Pox.transform.position;   
         }
+
         if (input_Space && jump_flag)
         {
             jump_Hit = false;
             Invoke(nameof(Delay), 0.3f);
         }
+
         SettingSpeed();
         input_Space = false;
     }
@@ -176,6 +184,7 @@ public class MoveController : MonoBehaviour
             }
         } 
     }
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         foreach (var Step in StepTags)
