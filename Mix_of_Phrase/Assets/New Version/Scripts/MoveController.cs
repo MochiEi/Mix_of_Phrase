@@ -64,7 +64,6 @@ public class MoveController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && jump_Hit && jump_flag)
         {
             input_Space = true;
-            jump_flag = false;
         }
 
         MoveActions();
@@ -168,14 +167,14 @@ public class MoveController : MonoBehaviour
     {
         foreach (var Step in StepTags)
         {
-            if (collision.tag == Step )
+            if (collision.tag == Step)
             {
                 t_Enter = true;
                 jump_Hit = true;
                 jump_flag = false;
                 Debug.Log(jump_Hit);
             }
-        }  
+        } 
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
@@ -197,6 +196,8 @@ public class MoveController : MonoBehaviour
             if (collision.tag ==Step)
             {
                 t_Exit = true;
+                t_Enter = false;
+                t_Stay = false;
             }
         }
     }
