@@ -205,8 +205,11 @@ public class MoveController : MonoBehaviour
             if (collision.tag ==Step)
             {
                 t_Exit = true;
-                t_Enter = false;
                 t_Stay = false;
+            }
+            else if (!t_Stay)
+            {
+                t_Enter = false;
             }
         }
     }
