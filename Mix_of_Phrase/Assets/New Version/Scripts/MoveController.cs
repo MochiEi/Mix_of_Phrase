@@ -22,10 +22,11 @@ public class MoveController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {   Pox = GameObject.Find("Pox");
+    {   //Pox = GameObject.Find("Pox");
         anim = Pox.gameObject.GetComponent<Animator>();
         rb = Pox.gameObject.GetComponent<Rigidbody2D>();
-        frame_One = true;  
+        frame_One = true;
+        pos = Pox.transform.position;
     }
 
     // Update is called once per frame
@@ -87,7 +88,7 @@ public class MoveController : MonoBehaviour
                 rb.velocity = new Vector2(0f, rb.velocity.y);
 
             Pox.transform.localScale = new Vector3(-1, 1);
-            rb.AddForce(Vector2.left * moveSpeed, ForceMode2D.Force);
+            rb.AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
             pos = Pox.transform.position;
         }
         else if (input_D)
@@ -96,7 +97,7 @@ public class MoveController : MonoBehaviour
                 rb.velocity = new Vector2(0f, rb.velocity.y);
 
             Pox.transform.localScale = new Vector3(1, 1);
-            rb.AddForce(Vector2.right * moveSpeed, ForceMode2D.Force);
+            rb.AddForce(Vector2.right * moveSpeed, ForceMode2D.Impulse);
             pos = Pox.transform.position;   
         }
 
@@ -186,9 +187,10 @@ public class MoveController : MonoBehaviour
     }
 
     private void OnTriggerStay2D(Collider2D collision)
-    {
+    {  
         foreach (var Step in StepTags)
         {
+            t_Enter = true;
             if (collision.tag == Step )
             {
                 t_Stay = true;
