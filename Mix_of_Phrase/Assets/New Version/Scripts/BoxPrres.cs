@@ -19,7 +19,7 @@ public class BoxPrres : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(rb2d.velocity.normalized);
+        //Debug.Log(rb2d.velocity.normalized);
 
         addForceNormalize = rb2d.velocity.normalized;
 
