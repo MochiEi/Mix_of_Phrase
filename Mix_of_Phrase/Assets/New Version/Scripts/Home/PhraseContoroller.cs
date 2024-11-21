@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PhraseContoroller : MonoBehaviour
 {
+    [SerializeField] SwitchScreenContoroller sceneContoroller;
     private Text outputText;
 
     private int textCount;
@@ -14,7 +15,7 @@ public class PhraseContoroller : MonoBehaviour
     {
         foreach (Transform child in this.transform)
         {
-            if(child.gameObject.name == "Text")
+            if (child.gameObject.name == "Text")
                 outputText = child.GetComponent<Text>();
         }
 
@@ -35,7 +36,8 @@ public class PhraseContoroller : MonoBehaviour
     {
         if (text == "game start")
         {
-
+            if (!sceneContoroller.isMove)
+                sceneContoroller.start = true;
         }
 
         if (text == "exit game")
