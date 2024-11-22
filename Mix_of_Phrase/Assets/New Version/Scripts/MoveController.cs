@@ -150,7 +150,7 @@ public class MoveController : MonoBehaviour
 
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         pos = this.transform.position;
-        Debug.Log(jump_flag);
+       // Debug.Log(jump_flag);
     }
 
     private void SettingSpeed()
@@ -181,7 +181,7 @@ public class MoveController : MonoBehaviour
                 t_Enter = true;
                 jump_Hit = true;
                 jump_flag = false;
-                Debug.Log(jump_Hit);
+                //Debug.Log(jump_Hit);
             }
         } 
     }

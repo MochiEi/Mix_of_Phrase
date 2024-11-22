@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,28 +8,40 @@ public class CreateBoxController : MonoBehaviour
 {
     [SerializeField]
     GameObject Box;
+
     [SerializeField]
     GameObject delateBox;
+    Collider2D delate;
+
     [SerializeField]
-    bool NotCreate = false;
+    bool NotCreate;
     [SerializeField]
     List<GameObject>StageThisCost = new List<GameObject>();
+
     public int MaxCost = 0;
+
+    List<Collider2D> ScanDelate = new List<Collider2D>();
 
     // Start is called before the first frame update
     void Start()
     {
-       Collider2D delate = delateBox.GetComponent<Collider2D>();
+        NotCreate = true;
+        delate = delateBox.GetComponent<Collider2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-        if (Input.GetKeyDown(KeyCode.R))
+        ///DebugCommand///
+        if (Input.GetKeyDown(KeyCode.R) && NotCreate)
         {
             CreateBox();
         }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DelateBox();
+        }
+        ///tadanosyori///
         StageThisCost.RemoveAll(Item => Item == null);
     }
 
@@ -36,25 +49,38 @@ public class CreateBoxController : MonoBehaviour
     {
         if (StageThisCost.Count < MaxCost)
         {
-            Instantiate(Box,this.gameObject.transform.position, Quaternion.identity);
-            StageThisCost.Add(Box);
+           GameObject box =  Instantiate(Box,this.gameObject.transform.position, Quaternion.identity);
+            
+            StageThisCost.Add(box);
         }
     }
     void DelateBox()
     {
+        int Hitbox = delate.OverlapCollider(new ContactFilter2D(),ScanDelate);
+
+        if (Hitbox > 0 )
+        {
+            for (int i = 0; i < Hitbox; i++)
+            {
+                if (ScanDelate[i].tag == "Box")
+                {
+                    Destroy(ScanDelate[i].gameObject);
+                }
+               
+            }
+        }
+
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerStay2D(Collider2D collision)
     {
-        NotCreate = true;
-        if (Input.GetKeyDown(KeyCode.G))
+        if (collision.tag != "Pox")
         {
-            DelateBox();
+            NotCreate = false;
         }
     }
-
     private void OnTriggerExit2D(Collider2D collision)
     {
-        NotCreate = false;
+        NotCreate = true;
     }
 }

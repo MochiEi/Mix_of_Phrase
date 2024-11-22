@@ -265,7 +265,7 @@ GameObject:
   - component: {fileID: 490099108}
   m_Layer: 0
   m_Name: DelateBox
-  m_TagString: Untagged
+  m_TagString: Pox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -285,8 +285,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1552771870}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &490099108
-CircleCollider2D:
+--- !u!61 &490099108
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -317,9 +317,19 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.06}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Size: {x: 1.15, y: 1.35}
+  m_EdgeRadius: 0
 --- !u!1 &1552771865
 GameObject:
   m_ObjectHideFlags: 0
@@ -652,7 +662,7 @@ GameObject:
   - component: {fileID: 1778496877}
   m_Layer: 0
   m_Name: JumpFlagBase0
-  m_TagString: Untagged
+  m_TagString: Pox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -703,6 +713,7 @@ MonoBehaviour:
   StepTags:
   - Ground
   - Box
+  - BoxPress
   Pox: {fileID: 1552771865}
 --- !u!61 &1778496877
 BoxCollider2D:
@@ -762,7 +773,7 @@ GameObject:
   - component: {fileID: 1912993643}
   m_Layer: 0
   m_Name: CreateBox
-  m_TagString: Untagged
+  m_TagString: Pox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -844,6 +855,51 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &1970896864
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1970896865}
+  - component: {fileID: 1970896866}
+  m_Layer: 0
+  m_Name: BoxHitList
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1970896865
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970896864}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.6106696, y: -2.59519, z: -0.033621732}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1970896866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1970896864}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3cbab5c23c77c1e47b8ec806162859b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameObjects: []
 --- !u!1 &2086718745
 GameObject:
   m_ObjectHideFlags: 0
@@ -1075,3 +1131,4 @@ SceneRoots:
   - {fileID: 2086718748}
   - {fileID: 1635690484}
   - {fileID: 1552771870}
+  - {fileID: 1970896865}
