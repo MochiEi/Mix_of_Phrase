@@ -7,6 +7,10 @@ TagManager:
   - Box
   - Block
   - Botton
+  - Ground
+  - Pox
+  - BoxPress
+  - Stop
   layers:
   - Default
   - TransparentFX
