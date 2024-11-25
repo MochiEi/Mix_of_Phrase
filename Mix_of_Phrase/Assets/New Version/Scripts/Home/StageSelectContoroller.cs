@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class StageSelectContoroller : MonoBehaviour
 {
+    private string sceneName;
+
     private GameDateController gameDate;
     private int clearStage;
 
@@ -12,6 +14,8 @@ public class StageSelectContoroller : MonoBehaviour
 
     void Start()
     {
+        sceneName = "Home";
+
         gameDate = GameObject.Find("GameManager").GetComponent<GameDateController>();
         clearStage = gameDate.Load() + 1;
 
@@ -51,5 +55,10 @@ public class StageSelectContoroller : MonoBehaviour
         {
             PlayerPrefs.DeleteKey("ClearedStage");
         }
+    }
+
+    public void ChangeScene00()
+    {
+        sceneName = "Stage 00";
     }
 }
