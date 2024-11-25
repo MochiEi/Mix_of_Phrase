@@ -11,10 +11,11 @@ public class BoxPrres : MonoBehaviour
 
     [SerializeField] Vector2 addForceNormalize;
     [SerializeField] bool Push_Flag = false;
-   // [SerializeField] List<GameObject> hitObj;
+    // [SerializeField] List<GameObject> hitObj;
     [SerializeField] string[] TagBluckList;
     [SerializeField] GameObject test;
     [SerializeField] TestPress testPress;
+    [SerializeField] int  Pox =0;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,15 @@ public class BoxPrres : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
+        if (this.gameObject.tag == "BoxPress")
+        {
+            Push_Flag = true;
+        }
+        else
+        {
+            Push_Flag = false;
+        }
         addForceNormalize = rb2d.velocity.normalized;
         if (Push_Flag)
         {
@@ -44,13 +54,20 @@ public class BoxPrres : MonoBehaviour
     private void OnCollisionStay2D(Collision2D collision)
     {
         Debug.Log("Hit");
-        foreach (var Nottag in TagBluckList)
-        {     
-            if (collision.gameObject.tag != Nottag)
+        if (this.gameObject.tag != "BoxPress")
+        {
+            Debug.Log("Load");
+            for (int i = 0; i < TagBluckList.Length; i++)
             {
-                Debug.Log("Stock");
-                testPress.gameObjects.Add(collision.gameObject);
+                if (collision.gameObject.tag != TagBluckList[i])
+                {
+                    Debug.Log("Stock");
+                    testPress.gameObjects.Add(collision.gameObject);
+                    testPress.HitSet(this.gameObject);
+                }
             }
         }
     }
+
 }
+    
