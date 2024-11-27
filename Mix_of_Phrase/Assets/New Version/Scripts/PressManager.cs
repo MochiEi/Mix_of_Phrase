@@ -16,8 +16,11 @@ public class PressManager : MonoBehaviour
     {
         if (gameObjects.Count >100)
         {
-            gameObjects.Clear();
-            PushFlagList.Clear();
+            gameObjects.RemoveAt(1);
+        }
+        if (PushFlagList.Count > 100)
+        {
+            PushFlagList.RemoveAt(1);
         }
     }
 

@@ -42,12 +42,6 @@ public class BoxManager : MonoBehaviour
         }
 
         addForceNormalize = rb2d.velocity.normalized;
-        if (pressManager.PushFlagList != null)
-        {
-            Debug.Log(pressManager.PushFlagList.Last());
-            Push_Flag = pressManager.PushFlagList.Last();
-            Debug.Log(Push_Flag);
-        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -58,6 +52,11 @@ public class BoxManager : MonoBehaviour
             {
                 //Debug.Log("Stock");
                 pressManager.HitSet(collision.gameObject, Push_Flag);
+                if (pressManager.PushFlagList != null)
+                {
+                    Push_Flag = pressManager.PushFlagList.Last();
+                    Debug.Log(Push_Flag);
+                }
             }
         }
 
@@ -66,6 +65,11 @@ public class BoxManager : MonoBehaviour
     private void OnCollisionExit2D(Collision2D collision)
     {
         pressManager.OutSet(collision.gameObject, Push_Flag);
+        if (pressManager.PushFlagList != null)
+        {
+            Push_Flag = pressManager.PushFlagList.Last();
+            Debug.Log(Push_Flag);
+        }
     }
 
 }
