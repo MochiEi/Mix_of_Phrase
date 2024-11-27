@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor.ShaderKeywordFilter;
 
-public class BoxPrres : MonoBehaviour
+public class BoxManager : MonoBehaviour
 {
     Rigidbody2D rb2d;
 
@@ -13,72 +13,60 @@ public class BoxPrres : MonoBehaviour
     [SerializeField] bool Push_Flag = false;
     // [SerializeField] List<GameObject> hitObj;
     [SerializeField] string[] TagBluckList;
-    [SerializeField] GameObject test;
-    [SerializeField] TestPress testPress;
-    [SerializeField] int  Pox =0;
+    [SerializeField] GameObject BoxHitList;
+    [SerializeField] PressManager pressManager;
+    [SerializeField] int Pox = 0;
 
 
     // Start is called before the first frame update
     void Awake()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        test = GameObject.Find("BoxHitList");
-        testPress = test.GetComponent<TestPress>();
+        BoxHitList = GameObject.Find("BoxHitList");
+        pressManager = BoxHitList.GetComponent<PressManager>();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-    
-        if (this.gameObject.tag == "BoxPress")
-        {
-            Push_Flag = true;
-        }
-        else
-        {
-            Push_Flag = false;
-        }
-        addForceNormalize = rb2d.velocity.normalized;
+
         if (Push_Flag)
         {
             addForceNormalize = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
             rb2d.velocity = new Vector2(rb2d.velocity.x, rb2d.velocity.y);
         }
-        else
+        else if(!Push_Flag)
         {
             addForceNormalize = new Vector2(0f, rb2d.velocity.y);
             rb2d.velocity = addForceNormalize;
-            
         }
 
-        if (Input.GetKeyDown(KeyCode.C))
+        addForceNormalize = rb2d.velocity.normalized;
+        if (pressManager.PushFlagList != null)
         {
-            testPress.OutSet(this.gameObject, Push_Flag);
+            Debug.Log(pressManager.PushFlagList.Last());
+            Push_Flag = pressManager.PushFlagList.Last();
+            Debug.Log(Push_Flag);
         }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        Debug.Log("Hit");
-        if (this.gameObject.tag != "BoxPress")
+        for (int i = 0; i < TagBluckList.Length; i++)
         {
-            Debug.Log("Load");
-            for (int i = 0; i < TagBluckList.Length; i++)
+            if (collision.gameObject.tag != TagBluckList[i])
             {
-                if (collision.gameObject.tag != TagBluckList[i])
-                {
-                    Debug.Log("Stock");
-                    testPress.gameObjects.Add(collision.gameObject);
-                    testPress.HitSet(this.gameObject);
-                }
+                //Debug.Log("Stock");
+                pressManager.HitSet(collision.gameObject, Push_Flag);
             }
         }
+
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        testPress.OutSet(this.gameObject , Push_Flag);
+        pressManager.OutSet(collision.gameObject, Push_Flag);
     }
 
 }
-    
+

@@ -40,9 +40,28 @@ public class TestPress : MonoBehaviour
             else if (gameObjects[i].tag == "Box" || gameObjects[i].tag == "Pox")
             {
                 pushflag.gameObject.tag = "BoxPress";
+                gameObjects.RemoveAll(all => all.tag == "Pox");
             }
         }
-        gameObjects.Clear();
+        //gameObjects.Clear();
+    }
+
+    public void OutSet(GameObject Stopflag , bool stop)
+    {
+        foreach (GameObject go in gameObjects)
+        {
+            if (go.tag != "Pox")
+            {
+                stop = false;
+                Stopflag.gameObject.tag = "Box";
+                Debug.Log(stop);
+            }
+            else
+            {
+                stop = true;
+                Debug.Log(stop);
+            }
+        }
     }
 }
 
