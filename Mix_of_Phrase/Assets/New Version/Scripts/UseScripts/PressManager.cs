@@ -26,7 +26,7 @@ public class PressManager : MonoBehaviour
 
     public void HitSet(GameObject HitObj, bool Pushflag)//当たった際にヒットリストを調べPOXタグがある場合Pushflagのtrueを返す
     {
-        Debug.Log(HitObj);
+        //Debug.Log(HitObj);
         gameObjects.Add(HitObj);
         if (HitObj.tag == "Pox")
         {

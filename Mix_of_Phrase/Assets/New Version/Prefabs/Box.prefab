@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4026406786501664091}
   - component: {fileID: 487591659482985562}
   - component: {fileID: 6404724603371119829}
-  - component: {fileID: 4227906329230099627}
   - component: {fileID: 1899319042173640153}
+  - component: {fileID: 249991843093793124}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -114,24 +114,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &4227906329230099627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4296836835369035570}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 218f81591567a9940b97831482989efd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  addForceNormalize: {x: 0, y: 0}
-  Push_Flag: 0
-  TagBluckList:
-  - Ground
-  test: {fileID: 0}
-  testPress: {fileID: 0}
 --- !u!60 &1899319042173640153
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -183,3 +165,22 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.46}
       - {x: 0.5, y: 0.5}
   m_UseDelaunayMesh: 0
+--- !u!114 &249991843093793124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4296836835369035570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d45336786ebc1cd49b40326d7ae121b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  addForceNormalize: {x: 0, y: 0}
+  Push_Flag: 0
+  TagBluckList:
+  - Ground
+  BoxHitList: {fileID: 0}
+  pressManager: {fileID: 0}
+  Pox: 0
