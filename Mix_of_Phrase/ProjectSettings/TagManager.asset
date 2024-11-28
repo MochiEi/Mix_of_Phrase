@@ -5,12 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Box
-  - Block
-  - Botton
   - Ground
   - Pox
   - BoxPress
-  - Stop
+  - MovingWall
   layers:
   - Default
   - TransparentFX
