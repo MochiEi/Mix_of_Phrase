@@ -9,16 +9,18 @@ TagManager:
   - Pox
   - BoxPress
   - MovingWall
+  - Block
+  - Botton
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera
   - Water
   - UI
   - Box
   - Player
-  - Camera
+  - 
   - 
   - 
   - 
