@@ -7,12 +7,12 @@ using UnityEngine.Playables;
 public class MovingWallContoroller : MonoBehaviour
 {
     private Transform wall;
-    private Renderer renderer;
+    private Renderer wallRenderer;
     private SpriteRenderer lamp;
     private ButtonController trigger;
 
     private Collider2D stopCollider;
-    private List<Collider2D> result = new List<Collider2D>();
+    [SerializeField] List<Collider2D> result = new List<Collider2D>();
 
     private bool isStop;
 
@@ -47,7 +47,7 @@ public class MovingWallContoroller : MonoBehaviour
             if (child.name == "Wall")
             {
                 wall = child;
-                renderer = wall.GetComponent<Renderer>();
+                wallRenderer = wall.GetComponent<Renderer>();
             }
             if (child.name == "Lamp")
             {
@@ -99,13 +99,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Up)
         {
-            float currentBottomY = renderer.bounds.min.y;
+            float currentBottomY = wallRenderer.bounds.min.y;
 
             scaleY += speed * Time.deltaTime;
             scaleY = Mathf.Min(scaleY, activeSize);
             wall.localScale = new Vector3(1, scaleY, 1);
 
-            float newBottomY = renderer.bounds.min.y;
+            float newBottomY = wallRenderer.bounds.min.y;
 
             float offsetY = currentBottomY - newBottomY;
 
@@ -114,13 +114,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Down)
         {
-            float currentBottomY = renderer.bounds.max.y;
+            float currentBottomY = wallRenderer.bounds.max.y;
 
             scaleY += speed * Time.deltaTime;
             scaleY = Mathf.Min(scaleY, activeSize);
             wall.localScale = new Vector3(1, scaleY, 1);
 
-            float newBottomY = renderer.bounds.max.y;
+            float newBottomY = wallRenderer.bounds.max.y;
 
             float offsetY = currentBottomY - newBottomY;
 
@@ -129,13 +129,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Right)
         {
-            float currentBottomX = renderer.bounds.min.x;
+            float currentBottomX = wallRenderer.bounds.min.x;
 
             scaleX += speed * Time.deltaTime;
             scaleX = Mathf.Min(scaleX, activeSize);
             wall.localScale = new Vector3(scaleX, 1, 1);
 
-            float newBottomX = renderer.bounds.min.x;
+            float newBottomX = wallRenderer.bounds.min.x;
 
             float offsetX = currentBottomX - newBottomX;
 
@@ -144,13 +144,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Left)
         {
-            float currentBottomX = renderer.bounds.max.x;
+            float currentBottomX = wallRenderer.bounds.max.x;
 
             scaleX += speed * Time.deltaTime;
             scaleX = Mathf.Min(scaleX, activeSize);
             wall.localScale = new Vector3(scaleX, 1, 1);
 
-            float newBottomX = renderer.bounds.max.x;
+            float newBottomX = wallRenderer.bounds.max.x;
 
             float offsetX = currentBottomX - newBottomX;
 
@@ -165,13 +165,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Up)
         {
-            float currentBottomY = renderer.bounds.max.y;
+            float currentBottomY = wallRenderer.bounds.max.y;
 
             scaleY -= speed * Time.deltaTime;
             scaleY = Mathf.Max(scaleY, activeSize);
             wall.localScale = new Vector3(1, scaleY, 1);
 
-            float newBottomY = renderer.bounds.max.y;
+            float newBottomY = wallRenderer.bounds.max.y;
 
             float offsetY = currentBottomY - newBottomY;
 
@@ -180,13 +180,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Down)
         {
-            float currentBottomY = renderer.bounds.min.y;
+            float currentBottomY = wallRenderer.bounds.min.y;
 
             scaleY -= speed * Time.deltaTime;
             scaleY = Mathf.Max(scaleY, activeSize);
             wall.localScale = new Vector3(1, scaleY, 1);
 
-            float newBottomY = renderer.bounds.min.y;
+            float newBottomY = wallRenderer.bounds.min.y;
 
             float offsetY = currentBottomY - newBottomY;
 
@@ -195,13 +195,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Right)
         {
-            float currentBottomX = renderer.bounds.max.x;
+            float currentBottomX = wallRenderer.bounds.max.x;
 
             scaleX -= speed * Time.deltaTime;
             scaleX = Mathf.Max(scaleX, activeSize);
             wall.localScale = new Vector3(scaleX, 1, 1);
 
-            float newBottomX = renderer.bounds.max.x;
+            float newBottomX = wallRenderer.bounds.max.x;
 
             float offsetX = currentBottomX - newBottomX;
 
@@ -210,13 +210,13 @@ public class MovingWallContoroller : MonoBehaviour
 
         if (direction == Direction.Left)
         {
-            float currentBottomX = renderer.bounds.min.x;
+            float currentBottomX = wallRenderer.bounds.min.x;
 
             scaleX -= speed * Time.deltaTime;
             scaleX = Mathf.Max(scaleX, activeSize);
             wall.localScale = new Vector3(scaleX, 1, 1);
 
-            float newBottomX = renderer.bounds.min.x;
+            float newBottomX = wallRenderer.bounds.min.x;
 
             float offsetX = currentBottomX - newBottomX;
 

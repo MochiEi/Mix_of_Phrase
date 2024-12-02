@@ -10,7 +10,7 @@ TagManager:
   - BoxPress
   - MovingWall
   - Block
-  - Botton
+  - Button
   layers:
   - Default
   - TransparentFX

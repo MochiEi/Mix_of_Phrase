@@ -37,28 +37,28 @@ public class StopPositionContoroller : MonoBehaviour
                 offsetX = wall.bounds.center.x;
                 offsetY = wall.bounds.max.y;
                 collider.size = new Vector2(0.9f, 0.2f);
-                addX = 0; addY = -0.15f;
+                addX = 0; addY = -0.1f;
             }
             if (direction == Direction.Down)
             {
                 offsetX = wall.bounds.center.x;
                 offsetY = wall.bounds.min.y;
                 collider.size = new Vector2(0.9f, 0.2f);
-                addX = 0; addY = 0.15f;
+                addX = 0; addY = 0.1f;
             }
             if (direction == Direction.Right)
             {
                 offsetX = wall.bounds.max.x;
-                offsetX = wall.bounds.center.y;
+                offsetY = wall.bounds.center.y;
                 collider.size = new Vector2(0.2f, 0.9f);
-                addX = -0.15f; addY = 0;
+                addX = -0.1f; addY = 0;
             }
             if (direction == Direction.Left)
             {
                 offsetX = wall.bounds.min.x;
-                offsetX = wall.bounds.center.y;
+                offsetY = wall.bounds.center.y;
                 collider.size = new Vector2(0.2f, 0.9f);
-                addX = 0.15f; addY = 0;
+                addX = 0.1f; addY = 0;
             }
 
             transform.position = new Vector3(offsetX + addX, offsetY + addY, 0);
