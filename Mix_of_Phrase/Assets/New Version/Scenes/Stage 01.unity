@@ -249,7 +249,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1749192873572058457, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_Name
-      value: Ground (5)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_LocalScale.x
@@ -314,7 +314,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1749192873572058457, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_Name
-      value: Ground (3)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_LocalScale.x
@@ -2482,7 +2482,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1749192873572058457, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_Name
-      value: Ground (1)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_LocalScale.x
@@ -2691,7 +2691,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1749192873572058457, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_Name
-      value: Ground (2)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_LocalScale.x
@@ -2945,7 +2945,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1749192873572058457, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_Name
-      value: Ground (4)
+      value: Ground
       objectReference: {fileID: 0}
     - target: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
       propertyPath: m_LocalScale.x
