@@ -158,13 +158,13 @@ public class POX_Controller : MonoBehaviour
     //{
     //    RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.63f, groundLayer);
     //    RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.6f, groundLayer);
-    //    return jumpL.collider != null || jumpR.collider != null;
+    //    return jumpL.wallCollider != null || jumpR.wallCollider != null;
     //}
     //private bool isBoxed()   //’…’n”»’è
     //{
     //    RaycastHit2D jumpL = Physics2D.Raycast(new Vector2(transform.position.x - 0.39f, transform.position.y), Vector2.down, 0.63f, boxLayer);
     //    RaycastHit2D jumpR = Physics2D.Raycast(new Vector2(transform.position.x + 0.39f, transform.position.y), Vector2.down, 0.63f, boxLayer);
-    //    return jumpL.collider != null || jumpR.collider != null;
+    //    return jumpL.wallCollider != null || jumpR.wallCollider != null;
     //}
 
     void FixedUpdate()

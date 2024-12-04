@@ -33,32 +33,32 @@ public class CreateBoxController : MonoBehaviour
     void Update()
     {
         ///DebugCommand///
-        if (Input.GetKeyDown(KeyCode.R) && NotCreate)
-        {
-            CreateBox();
-        }
-        if (Input.GetKeyDown(KeyCode.G))
-        {
-            DelateBox();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    CreateBox();
+        //}
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{
+        //    DelateBox();
+        //}
         ///tadanosyori///
         StageThisCost.RemoveAll(Item => Item == null);
     }
 
-    void CreateBox()
+    publicÅ@void CreateBox()
     {
-        if (StageThisCost.Count < MaxCost)
+        if (StageThisCost.Count < MaxCost && NotCreate)
         {
            GameObject box =  Instantiate(Box,this.gameObject.transform.position, Quaternion.identity);
             
             StageThisCost.Add(box);
         }
     }
-    void DelateBox()
+    public void DelateBox()
     {
-        int Hitbox = delate.OverlapCollider(new ContactFilter2D(),ScanDelate);
+        int Hitbox = delate.OverlapCollider(new ContactFilter2D(), ScanDelate);
 
-        if (Hitbox > 0 )
+        if (Hitbox > 0)
         {
             for (int i = 0; i < Hitbox; i++)
             {
@@ -66,7 +66,7 @@ public class CreateBoxController : MonoBehaviour
                 {
                     Destroy(ScanDelate[i].gameObject);
                 }
-               
+
             }
         }
 

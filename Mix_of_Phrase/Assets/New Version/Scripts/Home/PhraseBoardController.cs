@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PhraseContoroller : MonoBehaviour
+public class PhraseBoardController : MonoBehaviour
 {
     [SerializeField] SwitchScreenContoroller sceneContoroller;
     private Text outputText;

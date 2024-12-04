@@ -5,7 +5,7 @@ using UnityEngine;
 public class StopPositionContoroller : MonoBehaviour
 {
     private Renderer wall;
-    private BoxCollider2D collider;
+    private BoxCollider2D wallCollider;
     [SerializeField] Direction direction;
     private enum Direction
     {
@@ -20,7 +20,7 @@ public class StopPositionContoroller : MonoBehaviour
                 wall = bro.GetComponent<Renderer>();
         }
 
-        collider = GetComponent<BoxCollider2D>();
+        wallCollider = GetComponent<BoxCollider2D>();
     }
 
     void Update()
@@ -36,28 +36,28 @@ public class StopPositionContoroller : MonoBehaviour
             {
                 offsetX = wall.bounds.center.x;
                 offsetY = wall.bounds.max.y;
-                collider.size = new Vector2(0.9f, 0.2f);
+                wallCollider.size = new Vector2(0.9f, 0.2f);
                 addX = 0; addY = -0.1f;
             }
             if (direction == Direction.Down)
             {
                 offsetX = wall.bounds.center.x;
                 offsetY = wall.bounds.min.y;
-                collider.size = new Vector2(0.9f, 0.2f);
+                wallCollider.size = new Vector2(0.9f, 0.2f);
                 addX = 0; addY = 0.1f;
             }
             if (direction == Direction.Right)
             {
                 offsetX = wall.bounds.max.x;
                 offsetY = wall.bounds.center.y;
-                collider.size = new Vector2(0.2f, 0.9f);
+                wallCollider.size = new Vector2(0.2f, 0.9f);
                 addX = -0.1f; addY = 0;
             }
             if (direction == Direction.Left)
             {
                 offsetX = wall.bounds.min.x;
                 offsetY = wall.bounds.center.y;
-                collider.size = new Vector2(0.2f, 0.9f);
+                wallCollider.size = new Vector2(0.2f, 0.9f);
                 addX = 0.1f; addY = 0;
             }
 
