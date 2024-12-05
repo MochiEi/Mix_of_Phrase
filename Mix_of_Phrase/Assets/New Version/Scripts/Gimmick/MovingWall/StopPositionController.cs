@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StopPositionContoroller : MonoBehaviour
+public class StopPositionController : MonoBehaviour
 {
     private Renderer wall;
     private BoxCollider2D wallCollider;

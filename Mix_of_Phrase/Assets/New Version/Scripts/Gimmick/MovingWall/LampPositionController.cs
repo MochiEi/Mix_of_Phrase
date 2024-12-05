@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class LampPositionContoroller : MonoBehaviour
+public class LampPositionController : MonoBehaviour
 {
     private Renderer wall;
     [SerializeField] Pos pos;

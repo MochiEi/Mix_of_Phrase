@@ -4,20 +4,20 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.Playables;
 
-public class MovingWallContoroller : MonoBehaviour
+public class MovingWallController : MonoBehaviour
 {
     private Transform wall;
     private Renderer wallRenderer;
     private SpriteRenderer lamp;
-    private ButtonController trigger;
 
     private Collider2D stopCollider;
-    [SerializeField] List<Collider2D> result = new List<Collider2D>();
+    private List<Collider2D> result = new List<Collider2D>();
 
     private bool isStop;
 
     [Header("ÉgÉäÉKÅ[")]
-    [SerializeField] GameObject setTrigger;
+    [SerializeField] MonoBehaviour setTrigger;
+     private ActiveCheck trigger;
 
 
     [Header("êLèkìÆçÏ")]
@@ -58,15 +58,15 @@ public class MovingWallContoroller : MonoBehaviour
                 stopCollider = child.gameObject.GetComponent<Collider2D>();
             }
         }
+
+        trigger = setTrigger as ActiveCheck;
     }
 
     void Update()
     {
-        trigger = setTrigger.GetComponent<ButtonController>();
-
         Overlap();
 
-        if (trigger.IsActive())
+        if (trigger.IsActive()) 
         {
             isStop = false;
             speed = Mathf.Abs(speed);
@@ -89,7 +89,6 @@ public class MovingWallContoroller : MonoBehaviour
             if (stretch == Stretch.Shrink)
                 StretchShrink();
         }
-
     }
 
     private void StretchExpand()

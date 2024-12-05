@@ -2,22 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ButtonController : MonoBehaviour, ActiveCheck
+public class BoxInsertGimmickController : MonoBehaviour, ActiveCheck
 {
-    private Collider2D activeHitBox;
+    private SpriteRenderer lamp;
+
+    private Collider2D hitBox;
     private List<Collider2D> result = new List<Collider2D>();
 
     private bool isActive;
-    private Animator anim;
 
     [SerializeField] string[] unHitTags;
-
     private void Start()
     {
-        foreach (Transform child in transform)
-            activeHitBox = child.GetComponent<Collider2D>();
-
-        anim = GetComponent<Animator>();
+        hitBox = GetComponent<Collider2D>();
+        lamp = transform.GetChild(0).GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -25,14 +23,14 @@ public class ButtonController : MonoBehaviour, ActiveCheck
         Overlap();
 
         if (isActive)
-            anim.SetBool("isPush", true);
+            lamp.color = Color.green;
         else
-            anim.SetBool("isPush", false);
+            lamp.color = Color.red;
     }
 
     private void Overlap()
     {
-        int count = activeHitBox.OverlapCollider(new ContactFilter2D(), result);
+        int count = hitBox.OverlapCollider(new ContactFilter2D(), result);
 
         if (count > 0)
         {

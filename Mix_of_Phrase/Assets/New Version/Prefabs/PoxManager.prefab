@@ -555,7 +555,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4956137641644656876}
   m_Layer: 0
-  m_Name: Pox
+  m_Name: PoxManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

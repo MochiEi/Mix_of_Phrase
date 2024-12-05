@@ -123,10 +123,7 @@ public class PhraseController : MonoBehaviour
         if (isActive)
         {
             isActive = false;
-
-            var sequence = DOTween.Sequence();
-            sequence
-                .Append(phraseStorage.DOLocalMoveY(0.4f * select, 0.5f)).SetEase(Ease.OutSine);
+            phraseStorage.DOLocalMoveY(0.4f * select, 0.5f).SetEase(Ease.OutSine);
         }
     }
 
