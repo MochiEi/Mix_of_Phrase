@@ -178,3 +178,4 @@ MonoBehaviour:
   unHitTags:
   - Ground
   - Pox
+  - MovingWall

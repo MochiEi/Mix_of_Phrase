@@ -7,6 +7,7 @@ public class ExecutionWordController : MonoBehaviour
     private PhraseController controller;
 
     [SerializeField] CreateBoxController createBox;
+    [SerializeField] ActiveColorBlock colorBlock;
 
     void Start()
     {
@@ -27,6 +28,19 @@ public class ExecutionWordController : MonoBehaviour
                 if (controller.ExecutionWord() == "break box")
                 {
                     createBox.DelateBox();
+                }
+            }
+
+            if (colorBlock != null)
+            {
+                if(controller.ExecutionWord() == "active red")
+                {
+                    colorBlock.IsActiveRed();
+                }
+
+                if(controller.ExecutionWord() == "active blue")
+                {
+                    colorBlock.IsActiveBlue();
                 }
             }
         }

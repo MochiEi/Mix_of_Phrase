@@ -7,30 +7,32 @@ using Unity.VisualScripting;
 
 public class GoalGimmick01 : MonoBehaviour
 {
-    private ActiveCheck[] trigger = new ActiveCheck[4];
-    private Transform[] wall = new Transform[4];
+    [SerializeField] Transform topBlock;
+    [SerializeField] Transform bottomBlock;
+    [SerializeField] Transform[] block;
+    private Renderer[] blockRenderer = new Renderer[4];
 
-    private Tween tween;
+    [SerializeField] Transform[] insert;
+    private ActiveCheck[] trigger = new ActiveCheck[4];
+
+    private Collider2D[] hitBox = new Collider2D[4];
+    private Transform[] setBox = new Transform[4];
+    [SerializeField] Transform[] goalBox;
+
+    private Tween formerTween;
+    private Tween laterTween;
     private int count;
     private bool isPlay;
 
     void Start()
     {
-        int triggerCount = 0;
-        int wallCount = 0;
-
-        foreach (Transform obj in transform)
+        for (int i = 0; i < 4; i++)
         {
-            GameObject child = obj.gameObject;
+            blockRenderer[i] = block[i].GetComponent<Renderer>();
 
-            if (child.CompareTag("InsertGimmick"))
-            {
-                MonoBehaviour setTrigger = child.GetComponent<MonoBehaviour>();
-                trigger[triggerCount] = setTrigger as ActiveCheck;
-                triggerCount++;
-            }
-            if (child.CompareTag("Ground"))
-                wall[wallCount++] = child.transform;
+            MonoBehaviour setTrigger = insert[i].GetComponent<MonoBehaviour>();
+            trigger[i] = setTrigger as ActiveCheck;
+            hitBox[i] = insert[i].GetComponent<Collider2D>();
         }
 
         DoTween();
@@ -39,6 +41,16 @@ public class GoalGimmick01 : MonoBehaviour
     void Update()
     {
         count = 0;
+
+        for (int i = 0; i < 4; i++)
+        {
+            float posX = insert[i].position.x;
+            float posY = blockRenderer[i].bounds.max.y - 0.2f;
+
+            insert[i].position = new Vector2(posX, posY);
+        }
+
+        Overlap();
 
         foreach (ActiveCheck check in trigger)
         {
@@ -49,13 +61,43 @@ public class GoalGimmick01 : MonoBehaviour
         if (count == 4 && !isPlay)
         {
             isPlay = true;
-            tween.PlayForward();
+            formerTween.PlayForward();
         }
 
         if (count < 4 && isPlay)
         {
             isPlay = false;
-            tween.PlayBackwards();
+
+            if (formerTween.IsPlaying())
+                formerTween.PlayBackwards();
+            else
+                laterTween.PlayBackwards();
+        }
+    }
+
+    private void Overlap()
+    {
+        for (int i = 0; i < 4; i++)
+        {
+            Collider2D[] result = new Collider2D[10];
+            int hitCount = hitBox[i].OverlapCollider(new ContactFilter2D(), result);
+
+            if (hitCount <= 0) continue;
+
+            foreach (Collider2D c in result)
+            {
+                if (c == null) continue;
+
+                if (c.gameObject.CompareTag("Box"))
+                {
+                    setBox[i] = c.transform;
+                    break;
+                }
+                else
+                {
+                    setBox[i] = null;
+                }
+            }
         }
     }
 
@@ -63,13 +105,30 @@ public class GoalGimmick01 : MonoBehaviour
     {
         var sequence = DOTween.Sequence();
 
-        foreach (var w in wall)
+        foreach (var w in block)
         {
-            tween = sequence
-                .Join(w.DOLocalMoveY(2.7f, 2f))
-                .Join(w.DOScaleY(2, 2f))
+            formerTween = sequence
+                .Join(w.DOLocalMoveY(2.7f, 2f)).SetEase(Ease.Linear)
+                .Join(w.DOScaleY(2, 2f)).SetEase(Ease.Linear)
                 .SetAutoKill(false)
                 .Pause();
         }
+
+        laterTween = sequence
+            .Append(topBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
+            .Append(bottomBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
+            .AppendInterval(0.5f)
+            .AppendCallback(() =>
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    setBox[i].GetComponent<SpriteRenderer>().enabled = false;
+                    goalBox[i].gameObject.SetActive(true);
+                    goalBox[i].position = setBox[i].position;
+                }
+            })
+            .Append(bottomBlock.DOScaleX(2, 2f)).SetEase(Ease.Linear)
+            .SetAutoKill(false)
+            .Pause();
     }
 }

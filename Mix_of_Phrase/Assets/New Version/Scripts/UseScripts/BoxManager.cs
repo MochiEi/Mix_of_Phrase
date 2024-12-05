@@ -22,7 +22,7 @@ public class BoxManager : MonoBehaviour
     void Awake()
     {
         rb2d = this.GetComponent<Rigidbody2D>();
-        BoxHitList = GameObject.Find("BoxHitList");
+        BoxHitList = GameObject.Find("SceneManager");
         pressManager = BoxHitList.GetComponent<PressManager>();
     }
 

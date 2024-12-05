@@ -12,6 +12,7 @@ TagManager:
   - Block
   - Button
   - InsertGimmick
+  - ColorBlock
   layers:
   - Default
   - TransparentFX
