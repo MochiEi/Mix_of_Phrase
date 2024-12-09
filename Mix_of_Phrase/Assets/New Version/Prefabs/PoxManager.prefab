@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6755922681947933911}
   - component: {fileID: 4427231051335232508}
   - component: {fileID: 1884677247262401567}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Phrase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -80,7 +80,7 @@ GameObject:
   - component: {fileID: 6668273067232373742}
   - component: {fileID: 1621087400006490590}
   - component: {fileID: 5513238242069432669}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Pox
   m_TagString: Pox
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 790304428224610861}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: FirstPhrase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -301,7 +301,7 @@ GameObject:
   - component: {fileID: 3583873155725061163}
   - component: {fileID: 395295760530473523}
   - component: {fileID: 648564197022884108}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -401,7 +401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5268827052680124487}
   - component: {fileID: 2121820681354198722}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SecondPhrase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -446,7 +446,7 @@ GameObject:
   - component: {fileID: 906711575154427569}
   - component: {fileID: 6957400179410002116}
   - component: {fileID: 5440792094765904218}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: JumpFlagBase0
   m_TagString: Pox
   m_Icon: {fileID: 0}
@@ -555,7 +555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4956137641644656876}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PoxManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}

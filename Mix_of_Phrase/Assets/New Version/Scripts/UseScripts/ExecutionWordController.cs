@@ -8,6 +8,7 @@ public class ExecutionWordController : MonoBehaviour
 
     [SerializeField] CreateBoxController createBox;
     [SerializeField] ActiveColorBlock colorBlock;
+    [SerializeField] SelectLayerController selectLayer;
 
     void Start()
     {
@@ -41,6 +42,24 @@ public class ExecutionWordController : MonoBehaviour
                 if(controller.ExecutionWord() == "active blue")
                 {
                     colorBlock.IsActiveBlue();
+                }
+            }
+
+            if (selectLayer != null)
+            {
+                if (controller.ExecutionWord() == "front layer")
+                {
+                    selectLayer.FrontLayer();
+                }
+
+                if (controller.ExecutionWord() == "middle layer")
+                {
+                    selectLayer.MiddleLayer();
+                }
+
+                if (controller.ExecutionWord() == "back layer")
+                {
+                    selectLayer.BackLayer();
                 }
             }
         }
