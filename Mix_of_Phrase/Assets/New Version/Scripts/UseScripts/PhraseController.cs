@@ -63,7 +63,8 @@ public class PhraseController : MonoBehaviour
 
     void Update()
     {
-        transform.position = pox.position;
+        if (pox != null)
+            transform.position = pox.position;
 
         ChangePhrase();
 
