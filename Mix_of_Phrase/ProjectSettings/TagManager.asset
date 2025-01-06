@@ -9,20 +9,24 @@ TagManager:
   - Pox
   - BoxPress
   - MovingWall
+  - Block
+  - Button
+  - InsertGimmick
+  - ColorBlock
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Camera
   - Water
   - UI
   - Box
   - Player
-  - Camera
   - 
   - 
-  - 
-  - 
+  - Front
+  - Middle
+  - Back
   - 
   - 
   - 

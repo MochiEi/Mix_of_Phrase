@@ -6,7 +6,7 @@ using DG.Tweening;
 public class SwitchScreenContoroller : MonoBehaviour
 {
     [SerializeField] GameObject cam;
-    [SerializeField] PhraseContoroller PhraseContoroller;
+    [SerializeField] PhraseBoardController controller;
     //false = タイトル // true = セレクト
     public bool isSelect;
     public bool isMove;
@@ -28,7 +28,7 @@ public class SwitchScreenContoroller : MonoBehaviour
                 .Append(cam.transform.DOMoveY(-10.0f, 3.0f)).SetEase(Ease.OutSine)
                 .OnComplete(() =>
                 {
-                    PhraseContoroller.ErasePhrase();
+                    controller.ErasePhrase();
                     isSelect = true;
                     isMove = false;
                 });
