@@ -50,12 +50,10 @@ public class BoxManager : MonoBehaviour
         {
             if (collision.gameObject.tag != TagBluckList[i])
             {
-                //Debug.Log("Stock");
                 pressManager.HitSet(collision.gameObject, Push_Flag);
                 if (pressManager.PushFlagList != null)
                 {
                     Push_Flag = pressManager.PushFlagList.Last();
-                    //Debug.Log(Push_Flag);
                 }
             }
         }
@@ -68,7 +66,6 @@ public class BoxManager : MonoBehaviour
         if (pressManager.PushFlagList != null)
         {
             Push_Flag = pressManager.PushFlagList.Last();
-            // Debug.Log(Push_Flag);
         }
     }
 

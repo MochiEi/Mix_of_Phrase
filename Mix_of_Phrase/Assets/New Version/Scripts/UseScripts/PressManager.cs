@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+[AddComponentMenu("Create Empty/BoxHitManager", 14)]
 public class PressManager : MonoBehaviour
 {
     [SerializeField]
