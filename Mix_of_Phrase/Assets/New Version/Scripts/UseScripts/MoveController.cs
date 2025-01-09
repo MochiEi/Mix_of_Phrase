@@ -1,28 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
     ///判定動作
     [SerializeField] bool t_Enter = false, t_Exit = false, t_Stay = false; ///当たり判定制御
-    [SerializeField] bool jump_flag = false, jump_Hit = false;///ジャンプ動作制御
 
     ///内部動作
     [SerializeField] bool frame_One = false, frame_Chche = false;///フレーム動作制御関連
     [SerializeField] float moveSpeed = 0, jumpPower = 0, MaxvarticalSpeed = 0, MaxSpeed = 0;///移動関連、速度制御
     [SerializeField] bool input_A = false, input_D = false, input_S = false, input_Space = false;///入力制御関連
     [SerializeField] Vector2 pos;
-    [SerializeField] string[] StepTags;
 
     ///コンポーネント関連
     Animator anim;
     Rigidbody2D rb;
     public GameObject Pox;
 
+    //---------------------------------------------//
+
+    Collider2D HitBox;
+
+    Collider2D[] Box = new Collider2D[5];
+
+    Collider2D[] Ground = new Collider2D[1];
+
+    [SerializeField]
+    bool jumpFlag;
+
+    [SerializeField]
+    string[] Hittag;
+    //----------------------------------------------//
+
     // Start is called before the first frame update
     void Start()
-    {   //Pox = GameObject.Find("Pox");
+    {
+        HitBox = Pox.GetComponent<Collider2D>();
         anim = Pox.gameObject.GetComponent<Animator>();
         rb = Pox.gameObject.GetComponent<Rigidbody2D>();
         frame_One = true;
@@ -36,16 +51,7 @@ public class MoveController : MonoBehaviour
         input_S = false;
         input_A = false;
         input_D = false;
-
-        if (t_Enter && t_Stay && !t_Exit)
-        {
-            jump_flag = true;
-        }
-        else if (t_Exit)
-        {
-            jump_flag= false;
-        }
-     
+        JumpFlagment(HitBox, jumpFlag);
         if (Input.GetKey(KeyCode.S))
         {
             input_S = true;
@@ -60,7 +66,7 @@ public class MoveController : MonoBehaviour
             input_D = true;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space) && jump_Hit && jump_flag)
+        if (Input.GetKeyDown(KeyCode.Space) && jumpFlag)
         {
             input_Space = true;
         }
@@ -71,15 +77,15 @@ public class MoveController : MonoBehaviour
     private void FixedUpdate()
     {
         if (!input_A && !input_D && !input_S)
-        { 
+        {
             anim.SetBool("DownAnim", false);
             anim.SetBool("MoveAnim", false);
-            rb.velocity = new Vector2(0,rb.velocity.y);
+            rb.velocity = new Vector2(0, rb.velocity.y);
         }
 
         if (input_S)
         {
-            rb.velocity = new Vector2(0f , rb.velocity.y);
+            rb.velocity = new Vector2(0f, rb.velocity.y);
         }
 
         if (input_A)
@@ -98,22 +104,21 @@ public class MoveController : MonoBehaviour
 
             Pox.transform.localScale = new Vector3(1, 1);
             rb.AddForce(Vector2.right * moveSpeed, ForceMode2D.Impulse);
-            pos = Pox.transform.position;   
+            pos = Pox.transform.position;
         }
 
-        if (input_Space && jump_flag)
+        if (input_Space && jumpFlag)
         {
-            jump_Hit = false;
+            jumpFlag = false;
             Invoke(nameof(Delay), 0.3f);
         }
 
         SettingSpeed();
         input_Space = false;
     }
-
     private void MoveActions()
     {
-        if (jump_flag)
+        if (jumpFlag)
         {
             if (input_S)
             {
@@ -134,23 +139,24 @@ public class MoveController : MonoBehaviour
             }
             else anim.SetBool("MoveAnim", false);
 
-            if (input_Space && jump_flag)
+            if (input_Space && jumpFlag)
             {
                 anim.SetBool("JumpAnim", true);
             }
         }
-        else if(t_Exit &&jump_Hit)
+        else if (t_Exit && jumpFlag)
         {
             anim.SetBool("JumpAnim", false);
         }
     }
+
 
     private void Delay()
     {
 
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         pos = this.transform.position;
-       // Debug.Log(jump_flag);
+        // Debug.Log(jump_flag);
     }
 
     private void SettingSpeed()
@@ -171,48 +177,33 @@ public class MoveController : MonoBehaviour
         ///基本の処理を終えた後に移動量の適用処理///
         Pox.transform.position = pos;
     }
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    //---------------------------------------------------------------------------------------//ジャンプができるかどうかの処理、前回の処理に比べてboolが6個消えて行数もめっさ減った。
+    void JumpFlagment(Collider2D HitBox, bool Jump)
     {
-        foreach (var Step in StepTags)
-        {
-            if (collision.tag == Step)
-            {
-                t_Enter = true;
-                jump_Hit = true;
-                jump_flag = false;
-                //Debug.Log(jump_Hit);
-            }
-        } 
-    }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {  
-        foreach (var Step in StepTags)
+        int Count = HitBox.OverlapCollider(new ContactFilter2D(), Ground);
+        Debug.Log(Count);
+        if (Count > 0)
         {
-            t_Enter = true;
-            if (collision.tag == Step )
+            foreach (Collider2D Col in Ground)
             {
-                t_Stay = true;
-               
-                    t_Exit = false;
+                if (TargetTagResarch(Col, Hittag))
+                {
+                    Jump = true;
+                }
+                else
+                {
+                    Jump = false;
+                }
             }
         }
+        else Jump = false;
     }
-
-    private void OnTriggerExit2D(Collider2D collision)
+    //---------------------------------------------------------------------------------------//当たったオブジェクトの当たり判定が指定したLISTに入っているかどうか、いろんな処理使う。
+    public static bool TargetTagResarch(Collider2D collder2d, params string[] tags)
     {
-        foreach (var Step in StepTags)
-        {
-            if (collision.tag ==Step)
-            {
-                t_Exit = true;
-                t_Stay = false;
-            }
-            else if (!t_Stay)
-            {
-                t_Enter = false;
-            }
-        }
+        return tags.Any(tag => collder2d.CompareTag(tag));
     }
+    //---------------------------------------------------------------------------------------//
+
 }
