@@ -108,15 +108,15 @@ public class GoalGimmick01 : MonoBehaviour
         foreach (var w in block)
         {
             formerTween = sequence
-                .Join(w.DOLocalMoveY(2.7f, 2f)).SetEase(Ease.Linear)
+                .Join(w.DOLocalMoveY(-2.3f, 2f)).SetEase(Ease.Linear)
                 .Join(w.DOScaleY(2, 2f)).SetEase(Ease.Linear)
                 .SetAutoKill(false)
                 .Pause();
         }
 
         laterTween = sequence
-            .Append(topBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
-            .Append(bottomBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
+            .Append(topBlock.DOScaleX(11, 2f)).SetEase(Ease.Linear)
+            .Append(bottomBlock.DOScaleX(11, 2f)).SetEase(Ease.Linear)
             .AppendInterval(0.5f)
             .AppendCallback(() =>
             {
