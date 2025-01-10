@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class MoveController : MonoBehaviour
 {
-    ///判定動作
-    [SerializeField] bool t_Enter = false, t_Exit = false, t_Stay = false; ///当たり判定制御
-
     ///内部動作
     [SerializeField] bool frame_One = false, frame_Chche = false;///フレーム動作制御関連
     [SerializeField] float moveSpeed = 0, jumpPower = 0, MaxvarticalSpeed = 0, MaxSpeed = 0;///移動関連、速度制御
@@ -37,7 +34,8 @@ public class MoveController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        HitBox = Pox.GetComponent<Collider2D>();
+        HitBox = this.GetComponent<PolygonCollider2D>();
+        HitBox.enabled = true;
         anim = Pox.gameObject.GetComponent<Animator>();
         rb = Pox.gameObject.GetComponent<Rigidbody2D>();
         frame_One = true;
@@ -51,6 +49,7 @@ public class MoveController : MonoBehaviour
         input_S = false;
         input_A = false;
         input_D = false;
+        input_Space = false;
         JumpFlagment(HitBox, jumpFlag);
         if (Input.GetKey(KeyCode.S))
         {
@@ -114,7 +113,6 @@ public class MoveController : MonoBehaviour
         }
 
         SettingSpeed();
-        input_Space = false;
     }
     private void MoveActions()
     {
@@ -144,7 +142,7 @@ public class MoveController : MonoBehaviour
                 anim.SetBool("JumpAnim", true);
             }
         }
-        else if (t_Exit && jumpFlag)
+        else if (!jumpFlag)
         {
             anim.SetBool("JumpAnim", false);
         }
@@ -156,7 +154,6 @@ public class MoveController : MonoBehaviour
 
         rb.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
         pos = this.transform.position;
-        // Debug.Log(jump_flag);
     }
 
     private void SettingSpeed()
@@ -182,7 +179,6 @@ public class MoveController : MonoBehaviour
     {
 
         int Count = HitBox.OverlapCollider(new ContactFilter2D(), Ground);
-        Debug.Log(Count);
         if (Count > 0)
         {
             foreach (Collider2D Col in Ground)
@@ -197,7 +193,10 @@ public class MoveController : MonoBehaviour
                 }
             }
         }
-        else Jump = false;
+        else
+        {
+            Jump = false;
+        }
     }
     //---------------------------------------------------------------------------------------//当たったオブジェクトの当たり判定が指定したLISTに入っているかどうか、いろんな処理使う。
     public static bool TargetTagResarch(Collider2D collder2d, params string[] tags)
