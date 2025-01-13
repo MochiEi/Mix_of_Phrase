@@ -12,16 +12,17 @@ public class Controller : MonoBehaviour
     Rigidbody2D rb_Pllyer;
     Collider2D[] Box = new Collider2D[5];
     [SerializeField]
-    Collider2D[] Ground = new Collider2D[1];
+    Collider2D[] Ground = new Collider2D[2];
     [SerializeField]
     string[] _SettingTag;
     bool input_A, input_S, input_D, input_Space;///入力の確認
     [SerializeField]
     float moveSpeed = 0, jumpPower = 0, MaxvarticalSpeed = 0, MaxSpeed = 0;///移動関連、速度制御
     Vector2 pos;
-
     [SerializeField]
     Vector2 direction;
+    Vector2[] directionVec = new Vector2[2];
+
 
     // Start is called before the first frame update
     void Start()
@@ -48,7 +49,7 @@ public class Controller : MonoBehaviour
         {
             input_S = true;
         }
-        if (Input.GetKey(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             input_Space = true;
         }
@@ -56,29 +57,39 @@ public class Controller : MonoBehaviour
 
     private void FixedUpdate()
     {
+       
         if (!input_A && !input_D && !input_S)
         {
+            anim.SetBool("DownAnim", false);
+            anim.SetBool("MoveAnim", false);
             rb_Pllyer.velocity = new Vector2(0, rb_Pllyer.velocity.y);
             pos = player.transform.position;
         }
         if (input_S)
         {
+            anim.SetBool("JumpAnim", false);
+            anim.SetBool("DownAnim", true);
             rb_Pllyer.velocity = new Vector2(0f, rb_Pllyer.velocity.y);
         }
         if (input_A)
         {
+            anim.SetBool("DownAnim", false);
+            anim.SetBool("MoveAnim", true);
             player.transform.localScale = new Vector3(-1, 1);
             rb_Pllyer.AddForce(Vector2.left * moveSpeed, ForceMode2D.Impulse);
             pos = player.transform.position;
         }
         if (input_D)
         {
+            anim.SetBool("DownAnim", false);
+            anim.SetBool("MoveAnim", true);
             player.transform.localScale = new Vector3(1, 1);
             rb_Pllyer.AddForce(Vector2.right * moveSpeed, ForceMode2D.Impulse);
             pos = player.transform.position;
         }
         if (input_Space)
         {
+            anim.SetBool("JumpAnim", true);
             Invoke(nameof(Delay), 0.3f);
         }
         ReturnSetting();
@@ -94,12 +105,28 @@ public class Controller : MonoBehaviour
     /// <param name="ListTag"></param>
     /// <returns></returns>
     bool HitFlagment(Collider2D Coll, params string[] ListTag)
-    {
+    {     
         int HitCount = hitBox.OverlapCollider(new ContactFilter2D(), Ground);
-        direction = (Ground[0].ClosestPoint(transform.position)) - ((Vector2)transform.position).normalized;
-        if (direction.y < -1.0 && direction.x > -1)
+        if (HitCount > 1)
         {
-            Debug.Log("Clear");
+            for (int i = 0; i < HitCount; i++)
+            {
+                directionVec[i] = (Ground[i].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
+            }
+            direction = new Vector2(directionVec[0].x , directionVec[1].y);
+            if (direction.x == -1.0f && direction.y == 1.0f)
+            {
+                Debug.Log(direction);
+                return true;
+            }
+        }
+        else
+        {
+            direction = (Ground[0].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
+        }
+        // y方向が-1以下、かつx方向が-2より大きい場合のみ進む
+        if (direction.y <= -1.0f && direction.x > -2.0f)
+        {
             if (HitCount > 0)
             {
                 foreach (Collider2D Col in Ground)
@@ -167,5 +194,8 @@ public class Controller : MonoBehaviour
         player.transform.position = pos;
     }
 
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    { 
+        anim.SetBool("JumpAnim", false);
+    }
 }

@@ -21,6 +21,5 @@ public class HitListBox : MonoBehaviour
     void PressFlagManager(bool Press, GameObject obj)
     {
         bool flag = ObjManager.Any(Item => Item.tag == obj.tag);
-        //hitList.Add(obj, flag);
     }
 }
