@@ -16,6 +16,7 @@ public class Controller : MonoBehaviour
     [SerializeField]
     string[] _SettingTag;
     bool input_A, input_S, input_D, input_Space;///入力の確認
+    bool Jump;
     [SerializeField]
     float moveSpeed = 0, jumpPower = 0, MaxvarticalSpeed = 0, MaxSpeed = 0;///移動関連、速度制御
     Vector2 pos;
@@ -53,6 +54,12 @@ public class Controller : MonoBehaviour
         {
             input_Space = true;
         }
+        int Count = hitBox.OverlapCollider(new ContactFilter2D(), Ground);
+        if (Count > 0 && Jump)
+        {
+            Jump = false;
+            anim.SetBool("JumpAnim", false);
+        }
     }
 
     private void FixedUpdate()
@@ -69,7 +76,8 @@ public class Controller : MonoBehaviour
         {
             anim.SetBool("JumpAnim", false);
             anim.SetBool("DownAnim", true);
-            rb_Pllyer.velocity = new Vector2(0f, rb_Pllyer.velocity.y);
+            rb_Pllyer.velocity = new Vector2(0, rb_Pllyer.velocity.y);
+            pos = player.transform.position;
         }
         if (input_A)
         {
@@ -113,7 +121,7 @@ public class Controller : MonoBehaviour
             {
                 directionVec[i] = (Ground[i].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
             }
-            direction = new Vector2(directionVec[0].x , directionVec[1].y);
+            direction = new Vector2(directionVec[0].x, directionVec[1].y);
             if (direction.x == -1.0f && direction.y == 1.0f)
             {
                 Debug.Log(direction);
@@ -125,7 +133,7 @@ public class Controller : MonoBehaviour
             direction = (Ground[0].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
         }
         // y方向が-1以下、かつx方向が-2より大きい場合のみ進む
-        if (direction.y <= -1.0f && direction.x > -2.0f)
+        if (direction.x > -2.0f && direction.y <= -0.75f)
         {
             if (HitCount > 0)
             {
@@ -133,6 +141,7 @@ public class Controller : MonoBehaviour
                 {
                     if (TargetTagResarch(Col, ListTag))
                     {
+                        Jump = true;
                         return true;
                     }
                     else
@@ -194,8 +203,4 @@ public class Controller : MonoBehaviour
         player.transform.position = pos;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    { 
-        anim.SetBool("JumpAnim", false);
-    }
 }

@@ -7,12 +7,12 @@ TagManager:
   - Box
   - Ground
   - Pox
-  - BoxPress
   - MovingWall
   - Block
   - Button
   - InsertGimmick
   - ColorBlock
+  - PoxPress
   layers:
   - Default
   - TransparentFX

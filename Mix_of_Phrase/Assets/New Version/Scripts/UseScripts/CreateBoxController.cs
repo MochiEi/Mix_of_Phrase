@@ -32,16 +32,16 @@ public class CreateBoxController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ///DebugCommand///
-        //if (Input.GetKeyDown(KeyCode.R))
-        //{
-        //    CreateBox();
-        //}
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{
-        //    DelateBox();
-        //}
-        ///tadanosyori///
+        // DebugCommand///
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            CreateBox();
+        }
+        if (Input.GetKeyDown(KeyCode.G))
+        {
+            DelateBox();
+        }
+        // tadanosyori///
         StageThisCost.RemoveAll(Item => Item == null);
     }
 
