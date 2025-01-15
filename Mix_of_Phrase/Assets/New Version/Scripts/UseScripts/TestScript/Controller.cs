@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEditor.PlayerSettings;
 
@@ -23,6 +25,14 @@ public class Controller : MonoBehaviour
     [SerializeField]
     Vector2 direction;
     Vector2[] directionVec = new Vector2[2];
+
+    [SerializeField]
+    float DirectionSet;
+
+    [SerializeField]
+    float DirectionX;
+    [SerializeField]
+    float DirectionY;
 
 
     // Start is called before the first frame update
@@ -97,8 +107,7 @@ public class Controller : MonoBehaviour
         }
         if (input_Space)
         {
-            anim.SetBool("JumpAnim", true);
-            Invoke(nameof(Delay), 0.3f);
+            Jumping();
         }
         ReturnSetting();
     }
@@ -121,8 +130,9 @@ public class Controller : MonoBehaviour
             {
                 directionVec[i] = (Ground[i].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
             }
-            direction = new Vector2(directionVec[0].x, directionVec[1].y);
-            if (direction.x == -1.0f && direction.y == 1.0f)
+
+            direction = new Vector2(Mathf.Ceil(directionVec[0].x * 100)/100, Mathf.Ceil(directionVec[1].y * 100)/100);
+            if (direction.x >= DirectionX && direction.y <= DirectionY)
             {
                 Debug.Log(direction);
                 return true;
@@ -131,9 +141,10 @@ public class Controller : MonoBehaviour
         else
         {
             direction = (Ground[0].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
+            direction.x = Mathf.Ceil(direction.x * 100) / 100;
         }
         // y•ûŒü‚ª-1ˆÈ‰ºA‚©‚Âx•ûŒü‚ª-2‚æ‚è‘å‚«‚¢ê‡‚Ì‚Ýi‚Þ
-        if (direction.x > -2.0f && direction.y <= -0.75f)
+        if (direction.x > -2.0f && direction.y <= -DirectionSet)
         {
             if (HitCount > 0)
             {
@@ -162,10 +173,11 @@ public class Controller : MonoBehaviour
         return tags.Any(tag => collder2d.CompareTag(tag));
     }
     //----------------------------------------------------------//
-    void Delay()
+    void Jumping()
     {
         if (HitFlagment(hitBox, _SettingTag))
         {
+            anim.SetBool("JumpAnim", true);
             rb_Pllyer.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             pos = player.transform.position;
         }
