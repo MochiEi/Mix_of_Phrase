@@ -5,7 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class GoalGimmick01 : MonoBehaviour
+public class GoalController01 : MonoBehaviour
 {
     [SerializeField] Transform topBlock;
     [SerializeField] Transform bottomBlock;
@@ -127,7 +127,7 @@ public class GoalGimmick01 : MonoBehaviour
                     goalBox[i].position = setBox[i].position;
                 }
             })
-            .Append(bottomBlock.DOScaleX(2, 2f)).SetEase(Ease.Linear)
+            .Append(bottomBlock.DOScaleX(3, 2f)).SetEase(Ease.Linear)
             .SetAutoKill(false)
             .Pause();
     }
