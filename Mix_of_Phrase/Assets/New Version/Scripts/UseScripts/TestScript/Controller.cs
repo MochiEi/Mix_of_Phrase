@@ -84,7 +84,6 @@ public class Controller : MonoBehaviour
         }
         if (input_S)
         {
-            anim.SetBool("JumpAnim", false);
             anim.SetBool("DownAnim", true);
             rb_Pllyer.velocity = new Vector2(0, rb_Pllyer.velocity.y);
             pos = player.transform.position;
@@ -214,5 +213,12 @@ public class Controller : MonoBehaviour
         ///基本の処理を終えた後に移動量の適用処理///
         player.transform.position = pos;
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        Invoke("JumpAnim",0.25f);
+    }
+
+    void JumpAnim() { anim.SetBool("JumpAnim", false); }
 
 }

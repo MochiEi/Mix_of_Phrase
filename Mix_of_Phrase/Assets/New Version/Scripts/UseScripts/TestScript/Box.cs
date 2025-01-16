@@ -40,17 +40,16 @@ public class Box : MonoBehaviour
             foreach (var hit in HitObj)
             {
                 if (hit == null) break;
-                if (HitObj[0].tag == HitObj[1].tag)
-                {
-                    
-                }
-                else if (HitObj[0].tag == HitObj[1].tag)
+                if (HitObj[0].tag != HitObj[1].tag)
                 {
 
                 }
                 else if (HitObj[0].tag == HitObj[1].tag)
                 {
-
+                    if (HitObj[0].tag == "Box")
+                    {
+                        rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y);
+                    }
                 }
             }
         }
@@ -59,20 +58,25 @@ public class Box : MonoBehaviour
     bool Moved(Collider2D Hit , params string[] HitTag)
     {
         int num =  Hit.OverlapCollider(new ContactFilter2D(), HitObj);
-        if (num > 0) 
+        if (num > 0)
         {
-            
-            foreach (var ObjTag in HitObj)
+            direction = (HitObj[0].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
+
+            if (direction.x >=0f  || direction.x >= -0f)
             {
-                if (TargetTagResarch(ObjTag, tags))
+                foreach (var ObjTag in HitObj)
                 {
-                    return true;
+                    if (TargetTagResarch(ObjTag, tags))
+                    {
+                        
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
                 }
-                else
-                {
-                    return false;
-                }
-            }     
+            }
         }
         return false;
     }

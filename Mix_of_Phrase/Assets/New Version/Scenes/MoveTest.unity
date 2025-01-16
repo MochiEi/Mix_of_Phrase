@@ -760,6 +760,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HitObj:
   - {fileID: 0}
+  - {fileID: 0}
   MoveTags:
   - Pox
   - PoxPress
