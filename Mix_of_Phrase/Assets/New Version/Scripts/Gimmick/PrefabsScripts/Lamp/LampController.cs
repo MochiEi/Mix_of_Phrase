@@ -4,18 +4,21 @@ using UnityEngine;
 
 public class LampController : MonoBehaviour, ActiveCheck
 {
-    [Header("トリガー")]
-    [SerializeField] MonoBehaviour[] setTrigger;
-    private ActiveCheck[] trigger;
+    [Header("初期点灯")]
+    [SerializeField] bool lighting;
 
     [Header("点灯速度")]
     [SerializeField] float speed;
+
+    [Header("トリガー")]
+    [SerializeField] MonoBehaviour[] setTrigger;
+    private ActiveCheck[] trigger;
 
     private int activeCount;
     private bool isActive;
 
     private SpriteRenderer sprite;
-    private float lighting;
+    private float brightness;
 
     void Start()
     {
@@ -39,16 +42,19 @@ public class LampController : MonoBehaviour, ActiveCheck
 
         activeCount = Mathf.Max(activeCount, 0);
 
-        isActive = activeCount % 2 == 1;
+        if (lighting)
+            isActive = activeCount % 2 == 0;
+        else
+            isActive = activeCount % 2 == 1;
 
         if (isActive)
-            lighting += speed * Time.deltaTime;
+            brightness += speed * Time.deltaTime;
         else
-            lighting -= speed * Time.deltaTime;
+            brightness -= speed * Time.deltaTime;
 
-        lighting = Mathf.Clamp(lighting, 0.4f, 1f);
+        brightness = Mathf.Clamp(brightness, 0.4f, 1f);
 
-        sprite.color = new Color(lighting, lighting, lighting);
+        sprite.color = new Color(brightness, brightness, brightness);
     }
 
     public bool IsActive()
