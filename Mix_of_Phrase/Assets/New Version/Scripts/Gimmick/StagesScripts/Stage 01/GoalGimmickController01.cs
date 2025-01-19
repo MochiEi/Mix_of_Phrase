@@ -5,7 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class GoalController01 : MonoBehaviour
+public class GoalGimmickController01 : MonoBehaviour
 {
     [SerializeField] Transform topBlock;
     [SerializeField] Transform bottomBlock;
