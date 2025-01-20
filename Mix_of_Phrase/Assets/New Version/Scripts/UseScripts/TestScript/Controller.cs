@@ -133,7 +133,6 @@ public class Controller : MonoBehaviour
             direction = new Vector2(Mathf.Ceil(directionVec[0].x * 100)/100, Mathf.Ceil(directionVec[1].y * 100)/100);
             if (direction.x >= DirectionX && direction.y <= DirectionY)
             {
-                Debug.Log(direction);
                 return true;
             }
         }
