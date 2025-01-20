@@ -15,7 +15,6 @@ public class BoxManager : MonoBehaviour
     [SerializeField] string[] TagBluckList;
     [SerializeField] GameObject BoxHitList;
     [SerializeField] PressManager pressManager;
-    [SerializeField] int Pox = 0;
 
 
     // Start is called before the first frame update
