@@ -5,7 +5,7 @@ using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
 
-public class GoalGimmick01 : MonoBehaviour
+public class GoalGimmickController01 : MonoBehaviour
 {
     [SerializeField] Transform topBlock;
     [SerializeField] Transform bottomBlock;
@@ -108,15 +108,15 @@ public class GoalGimmick01 : MonoBehaviour
         foreach (var w in block)
         {
             formerTween = sequence
-                .Join(w.DOLocalMoveY(2.7f, 2f)).SetEase(Ease.Linear)
+                .Join(w.DOLocalMoveY(-2.3f, 2f)).SetEase(Ease.Linear)
                 .Join(w.DOScaleY(2, 2f)).SetEase(Ease.Linear)
                 .SetAutoKill(false)
                 .Pause();
         }
 
         laterTween = sequence
-            .Append(topBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
-            .Append(bottomBlock.DOScaleX(9, 2f)).SetEase(Ease.Linear)
+            .Append(topBlock.DOScaleX(11, 2f)).SetEase(Ease.Linear)
+            .Append(bottomBlock.DOScaleX(11, 2f)).SetEase(Ease.Linear)
             .AppendInterval(0.5f)
             .AppendCallback(() =>
             {
@@ -127,7 +127,7 @@ public class GoalGimmick01 : MonoBehaviour
                     goalBox[i].position = setBox[i].position;
                 }
             })
-            .Append(bottomBlock.DOScaleX(2, 2f)).SetEase(Ease.Linear)
+            .Append(bottomBlock.DOScaleX(3, 2f)).SetEase(Ease.Linear)
             .SetAutoKill(false)
             .Pause();
     }
