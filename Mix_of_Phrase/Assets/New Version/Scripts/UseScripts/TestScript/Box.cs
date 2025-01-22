@@ -68,7 +68,6 @@ public class Box : MonoBehaviour
                 {
                     if (TargetTagResarch(ObjTag, tags))
                     {
-                        
                         return true;
                     }
                     else
