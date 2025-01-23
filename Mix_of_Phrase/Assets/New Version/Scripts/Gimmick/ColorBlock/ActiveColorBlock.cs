@@ -23,4 +23,9 @@ public class ActiveColorBlock : MonoBehaviour
     {
         return selectColor.ToString();
     }
+
+    private void IsIn()
+    {
+
+    }
 }
