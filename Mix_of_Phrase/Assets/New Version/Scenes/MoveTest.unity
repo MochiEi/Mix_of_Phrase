@@ -361,7 +361,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 4882478567838626256, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
   m_PrefabInstance: {fileID: 8922703671580603775}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &565866659
+--- !u!114 &565866665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -370,39 +370,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 565866658}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44909a1d03733ba479ca98961ddaf247, type: 3}
+  m_Script: {fileID: 11500000, guid: 397a1f6b3a55ba84db43dda413ab4bb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   TagResarchFor:
   - Ground
   - Box
   - MovingWall
-  HitList:
+  AddList:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  InObject:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  InObject: []
-  Direction: {x: 0, y: 0}
   DirectionList:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
   - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  - {x: 0, y: 0}
-  DirectX: 0
-  DirectY: 0
+  moveSpeed: 3
+  jumpPower: 150
+  MaxvarticalSpeed: 4.7
+  MaxSpeed: 2
 --- !u!1 &921018445
 GameObject:
   m_ObjectHideFlags: 0
@@ -1232,7 +1228,7 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 4882478567838626256, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 565866659}
+      addedObject: {fileID: 565866665}
   m_SourcePrefab: {fileID: 100100000, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
