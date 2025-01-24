@@ -30,6 +30,7 @@ public class ControllTest : MonoBehaviour
     Vector2 Direction;
     float direction_x;
     float direction_y;
+    public float Float_y;
     //-----------------------------------------//入力・bool関連
 
     bool input_A, input_S, input_D, input_Space;
@@ -59,7 +60,7 @@ public class ControllTest : MonoBehaviour
         {
             DirectionList[i] = Vector2.zero;
         }
-        JumpFlagController(PlayerCollder,AddList,TagResarchFor);
+        JumpFlagController(PlayerCollder, AddList, TagResarchFor);
         if (Input.GetKey(KeyCode.A))
         {
             input_A = true;
@@ -72,7 +73,7 @@ public class ControllTest : MonoBehaviour
         {
             input_S = true;
         }
-        if (Input.GetKeyDown(KeyCode.Space)&&Jump)
+        if (Input.GetKeyDown(KeyCode.Space) && Jump)
         {
             input_Space = true;
         }
@@ -137,16 +138,16 @@ public class ControllTest : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                if (TargetTagResarch(AddObject[i],TagResarchFor) )
+                if (TargetTagResarch(AddObject[i], TagResarchFor))
                 {
-                    ObjectCount(Hit,AddObject,AddObject[i] ,InObject);
+                    ObjectCount(Hit, AddObject, AddObject[i], InObject);
                 }
             }
         }
     }
 
     //-----------------------------------------------------------------------------------------------------------//対応したオブジェクトを配列に入れる。
-    void ObjectCount(Collider2D Hit , Collider2D[]AddObject,Collider2D AddObjList , List<Collider2D> ListIn)
+    void ObjectCount(Collider2D Hit, Collider2D[] AddObject, Collider2D AddObjList, List<Collider2D> ListIn)
     {
         int count = Hit.OverlapCollider(new ContactFilter2D(), AddObject);
         //Debug.Log("AddObject || " + AddObject.Length + " ||");
@@ -164,11 +165,11 @@ public class ControllTest : MonoBehaviour
                     InObject.Add(AddObjList);
                 }
             }
-            DirectionForce(InObject,DirectionList);
+            DirectionForce(InObject, DirectionList);
         }
     }
 
-    void DirectionForce(List<Collider2D> Coll2d,List<Vector2>Direction)
+    void DirectionForce(List<Collider2D> Coll2d, List<Vector2> Direction)
     {
         for (int i = 0; i < Coll2d.Count; i++)
         {
@@ -180,6 +181,10 @@ public class ControllTest : MonoBehaviour
                 direction_x = Mathf.Ceil(direction_x * 100) / 100;
                 direction_y = Mathf.Ceil(direction_y * 100) / 100;
                 Vector2 vector = new Vector2(direction_x, direction_y);
+                if (vector == new Vector2(0.75f, 0.68f))
+                {
+                    vector = Direction[0];
+                }
                 Direction[i] = vector;
             }
         }
@@ -193,10 +198,10 @@ public class ControllTest : MonoBehaviour
         input_D = false;
         input_S = false;
         input_Space = false;
-        SettingSpeed(rb,position);
+        SettingSpeed(rb, position);
     }
     //----------------------------------------------------------//
-    private void SettingSpeed(Rigidbody2D rb ,Vector2 position)
+    private void SettingSpeed(Rigidbody2D rb, Vector2 position)
     {
         /// 移動速度制限を適用する///
         float currentHorizontalSpeed = Mathf.Abs(rb.velocity.x);  // 水平方向の速度を取得
