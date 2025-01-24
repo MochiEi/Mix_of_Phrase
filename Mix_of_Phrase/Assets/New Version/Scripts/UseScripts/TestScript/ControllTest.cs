@@ -30,7 +30,6 @@ public class ControllTest : MonoBehaviour
     Vector2 Direction;
     float direction_x;
     float direction_y;
-    public float Float_y;
     //-----------------------------------------//ì¸óÕÅEboolä÷òA
 
     bool input_A, input_S, input_D, input_Space;
@@ -181,10 +180,6 @@ public class ControllTest : MonoBehaviour
                 direction_x = Mathf.Ceil(direction_x * 100) / 100;
                 direction_y = Mathf.Ceil(direction_y * 100) / 100;
                 Vector2 vector = new Vector2(direction_x, direction_y);
-                if (vector == new Vector2 (0.75f,0.68f))
-                {
-                    vector = Direction[0];
-                }
                 Direction[i] = vector;
             }
         }
