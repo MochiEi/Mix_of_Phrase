@@ -26,9 +26,14 @@ public class PhraseController : MonoBehaviour
     //------------------- Output -------------------//
     private string executionWord;
 
+    private RectTransform frame;
+
     private float alpha;
     private Color displayColor;
     private Color hiddenColor;
+
+    private Tween frameScale;
+    private float interval;
 
     void Start()
     {
@@ -38,6 +43,8 @@ public class PhraseController : MonoBehaviour
                 firstPhrase = child;
             if (child.gameObject.name == "SecondPhrase")
                 secondPhrase = child;
+            if (child.gameObject.name == "Frame")
+                frame = child.GetComponent<RectTransform>();
         }
 
         firstPhrases = firstPhrase.Cast<Transform>().Select(phrase => phrase.GetComponent<Text>()).ToArray();
@@ -49,6 +56,8 @@ public class PhraseController : MonoBehaviour
         alpha = 0;
         displayColor = new Color(0, 0, 0, 1.0f);
         hiddenColor = new Color(0, 0, 0, 0);
+
+        DoTween();
     }
 
     void Update()
@@ -58,6 +67,21 @@ public class PhraseController : MonoBehaviour
         if (changePhrase == selectChangePhrase.Second)
             SecondPhraseControlle();
 
+        alpha -= Time.deltaTime;
+        alpha = Mathf.Max(0, alpha);
+
+        if (interval >= 0.3f)
+            frameScale.PlayBackwards();
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            interval = 0;
+            frameScale.PlayForward();
+        }
+
+        if (frame.rect.width == 390)
+            interval += Time.deltaTime;
+
+        executionWord = $"{firstPhrases[firstPhraseCount].text} {secondPhrases[secondPhraseCount].text}";
     }
 
     private void FirstPhraseControlle()
@@ -85,10 +109,8 @@ public class PhraseController : MonoBehaviour
                 firstPhrases[i].color = hiddenColor;
 
             if (i == firstPhraseCount)
-                firstPhrases[i].color = displayColor;            
+                firstPhrases[i].color = displayColor;
         }
-
-        alpha -= Time.deltaTime;
     }
 
     private void SecondPhraseControlle()
@@ -116,14 +138,22 @@ public class PhraseController : MonoBehaviour
                 secondPhrases[i].color = hiddenColor;
 
             if (i == secondPhraseCount)
-                secondPhrases[i].color = displayColor;            
+                secondPhrases[i].color = displayColor;
         }
-
-        alpha -= Time.deltaTime;
     }
 
     public string ExecutionWord()
     {
         return executionWord;
+    }
+
+    private void DoTween()
+    {
+        var sequence = DOTween.Sequence();
+
+        frameScale = sequence
+            .Append(frame.DOSizeDelta(new Vector2(390, 60), 0.2f))
+            .SetAutoKill(false)
+            .Pause();
     }
 }

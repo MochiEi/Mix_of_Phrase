@@ -32,4 +32,11 @@ public class GameDateController : MonoBehaviour
     {
         return PlayerPrefs.GetInt("ClearedStage", 0);
     }
+
+    // ƒfƒŠ[ƒgˆ—
+    public void Delete()
+    {
+        PlayerPrefs.SetInt("ClearedStage", 0);
+        PlayerPrefs.Save();
+    }
 }

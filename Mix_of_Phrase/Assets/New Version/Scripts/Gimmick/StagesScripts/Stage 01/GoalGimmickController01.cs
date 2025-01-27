@@ -4,9 +4,14 @@ using UnityEngine;
 using System.Linq;
 using DG.Tweening;
 using Unity.VisualScripting;
+using UnityEditor.Build.Content;
 
 public class GoalGimmickController01 : MonoBehaviour
 {
+    [SerializeField] Transform gameManager;
+    private GameDateController dateController;
+    private ToSelectStage selectStage;
+
     [SerializeField] Transform topBlock;
     [SerializeField] Transform bottomBlock;
     [SerializeField] Transform[] block;
@@ -26,6 +31,9 @@ public class GoalGimmickController01 : MonoBehaviour
 
     void Start()
     {
+        dateController = gameManager.GetComponent<GameDateController>();
+        selectStage = gameManager.GetComponent<ToSelectStage>();
+
         for (int i = 0; i < 4; i++)
         {
             blockRenderer[i] = block[i].GetComponent<Renderer>();
@@ -128,6 +136,11 @@ public class GoalGimmickController01 : MonoBehaviour
                 }
             })
             .Append(bottomBlock.DOScaleX(3, 2f)).SetEase(Ease.Linear)
+            .AppendCallback(() =>
+            {
+                dateController.Save(1);
+                selectStage.ToHome();
+            })
             .SetAutoKill(false)
             .Pause();
     }
