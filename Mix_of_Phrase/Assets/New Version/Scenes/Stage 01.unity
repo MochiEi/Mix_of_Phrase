@@ -5255,13 +5255,17 @@ PrefabInstance:
       propertyPath: _SettingTag.Array.data[3]
       value: Button
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9087382143784364971, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 8516714224147314818, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1138437484}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4882478567838626256, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1952722402}
   m_SourcePrefab: {fileID: 100100000, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
 --- !u!4 &1582957305 stripped
 Transform:
@@ -6279,6 +6283,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1927013761}
   m_CullTransparentMesh: 1
+--- !u!1 &1952722401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4882478567838626256, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
+  m_PrefabInstance: {fileID: 1559728761}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1952722402
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952722401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 397a1f6b3a55ba84db43dda413ab4bb5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TagResarchFor:
+  - Ground
+  - MovingWall
+  - Button
+  - Box
+  AddList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  InObject:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  correction:
+  - {x: 0.75, y: 0.68}
+  DirectionList:
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  - {x: 0, y: 0}
+  moveSpeed: 3
+  jumpPower: 150
+  MaxvarticalSpeed: 4.7
+  MaxSpeed: 2
 --- !u!4 &1967530917 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2641447962206447982, guid: 9e051e727b34e6242920cfa8975f1eec, type: 3}
