@@ -32,8 +32,7 @@ public class TitlePhraseActionContllore : MonoBehaviour
 
     private void GameStart()
     {
-        camController.enabled = true;
-        contllore.enabled = false;
+        IsSelect.isActive = true;
     }
 
     private void ExitGame()

@@ -63,20 +63,15 @@ public class PhraseController : MonoBehaviour
     void Update()
     {
         if (changePhrase == selectChangePhrase.First)
-            FirstPhraseControlle();
+            firstPhraseCount = PhraseControlle(firstPhraseCount, firstPhrase, firstPhrases);
         if (changePhrase == selectChangePhrase.Second)
-            SecondPhraseControlle();
+            secondPhraseCount = PhraseControlle(secondPhraseCount, secondPhrase, secondPhrases);
 
         alpha -= Time.deltaTime;
         alpha = Mathf.Max(0, alpha);
 
         if (interval >= 0.3f)
             frameScale.PlayBackwards();
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            interval = 0;
-            frameScale.PlayForward();
-        }
 
         if (frame.rect.width == 390)
             interval += Time.deltaTime;
@@ -84,62 +79,41 @@ public class PhraseController : MonoBehaviour
         executionWord = $"{firstPhrases[firstPhraseCount].text} {secondPhrases[secondPhraseCount].text}";
     }
 
-    private void FirstPhraseControlle()
+    private int PhraseControlle(int phraseCount, Transform phrase, Text[] phrases)
     {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && firstPhraseCount > 0)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && phraseCount > 0)
         {
-            firstPhraseCount--;
-            firstPhrase.DOLocalMoveY(0.6f * firstPhraseCount, 0.2f).SetEase(Ease.OutCubic);
+            phraseCount--;
+            phrase.DOLocalMoveY(0.6f * phraseCount, 0.2f).SetEase(Ease.OutCubic);
 
             alpha = 0.5f;
+
+            interval = 0;
+            frameScale.PlayForward();
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && firstPhraseCount < firstPhrases.Length - 1)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && phraseCount < phrases.Length - 1)
         {
-            firstPhraseCount++;
-            firstPhrase.DOLocalMoveY(0.6f * firstPhraseCount, 0.2f).SetEase(Ease.OutCubic);
+            phraseCount++;
+            phrase.DOLocalMoveY(0.6f * phraseCount, 0.2f).SetEase(Ease.OutCubic);
 
             alpha = 0.5f;
+
+            interval = 0;
+            frameScale.PlayForward();
         }
 
-        for (int i = 0; i < firstPhrases.Length; i++)
+            for (int i = 0; i < phrases.Length; i++)
         {
-            if (i == firstPhraseCount - 1 || i == firstPhraseCount + 1)
-                firstPhrases[i].color = new Color(0, 0, 0, alpha);
+            if (i == phraseCount - 1 || i == phraseCount + 1)
+                phrases[i].color = new Color(0, 0, 0, alpha);
             else
-                firstPhrases[i].color = hiddenColor;
+                phrases[i].color = hiddenColor;
 
-            if (i == firstPhraseCount)
-                firstPhrases[i].color = displayColor;
-        }
-    }
-
-    private void SecondPhraseControlle()
-    {
-        if (Input.GetKeyDown(KeyCode.UpArrow) && secondPhraseCount > 0)
-        {
-            secondPhraseCount--;
-            secondPhrase.DOLocalMoveY(0.6f * secondPhraseCount, 0.2f).SetEase(Ease.OutCubic);
-
-            alpha = 0.5f;
-        }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && secondPhraseCount < secondPhrases.Length - 1)
-        {
-            secondPhraseCount++;
-            secondPhrase.DOLocalMoveY(0.6f * secondPhraseCount, 0.2f).SetEase(Ease.OutCubic);
-
-            alpha = 0.5f;
+            if (i == phraseCount)
+                phrases[i].color = displayColor;
         }
 
-        for (int i = 0; i < secondPhrases.Length; i++)
-        {
-            if (i == secondPhraseCount - 1 || i == secondPhraseCount + 1)
-                secondPhrases[i].color = new Color(0, 0, 0, alpha);
-            else
-                secondPhrases[i].color = hiddenColor;
-
-            if (i == secondPhraseCount)
-                secondPhrases[i].color = displayColor;
-        }
+        return phraseCount;
     }
 
     public string ExecutionWord()

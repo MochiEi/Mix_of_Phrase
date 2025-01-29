@@ -5,56 +5,15 @@ using UnityEngine;
 
 public class TitleCameraController : MonoBehaviour
 {
-    private Transform cam;
-    private TitleCameraController camController;
-
-    [SerializeField] Transform systemController;
-    private TitlePhraseActionContllore contllore;
-
-    [SerializeField] Transform selectPhrase;
-    private SelectPhraseController phraseController;
-
-    private Tween toSelect;
-    private bool select;
-
-    void Start()
+    void Awake()
     {
-        cam = transform;
-        camController = cam.GetComponent<TitleCameraController>();
-        contllore = systemController.GetComponent<TitlePhraseActionContllore>();
-        phraseController = selectPhrase.GetComponent<SelectPhraseController>();
-
-        var sequence = DOTween.Sequence();
-        toSelect = sequence
-            .AppendCallback(() =>
-            {
-                if (select)
-                {
-                    camController.enabled = false;
-                    contllore.enabled = true;
-                }
-
-                select = false;
-            })
-            .Append(cam.DOMoveY(-10.0f, 2f).SetEase(Ease.InOutSine))
-            .AppendCallback(() =>
-            {
-                phraseController.PhraseErase();
-                select = true;
-            })
-            .SetAutoKill(false);
+        float posY = 0;
+        posY = IsSelect.isSelected ? -10 : 0;
+        transform.position = new Vector3(0, posY , -10); 
     }
 
     void Update()
     {
-        if (!select)
-            toSelect.PlayForward();
+        
     }
-
-    public void toTitle()
-    {
-        toSelect.PlayBackwards();
-    }
-
-
 }

@@ -2250,6 +2250,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &892577566 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7106479595287761354, guid: c110668612d600b4b9847c2b09825046, type: 3}
+  m_PrefabInstance: {fileID: 3600647288901760968}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73d8aefcc49025e4fb74432cb2930afe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &954254753
 GameObject:
   m_ObjectHideFlags: 0
@@ -2611,7 +2622,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1212971726}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 892577566}
+        m_TargetAssemblyTypeName: ToSelectStage, Assembly-CSharp
+        m_MethodName: ToStage01
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1212971726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4429,13 +4452,11 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994794882}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8cb53645feab5f44abd5d4554cec81ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  systemController: {fileID: 407167800}
-  selectPhrase: {fileID: 1888248649}
 --- !u!1 &2028251082
 GameObject:
   m_ObjectHideFlags: 0
