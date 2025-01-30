@@ -31,53 +31,19 @@ public class SelectPhraseController : MonoBehaviour
         selectPhrase.text = $"{firstPhrase} {secondPhrase}";
     }
 
-    public void Button01()
+    public void PhraseButton(int num)
     {
         if (phraseCount == 0)
         {
             phraseCount++;
-            firstPhrase = buttonText[0].text;
+            firstPhrase = buttonText[num].text;
             secondPhrase = "";
             return;
         }
         if (phraseCount == 1)
         {
             phraseCount++;
-            secondPhrase = buttonText[0].text;
-            return;
-        }
-    }
-
-    public void Button02()
-    {
-        if (phraseCount == 0)
-        {
-            phraseCount++;
-            firstPhrase = buttonText[1].text;
-            secondPhrase = "";
-            return;
-        }
-        if (phraseCount == 1)
-        {
-            phraseCount++;
-            secondPhrase = buttonText[1].text;
-            return;
-        }
-    }
-
-    public void Button03()
-    {
-        if (phraseCount == 0)
-        {
-            phraseCount++;
-            firstPhrase = buttonText[2].text;
-            secondPhrase = "";
-            return;
-        }
-        if (phraseCount == 1)
-        {
-            phraseCount++;
-            secondPhrase = buttonText[2].text;
+            secondPhrase = buttonText[num].text;
             return;
         }
     }

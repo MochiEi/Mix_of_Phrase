@@ -2,12 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ActiveColorBlock : MonoBehaviour
+public class ActiveColorController : MonoBehaviour
 {
-    private enum SelectColor
-    {
-        Red, Blue
-    };
+    private enum SelectColor { Red, Blue };
     [SerializeField] SelectColor selectColor;
 
     public void IsActiveRed()

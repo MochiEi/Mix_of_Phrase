@@ -4,6 +4,7 @@ using DG.Tweening;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class PhraseController : MonoBehaviour
 {
@@ -35,6 +36,9 @@ public class PhraseController : MonoBehaviour
     private Tween frameScale;
     private float interval;
 
+    private float width;
+    private float height;
+
     void Start()
     {
         foreach (Transform child in transform)
@@ -57,6 +61,8 @@ public class PhraseController : MonoBehaviour
         displayColor = new Color(0, 0, 0, 1.0f);
         hiddenColor = new Color(0, 0, 0, 0);
 
+        width = frame.rect.width + 10;
+
         DoTween();
     }
 
@@ -73,7 +79,7 @@ public class PhraseController : MonoBehaviour
         if (interval >= 0.3f)
             frameScale.PlayBackwards();
 
-        if (frame.rect.width == 390)
+        if (frame.rect.width == width)
             interval += Time.deltaTime;
 
         executionWord = $"{firstPhrases[firstPhraseCount].text} {secondPhrases[secondPhraseCount].text}";
@@ -126,7 +132,7 @@ public class PhraseController : MonoBehaviour
         var sequence = DOTween.Sequence();
 
         frameScale = sequence
-            .Append(frame.DOSizeDelta(new Vector2(390, 60), 0.2f))
+            .Append(frame.DOSizeDelta(new Vector2(width, 60), 0.2f))
             .SetAutoKill(false)
             .Pause();
     }

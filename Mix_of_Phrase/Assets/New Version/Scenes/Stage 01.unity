@@ -722,11 +722,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 271c3bcf48374694792e251a455144ad, type: 3}
---- !u!4 &215659836 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7146480031241242147, guid: c110668612d600b4b9847c2b09825046, type: 3}
-  m_PrefabInstance: {fileID: 3600647288901760968}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &255244543
 GameObject:
   m_ObjectHideFlags: 0
@@ -4422,11 +4417,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8516714224147314818, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.39
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8516714224147314818, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.54
+      value: -2.65
       objectReference: {fileID: 0}
     - target: {fileID: 8516714224147314818, guid: 74925e0b6ff6563498cd2c9fec1c4ea2, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4676,7 +4671,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c6e522e76fb16944be6816bdb51b539, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 215659836}
   topBlock: {fileID: 1002012827}
   bottomBlock: {fileID: 542742505}
   block:
@@ -6135,7 +6129,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 184378731659338200, guid: 19712d6b585ad5544878a1e802c65ae2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.39
+      value: -0.11111069
       objectReference: {fileID: 0}
     - target: {fileID: 184378731659338200, guid: 19712d6b585ad5544878a1e802c65ae2, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6257,11 +6251,11 @@ PrefabInstance:
       objectReference: {fileID: 1712971072}
     - target: {fileID: 8615045884626691696, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 65.39
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 8615045884626691696, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.54
+      value: -2.65
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

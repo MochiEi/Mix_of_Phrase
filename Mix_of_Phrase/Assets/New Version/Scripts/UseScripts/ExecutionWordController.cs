@@ -7,7 +7,7 @@ public class ExecutionWordController : MonoBehaviour
     private PhraseController controller;
 
     [SerializeField] CreateBoxController createBox;
-    [SerializeField] ActiveColorBlock colorBlock;
+    [SerializeField] ActiveColorController colorBlock;
     [SerializeField] SelectLayerController selectLayer;
 
     void Start()

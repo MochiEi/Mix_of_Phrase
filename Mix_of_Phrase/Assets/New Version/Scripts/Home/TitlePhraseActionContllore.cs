@@ -6,18 +6,8 @@ using DG.Tweening;
 
 public class TitlePhraseActionContllore : MonoBehaviour
 {
-    [SerializeField] Transform cam;
-    private TitleCameraController camController;
-    private TitlePhraseActionContllore contllore;
-
     [SerializeField] Text selectPhrase;
     private string phrase;
-
-    void Start()
-    {
-        camController = cam.GetComponent<TitleCameraController>();
-        contllore = GetComponent<TitlePhraseActionContllore>();
-    }
 
     void Update()
     {
