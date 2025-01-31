@@ -66,7 +66,6 @@ public class CreateBoxController : MonoBehaviour
                 {
                     Destroy(ScanDelate[i].gameObject);
                 }
-
             }
         }
 

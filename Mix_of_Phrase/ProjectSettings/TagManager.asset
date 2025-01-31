@@ -14,6 +14,7 @@ TagManager:
   - InsertGimmick
   - ColorBlock
   - Lamp
+  - emptyTag
   layers:
   - Default
   - TransparentFX

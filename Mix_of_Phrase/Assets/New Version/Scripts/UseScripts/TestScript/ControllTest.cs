@@ -17,7 +17,8 @@ public class ControllTest : MonoBehaviour
     Collider2D[] AddList;
     [SerializeField]
     List<Collider2D> InObject;
-
+    [SerializeField]
+    List<Vector2> correction;
     //-----------------------------------------//Playerïœêî
     GameObject Player;
     Collider2D PlayerCollder;
@@ -168,7 +169,7 @@ public class ControllTest : MonoBehaviour
         }
     }
 
-    void DirectionForce(List<Collider2D> Coll2d,List<Vector2>Direction)
+    void DirectionForce(List<Collider2D> Coll2d, List<Vector2> Direction)
     {
         for (int i = 0; i < Coll2d.Count; i++)
         {
@@ -179,6 +180,18 @@ public class ControllTest : MonoBehaviour
                 direction_y = pos.y;
                 direction_x = Mathf.Ceil(direction_x * 100) / 100;
                 direction_y = Mathf.Ceil(direction_y * 100) / 100;
+                if (direction_y != -1)
+                {
+                    for (global::System.Int32 j = 0; j < correction.Count; j++)
+                    {
+                        if (direction_x == correction[j].x && direction_y == correction[j].y)
+                        {
+                            direction_x = 0;
+                            direction_y = -1;
+                        }
+
+                    }
+                }
                 Vector2 vector = new Vector2(direction_x, direction_y);
                 Direction[i] = vector;
             }

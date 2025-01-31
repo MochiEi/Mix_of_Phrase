@@ -1,47 +1,94 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
-[AddComponentMenu("Create Empty/BoxHitManager", 14)]
 public class PressManager : MonoBehaviour
 {
     [SerializeField]
     public List<GameObject> gameObjects = new List<GameObject>();
     [SerializeField]
+    string[] tagList;
+    [SerializeField]
+    List<Collider2D> Addobj;
+    [SerializeField]
     public List<bool> PushFlagList = new List<bool>();
-    // Start is called before the first frame update
 
     private void Update()
     {
-        if (gameObjects.Count >100)
+        // リストが10を超えないように制限
+        if (gameObjects.Count > 10)
         {
-            gameObjects.RemoveAt(1);
-        }
-        if (PushFlagList.Count > 100)
-        {
-            PushFlagList.RemoveAt(1);
+            gameObjects.RemoveAt(0); // インデックス0の要素を削除
+            PushFlagList.RemoveAt(0); // インデックス0のPushFlagも削除
         }
     }
 
-    public void HitSet(GameObject HitObj, bool Pushflag)//当たった際にヒットリストを調べPOXタグがある場合Pushflagのtrueを返す
+    // ヒットしたオブジェクトをリストに追加し、PushFlagを設定する
+    public void HitSet(GameObject HitObj)
     {
-        //Debug.Log(HitObj);
-        gameObjects.Add(HitObj);
-        if (HitObj.tag == "Pox")
+        // すでに存在する場合は何もしない
+        if (!gameObjects.Contains(HitObj))
         {
-            PushFlagList.Add(true);
+            gameObjects.Add(HitObj);
+
+            // Poxタグのオブジェクトが追加されたらPushFlagをtrueに
+            if (HitObj.CompareTag("Pox"))
+            {
+                PushFlagList.Add(true);
+            }
+            else
+            {
+                PushFlagList.Add(false); // それ以外のタグはfalse
+            }
         }
     }
 
-    public void OutSet(GameObject OutObj, bool Pushflag)//離れた際にヒットリストを調べ、POXタグが無い場合Pushflagのfalseを返す
+    // 離れたオブジェクトをリストから削除し、PushFlagを更新
+    public void OutSet(GameObject OutObj)
     {
-        gameObjects.Add(OutObj);
-        if (OutObj.tag == "Pox")
+        int index = gameObjects.IndexOf(OutObj);
+        if (index != -1)
         {
-            PushFlagList.Add(false);
+            // すでにPushFlagListに同じ状態のfalseがある場合は何もしない
+            if (PushFlagList[index] != false)
+            {
+                PushFlagList[index] = false;  // 離れた際にfalseに設定
+            }
         }
     }
 
+    // オブジェクトの重なりを検出してPushFlagを設定
+    public void Flagment(Collider2D col)
+    {
+        int count = col.OverlapCollider(new ContactFilter2D(), Addobj);
+
+        if (count > 0)
+        {
+            for (int i = 0; i < count; i++) // 修正: i <= count -> i < count
+            {
+                if (TargetTagResarch(Addobj[i], tagList))  // タグをチェック
+                {
+                    HitSet(Addobj[i].gameObject);
+                }
+                else
+                {
+                    OutSet(Addobj[i].gameObject);
+                }
+            }
+        }
+    }
+
+    // タグを調べるメソッド
+    private bool TargetTagResarch(Collider2D coll, string[] tagList)
+    {
+        foreach (string tag in tagList)
+        {
+            if (coll.CompareTag(tag))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 }
