@@ -749,6 +749,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ColorBlockManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3978092677401400457, guid: 739c601c008ea894b87f564db039a8b8, type: 3}
+      propertyPath: pox
+      value: 
+      objectReference: {fileID: 902041575}
     - target: {fileID: 8798842611443634436, guid: 739c601c008ea894b87f564db039a8b8, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

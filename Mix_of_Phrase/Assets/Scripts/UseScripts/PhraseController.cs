@@ -108,7 +108,7 @@ public class PhraseController : MonoBehaviour
             frameScale.PlayForward();
         }
 
-            for (int i = 0; i < phrases.Length; i++)
+        for (int i = 0; i < phrases.Length; i++)
         {
             if (i == phraseCount - 1 || i == phraseCount + 1)
                 phrases[i].color = new Color(0, 0, 0, alpha);
