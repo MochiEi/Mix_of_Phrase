@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 487591659482985562}
   - component: {fileID: 6404724603371119829}
   - component: {fileID: 1899319042173640153}
-  - component: {fileID: 249991843093793124}
+  - component: {fileID: 8542880868738181890}
   m_Layer: 0
   m_Name: Box
   m_TagString: Box
@@ -123,7 +123,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 4296836835369035570}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: dfd2c86aebfb27445a934027e3447f96, type: 2}
+  m_Material: {fileID: 6200000, guid: d56e673d1c0891647a8734866969f7fe, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -159,13 +159,13 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -0.48, y: 0.48}
-      - {x: -0.48, y: -0.46}
+      - {x: -0.48, y: -0.42}
       - {x: -0.4, y: -0.48}
       - {x: 0.4, y: -0.48}
-      - {x: 0.48, y: -0.46}
+      - {x: 0.48, y: -0.42}
       - {x: 0.48, y: 0.48}
   m_UseDelaunayMesh: 0
---- !u!114 &249991843093793124
+--- !u!114 &8542880868738181890
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,8 +179,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   addForceNormalize: {x: 0, y: 0}
   Push_Flag: 0
-  TagBluckList:
-  - Ground
+  TagBluckList: []
   BoxHitList: {fileID: 0}
   pressManager: {fileID: 0}
-  Pox: 0

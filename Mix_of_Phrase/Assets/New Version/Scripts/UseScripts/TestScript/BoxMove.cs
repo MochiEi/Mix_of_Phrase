@@ -1,108 +1,69 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class BoxMove : MonoBehaviour
 {
-    GameObject Box;
-    Collider2D boxColl;
-    [SerializeField]
-    Collider2D[] HitObj = new Collider2D[1];
-    Rigidbody2D rb;
-    [SerializeField]
-    string[] MoveTags = new string[2];
+    private Collider2D boxCollider;
+    private Rigidbody2D rb;
 
     [SerializeField]
-    Vector2[] DirectVec;
-    [SerializeField]
-    Vector2 Direction;
+    private List<Collider2D> AddObj = new List<Collider2D>();
 
-    //bool MovedNow;
-    bool StopNow;
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField]
+    private float forceMultiplier = 1.0f;
+
+    private void Start()
     {
-        Box = this.gameObject;
-        boxColl = Box.GetComponent<Collider2D>();
-        rb = Box.GetComponent<Rigidbody2D>();
+        boxCollider = GetComponent<Collider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        if (MovedNow(boxColl, MoveTags))
+        if (boxCollider == null || rb == null) return;
+
+        // OverlapColliderを使用してAddObjリストを更新
+        boxCollider.OverlapCollider(new ContactFilter2D().NoFilter(), AddObj);
+
+        if (AddObj.Count > 0)
         {
-            int countHit = HitObj.Length;
+            ApplyPushForce();
         }
         else
         {
-            Debug.Log("AA");
-            Stoped(this.gameObject);
+            rb.velocity = new Vector2(0, rb.velocity.y); // 押されていなければX方向の速度を0にする
         }
     }
 
-    bool MovedNow(Collider2D Coll, params string[] ListTags)
+    private void ApplyPushForce()
     {
-        int Count = Coll.OverlapCollider(new ContactFilter2D(), HitObj);
+        Vector2 totalForce = Vector2.zero;
 
-        if (Count > 0)
+        foreach (Collider2D coll in AddObj)
         {
-            Direction = (HitObj[0].ClosestPoint(transform.position) - (Vector2)transform.position).normalized;
-            if (Direction.x == -1 || Direction.x == 1)
+            if (coll.CompareTag("Pox") && coll.attachedRigidbody != null)
             {
-                foreach (var HitColl in HitObj)
+                // 押しているオブジェクトの速度を取得
+                Vector2 pushVelocity = coll.attachedRigidbody.velocity;
+                Vector2 pushDirection = pushVelocity.normalized; // 押している方向（正規化）
+
+                // ① 上下の押し（y ≠ 0）は無視
+                if (Mathf.Abs(pushDirection.y) > 0.1f) continue;
+
+                // ② Pox の足元が BoxMove の天井より上なら影響を受けない
+                if (coll.bounds.min.y > boxCollider.bounds.max.y) continue;
+
+                // ③ Pox の頭が BoxMove の床より下なら影響を受けない（下からの持ち上げを防ぐ）
+                if (coll.bounds.max.y -0.2< boxCollider.bounds.min.y) continue;
+
+                // ④ 横方向（x ≠ 0）なら適用
+                if (Mathf.Abs(pushDirection.x) > 0.1f)
                 {
-                    if (TargetTagResarch(HitColl, ListTags))
-                    {
-                        if (HitColl.tag == "Pox")
-                        {
-                            this.gameObject.tag = "PoxPress";
-                            return true;
-                        }
-                        else if (HitObj[0].tag == "PoxPress")
-                        {
-                            this.gameObject.tag = "PoxPress";
-                            return true;
-                        }
-                        else
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        return false;
-                    }
+                    totalForce += pushVelocity * forceMultiplier;
                 }
             }
         }
-        return false;
-    }
 
-    void Stoped(GameObject setObj)
-    {
-        rb.velocity = new Vector2(0, rb.velocity.y);
-    }
-
-    public static bool TargetTagResarch(Collider2D collder2d, params string[] tags)
-    {
-        return tags.Any(tag => collder2d.CompareTag(tag));
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        CountHit(HitObj);
-    }
-
-    void CountHit(Collider2D[] countColl)
-    {
-        if (HitObj[0].tag == countColl[0].tag)
-        {
-            Debug.Log(HitObj[0].tag +"=="+ countColl[0].tag);
-            Stoped(this.gameObject);
-        }
+        rb.velocity = new Vector2(totalForce.x, rb.velocity.y);
     }
 }
-   
