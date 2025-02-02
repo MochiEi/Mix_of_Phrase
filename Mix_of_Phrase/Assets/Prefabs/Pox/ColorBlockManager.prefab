@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8798842611443634436}
   - component: {fileID: 3978092677401400457}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ColorBlockManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,4 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1dda11229f90b2d4484866a80027837c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pox: {fileID: 0}
+  hitColl: []
   selectColor: 0

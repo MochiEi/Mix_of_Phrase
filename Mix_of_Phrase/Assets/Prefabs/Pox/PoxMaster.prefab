@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3588868692622753614}
   - component: {fileID: 3970108582956535164}
   - component: {fileID: 9087382143784364971}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: PoxMaster
   m_TagString: Pox
   m_Icon: {fileID: 0}

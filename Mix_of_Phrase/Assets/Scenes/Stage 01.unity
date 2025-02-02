@@ -1061,7 +1061,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2613652c210e32542a9fa435bd9086ac, type: 3}
+    m_Font: {fileID: 12800000, guid: 61a78572ce715684e812aa2fc0a3f472, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -1874,7 +1874,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2613652c210e32542a9fa435bd9086ac, type: 3}
+    m_Font: {fileID: 12800000, guid: 61a78572ce715684e812aa2fc0a3f472, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -2059,7 +2059,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2613652c210e32542a9fa435bd9086ac, type: 3}
+    m_Font: {fileID: 12800000, guid: 61a78572ce715684e812aa2fc0a3f472, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -3542,7 +3542,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 2613652c210e32542a9fa435bd9086ac, type: 3}
+    m_Font: {fileID: 12800000, guid: 61a78572ce715684e812aa2fc0a3f472, type: 3}
     m_FontSize: 70
     m_FontStyle: 0
     m_BestFit: 0
@@ -4974,6 +4974,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  correction: []
   DirectionList:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
@@ -6240,6 +6241,18 @@ PrefabInstance:
     - target: {fileID: 311426395123187770, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612007434756756077, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[0].x
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612007434756756077, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].x
+      value: 78
+      objectReference: {fileID: 0}
+    - target: {fileID: 2612007434756756077, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
+      propertyPath: m_Points.m_Paths.Array.data[0].Array.data[1].y
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2846482072977709877, guid: 623a745b344e2ab468d9edb8708f9d5a, type: 3}
       propertyPath: m_Name

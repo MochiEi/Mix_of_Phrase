@@ -19,7 +19,7 @@ public class ActiveColorController : MonoBehaviour
 
         filter.useTriggers = true;
         filter.useLayerMask = true;
-        filter.SetLayerMask(Physics2D.GetLayerCollisionMask(poxColl.gameObject.layer));
+        filter.SetLayerMask(poxColl.gameObject.layer);
     }
 
     void Update()
@@ -32,7 +32,7 @@ public class ActiveColorController : MonoBehaviour
         {
             if (hitObj == null) continue;
 
-            if (hitObj.isTrigger)
+            if (hitObj.isTrigger && hitObj.CompareTag("ColorBlock"))
             {
                 ishit = true;
                 break;

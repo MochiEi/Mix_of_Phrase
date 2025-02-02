@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7222074039106859146}
   - component: {fileID: 2543110400741332514}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: DelateBox
   m_TagString: Pox
   m_Icon: {fileID: 0}
@@ -86,7 +86,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5223121948966755675}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CreateBoxManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 7971322559764717717}
   - component: {fileID: 5928699493546625054}
   - component: {fileID: 896298666734010928}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CreateBox
   m_TagString: Pox
   m_Icon: {fileID: 0}
