@@ -23,6 +23,8 @@ public class ElevatorGimmickController02 : MonoBehaviour
         anchor = elevaterRenderer.bounds.min.y;
 
         trigger = triggerObj.GetComponent<MonoBehaviour>() as ActiveCheck;
+
+        Dotween();
     }
 
     void Update()
