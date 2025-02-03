@@ -177,8 +177,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d45336786ebc1cd49b40326d7ae121b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TagList:
-  - Pox
   addForceNormalize: {x: 0, y: 0}
   Push_Flag: 0
   SceneManager: {fileID: 0}
