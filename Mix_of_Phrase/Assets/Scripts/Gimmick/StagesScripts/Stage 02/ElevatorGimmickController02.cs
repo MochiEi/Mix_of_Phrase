@@ -5,11 +5,11 @@ using UnityEngine;
 
 public class ElevatorGimmickController02 : MonoBehaviour
 {
-    private Transform elevator;
+    [SerializeField] Transform elevator;
     private Renderer elevaterRenderer;
     private float anchor;
 
-    private Transform triggerObj;
+    [SerializeField] Transform triggerObj;
     private ActiveCheck trigger;
 
     private Tween moveElevaator;
@@ -50,7 +50,7 @@ public class ElevatorGimmickController02 : MonoBehaviour
     private void Dotween()
     {
         moveElevaator = DOTween.Sequence()
-            .Append(elevator.DOScaleY(8f, 1.5f).SetEase(Ease.OutSine))
+            .Append(elevator.DOScaleY(7.85f, 1.5f).SetEase(Ease.OutSine))
             .SetAutoKill(false).Pause();
     }
 }
