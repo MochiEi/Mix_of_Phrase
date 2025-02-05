@@ -184,12 +184,16 @@ public class ControllTest : MonoBehaviour
                 {
                     for (global::System.Int32 j = 0; j < correction.Count; j++)
                     {
+                        if (direction_y < -0.90f)
+                        {
+                                        direction_x = 0;
+                            direction_y = -1;
+                        }
                         if (direction_x == correction[j].x && direction_y == correction[j].y)
                         {
                             direction_x = 0;
                             direction_y = -1;
                         }
-
                     }
                 }
                 Vector2 vector = new Vector2(direction_x, direction_y);

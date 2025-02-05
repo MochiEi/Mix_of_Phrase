@@ -4974,7 +4974,8 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  correction: []
+  correction:
+  - {x: 0, y: 0}
   DirectionList:
   - {x: 0, y: 0}
   - {x: 0, y: 0}
