@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5814216215970473736}
+  - component: {fileID: -9182830685968804227}
   - component: {fileID: 182796167809946957}
   - component: {fileID: 4146293597987519505}
   - component: {fileID: 8873241496708518708}
-  - component: {fileID: 1492563848522949978}
   m_Layer: 0
   m_Name: ColorBlock_Mono
   m_TagString: ColorBlock
@@ -35,6 +35,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-9182830685968804227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5247908952641222526}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6862e4ab0027aab47b3fac17363a9fce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colorBlockManager: {fileID: 0}
 --- !u!212 &182796167809946957
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -161,17 +174,3 @@ PolygonCollider2D:
       - {x: 0.5, y: -0.49}
       - {x: 0.5, y: 0.49}
   m_UseDelaunayMesh: 0
---- !u!114 &1492563848522949978
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5247908952641222526}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 936a1deb3a9d5ef44af7d419c967095c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blockColor: 1
-  colorBlockManager: {fileID: 0}
