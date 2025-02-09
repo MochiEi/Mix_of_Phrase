@@ -39,6 +39,7 @@ public class MemoryGimmickController02 : MonoBehaviour
             .Where(obj => obj.gameObject.CompareTag("ColorBlock"))
             .Select(obj => new Result { block = obj, blockColor = BlockColor.Red ,controller = obj.GetComponent<MonoBlockController>() })
             .ToArray();
+
         activeCheck = trigger as ActiveCheck;
 
         filter.useLayerMask = true;
@@ -61,10 +62,15 @@ public class MemoryGimmickController02 : MonoBehaviour
 
             for (int i = 0; i < result.Length; i++)
                 result[i].controller.enabled = true;
+
+            Dotween();
+            hints.Restart();
         }
 
         if (isActive)
+        {
             Overlap();
+        }
     }
 
     private void Overlap()
@@ -86,12 +92,20 @@ public class MemoryGimmickController02 : MonoBehaviour
         hints = DOTween.Sequence()
             .AppendCallback(() =>
             {
+                var chengeColor = DOTween.Sequence();
+
                 for(int i = 0;i < result.Length; i++)
                 {
                     if (result[i].blockColor == BlockColor.Red)
                     {
-
+                        chengeColor.Append(colorHints.DOColor(red, 0.3f));
                     }
+                    if (result[i].blockColor == BlockColor.Blue)
+                    {
+                        chengeColor.Append(colorHints.DOColor(blue, 0.3f));
+                    }
+
+                    chengeColor.Append(colorHints.DOColor(mono, 0.1f));
                 }
             })
             .SetAutoKill(false).Pause();
